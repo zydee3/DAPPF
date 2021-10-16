@@ -7,11 +7,11 @@ add_library(
         lib SHARED # <target> <LINK_PRIVATE | LINK_PUBLIC>
 
         # files to be compiled
-        framework/daapf.cpp
+        framework/dappf.h framework/dappf.cpp
 )
 
 # link entry point to project
-add_executable(Dappf environment/main.cpp)
+add_executable(Dappf environment/main.cpp framework/net/connection.cpp framework/net/connection.h)
 
 # link framework to project
 target_link_libraries(Dappf lib)

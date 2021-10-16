@@ -2,9 +2,9 @@
 // Created by Vince on 10/16/2021.
 //
 
-#include "daapf.hpp"
+#include "dappf.h"
 #include <iostream>
 
-void daapf::test_function() {
+void dappf::test_function() {
     std::cout << "hello from inside" << std::endl;
 }

@@ -6,7 +6,7 @@
 #define FRAMEWORK_DAAPF_HPP
 
 
-namespace daapf {
+namespace dappf {
 
     void test_function();
 
