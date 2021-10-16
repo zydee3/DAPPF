@@ -8,7 +8,8 @@ add_library(
 
         # files to be compiled
         framework/dappf.h framework/dappf.cpp
-)
+        framework/meta/packet_writer.cpp framework/meta/packet_writer.h
+        framework/meta/log.h framework/meta/log.cpp)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp framework/net/connection.cpp framework/net/connection.h)
