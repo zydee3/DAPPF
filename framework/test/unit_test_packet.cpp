@@ -21,7 +21,7 @@ void dappf::test::unit_test_packet::test() {
 
     // creating the array of bytes
     int8_t* packet = writer->to_array();
-    dappf::meta::log::write_hex_array(packet, writer->length());
+    dappf::meta::log::cout_hex_array(packet, writer->length());
 
     // creating a reader
     dappf::meta::packet_reader* reader = new dappf::meta::packet_reader(packet, writer->length());

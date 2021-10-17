@@ -6,7 +6,6 @@
 #define DAPPF_PACKET_READER_H
 
 #include <string>
-#include <queue>
 
 namespace dappf::meta {
     class packet_reader {
@@ -26,7 +25,7 @@ namespace dappf::meta {
         int16_t decode_2();
         int32_t decode_4();
         int64_t decode_8();
-        std::string decode_string(int32_t length);
+        std::string decode_string(int32_t);
         int32_t remaining();
     };
 }
