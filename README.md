@@ -15,7 +15,7 @@ Within each directory the respective directories are meta files. The meta file w
 
 # Modules TODO
 
-
+```
 <pre>No.</pre> | <pre>Module                           </pre>| <pre>Status                     </pre>    | <pre>Who</pre>
 :------------  | :------------                               | :-------------| :-------------
 1.             | Network Node Connect and Disconnect         | In Progress   | Kirill
@@ -33,3 +33,4 @@ Within each directory the respective directories are meta files. The meta file w
 13.            | Handlers                                    | Incomplete    | 
 14.            | Listeners                                   | Incomplete    |
 15.            | Example Project                             | In Progress   | *
+```
