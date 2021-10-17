@@ -17,15 +17,14 @@ namespace dappf::meta {
         packet_writer();
         ~packet_writer();
 
-        void encode_1(char);
         void encode_1(int8_t);
-        void encode_2(short);
-        void encode_4(int);
-        void encode_8(long);
+        void encode_2(int16_t);
+        void encode_4(int32_t);
+        void encode_8(int64_t);
         void encode_string(std::string);
 
-        int length();
-        void remove_n(int n);
+        int32_t length();
+        void remove_n(int32_t n);
         void clear();
 
         int8_t* to_array();

@@ -10,8 +10,8 @@
 namespace dappf::meta {
     class log {
     public:
-        static void write_hex(int);
-        static void write_hex_array(int8_t*, int);
+        static void write_hex(int32_t);
+        static void write_hex_array(int8_t*, int32_t);
     };
 }
 
