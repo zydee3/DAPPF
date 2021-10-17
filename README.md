@@ -18,18 +18,18 @@ Within each directory the respective directories are meta files. The meta file w
 
 <pre>No.</pre> | <pre>Module                           </pre>| <pre>Status                     </pre>    | <pre>Who</pre>
 :------------  | :------------                               | :-------------| :-------------
-1.             | Network Node Connect and Disconnect         | <font color="blue"> In Progress   </font> | Kirill
-2.             | Network Node Analyzer                       | <font color="red"> Incomplete     </font> | 
-3.             | Network API                                 | <font color="blue"> In Progress   </font> | Garrett
-4.             | Packet Reader and Writer                    | <font color="green"> Completed    </font> |  Vincent
-5.             |Packet Compress and Decompress               | <font color="red"> Incomplete    </font> | 
-6.             | Packet Encrypt and Decrypt                  | <font color="red"> Incomplete    </font> | 
-7.             | Data Serializer and Deserializer            | <font color="red"> Incomplete    </font> | 
-8.             | Data Validator                              | <font color="red"> Incomplete    </font> | 
-9.             | Data Cache                                  | <font color="red"> Incomplete    </font> |
-10.            | Data Spooler                                | <font color="red"> Incomplete    </font> |
-11.            | Task Pool                                   | <font color="red"> Incomplete    </font> |
-12.            | Delegates                                   | <font color="red"> Incomplete    </font> |
-13.            | Handlers                                    | <font color="red"> Incomplete    </font> | 
-14.            | Listeners                                   | <font color="red"> Incomplete    </font> |
-15.            | Example Project                             | <font color="blue"> In Progress   </font> | *
+1.             | Network Node Connect and Disconnect         | In Progress   | Kirill
+2.             | Network Node Analyzer                       | Incomplete    | 
+3.             | Network API                                 | In Progress   | Garrett
+4.             | Packet Reader and Writer                    | Completed     |  Vincent
+5.             |Packet Compress and Decompress               | Incomplete    | 
+6.             | Packet Encrypt and Decrypt                  | Incomplete    | 
+7.             | Data Serializer and Deserializer            | Incomplete    | 
+8.             | Data Validator                              | Incomplete    | 
+9.             | Data Cache                                  | Incomplete    |
+10.            | Data Spooler                                | Incomplete    |
+11.            | Task Pool                                   | Incomplete    |
+12.            | Delegates                                   | Incomplete    |
+13.            | Handlers                                    | Incomplete    | 
+14.            | Listeners                                   | Incomplete    |
+15.            | Example Project                             | In Progress   | *
