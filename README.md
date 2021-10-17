@@ -22,7 +22,7 @@ No.  | Module                                      | Status        | Who
 2.   | Network Node Analyzer                       | Incomplete    | 
 3.   | Network API                                 | In Progress   | Garrett
 4.   | Packet Reader and Writer                    | Completed     | Vincent
-5.   |Packet Compress and Decompress               | Incomplete    | 
+5.   | Packet Compress and Decompress              | Incomplete    | 
 6.   | Packet Encrypt and Decrypt                  | Incomplete    | 
 7.   | Data Serializer and Deserializer            | Incomplete    | 
 8.   | Data Validator                              | Incomplete    | 
