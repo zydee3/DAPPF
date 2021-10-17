@@ -5,7 +5,6 @@
 #ifndef DAPPF_PACKET_WRITER_H
 #define DAPPF_PACKET_WRITER_H
 
-#include <cstddef>
 #include <string>
 #include <vector>
 
@@ -13,7 +12,6 @@ namespace dappf::meta {
     class packet_writer {
     private:
         std::vector<int8_t>* packet;
-        int num_bytes;
 
     public:
         packet_writer();
