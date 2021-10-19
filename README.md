@@ -26,7 +26,7 @@ No.  | Module                                      | Status        | Who
 6.   | Packet Encrypt and Decrypt                  | Incomplete    | 
 7.   | Data Serializer and Deserializer            | Incomplete    | 
 8.   | Data Validator                              | Incomplete    | 
-9.   | Data Cache                                  | Incomplete    |
+9.   | Data Cache                                  | In Progress   | Vincent
 10.  | Data Spooler                                | Incomplete    |
 11.  | Task Pool                                   | Incomplete    |
 12.  | Delegates                                   | Incomplete    |
