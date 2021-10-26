@@ -34,3 +34,21 @@ No.  | Module                                      | Status        | Who
 14.  | Listeners                                   | Incomplete    |
 15.  | Example Project                             | In Progress   | *
 ```
+
+# Module Functionality
+
+1.  Network Node Connect and Disconnect
+2.  Network Node Analyzer
+3.  Network API
+4.  Packet Reader and Writer
+5.  Packet Compress and Decompress
+6.  Packet Encrypt and Decrypt
+7.  Data Serializer and Deserializer
+8.  Data Validator
+9.  Data Cache 
+10. Data Spooler
+11. Task Pool 
+12. Delegates 
+13. Handlers
+14. Listeners
+15. Example Project 
