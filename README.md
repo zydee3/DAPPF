@@ -15,25 +15,24 @@ Within each directory the respective directories are meta files. The meta file w
 
 # Modules Task Sheet
 
-```
-No.  | Module                                      | Status        | Who
------|---------------------------------------------|---------------| :-------------
-1.   | Network Node Connect and Disconnect         | In Progress   | Kirill
-2.   | Network Node Analyzer                       | Incomplete    | 
-3.   | Network API                                 | In Progress   | Garrett
-4.   | Packet Reader and Writer                    | Completed     | Vincent
-5.   | Packet Compress and Decompress              | Incomplete    | 
-6.   | Packet Encrypt and Decrypt                  | Incomplete    | 
-7.   | Data Serializer and Deserializer            | Incomplete    | 
-8.   | Data Validator                              | Incomplete    | 
-9.   | Data Cache                                  | In Progress   | Vincent
-10.  | Data Spooler                                | Incomplete    |
-11.  | Task Pool                                   | Incomplete    |
-12.  | Delegates                                   | Incomplete    |
-13.  | Handlers                                    | Incomplete    | 
-14.  | Listeners                                   | Incomplete    |
-15.  | Example Project                             | In Progress   | *
-```
+| No.  | Module                                      | Status        | Who     |
+| ---- | ------------------------------------------- | ------------- | :------ |
+| 1.   | Network Node Connect and Disconnect         | In Progress   | Kirill |
+| 2.   | Network Node Analyzer                       | Incomplete    |  |
+| 3.   | Network API                                 | In Progress   | Garrett |
+| 4.   | Packet Reader and Writer                    | Completed     | Vincent |
+| 5.   | Packet Compress and Decompress              | Incomplete    |  |
+| 6.   | Packet Encrypt and Decrypt                  | Incomplete    |  |
+| 7.   | Data Serializer and Deserializer            | Incomplete    |  |
+| 8.   | Data Validator                              | Incomplete    |  |
+| 9.   | Data Cache                                  | In Progress   | Vincent |
+| 10.  | Data Spooler                                | Incomplete    |  |
+| 11.  | Task Pool                                   | Incomplete    |  |
+| 12.  | Delegates                                   | Incomplete    |  |
+| 13.  | Handlers                                    | Incomplete    |  |
+| 14.  | Listeners                                   | Incomplete    |  |
+| 15.  | Example Project                             | In Progress   | * |
+
 
 # Module Functionality
 
