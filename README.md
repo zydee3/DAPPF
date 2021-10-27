@@ -36,9 +36,9 @@ Within each directory the respective directories are meta files. The meta file w
 
 # Module Functionality
 
-| No.  | Module                                      |
-| ---- | ------------------------------------------- |
-| 1.   |  Network Node Connect and Disconnect <br /> s|
+| No.  | Module                                                           |
+| ---- | ---------------------------------------------------------------- |
+| 1.   |  Network Node Connect and Disconnect <br />This feature handles the connection between any two or more nodes in a network. The questions we ask here are, in the absence of a direct target, how would a new node enter the network? When a node would like to leave the network, it remembers some nodes and is able to use those records to re-enter the network without needing to find a way in like it did when it was a new node. Here we note that it is entirely possible for all records to disconnect prior to the current node re-entering the network, thus it is possible for a non-new node to be subject to new-node entry proceedures of finding an entry point.|
 | 2.   |  Network Node Analyzer |
 | 3.   |  Network API |
 | 4.   |  Packet Reader and Writer |
