@@ -16,10 +16,10 @@ Within each directory the respective directories are meta files. The meta file w
 # Modules Task Sheet
 
 | No.  | Module                                      | Status        | Who     |
-| ---- | ------------------------------------------- | ------------- | :------ |
+| ---- | ------------------------------------------- | ------------- | ------- |
 | 1.   | Network Node Connect and Disconnect         | In Progress   | Kirill |
 | 2.   | Network Node Analyzer                       | Incomplete    |  |
-| 3.   | Network API                                 | In Progress   | Garrett |
+| 3.   | Documentation Site                          | Incomplete    |  |
 | 4.   | Packet Reader and Writer                    | Completed     | Vincent |
 | 5.   | Packet Compress and Decompress              | Incomplete    |  |
 | 6.   | Packet Encrypt and Decrypt                  | Incomplete    |  |
@@ -36,18 +36,20 @@ Within each directory the respective directories are meta files. The meta file w
 
 # Module Functionality
 
-1.  Network Node Connect and Disconnect
-2.  Network Node Analyzer
-3.  Network API
-4.  Packet Reader and Writer
-5.  Packet Compress and Decompress
-6.  Packet Encrypt and Decrypt
-7.  Data Serializer and Deserializer
-8.  Data Validator
-9.  Data Cache 
-10. Data Spooler
-11. Task Pool 
-12. Delegates 
-13. Handlers
-14. Listeners
-15. Example Project 
+| No.  | Module                                      |
+| ---- | ------------------------------------------- |
+| 1.   |  Network Node Connect and Disconnect <br /> s|
+| 2.   |  Network Node Analyzer |
+| 3.   |  Network API |
+| 4.   |  Packet Reader and Writer |
+| 5.   |  Packet Compress and Decompress |
+| 6.   |  Packet Encrypt and Decrypt |
+| 7.   |  Data Serializer and Deserializer |
+| 8.   |  Data Validator |
+| 9.   |  Data Cache |
+| 10.  | Data Spooler |
+| 11.  | Task Pool |
+| 12.  | Delegates |
+| 13.  | Handlers |
+| 14.  | Listeners |
+| 15.  | Example Project|
