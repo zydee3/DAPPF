@@ -21,7 +21,7 @@ Within each directory the respective directories are meta files. The meta file w
 | 2.   | Documentation Site                          | Incomplete    |  |
 | 3.   | Packet Reader and Writer                    | Completed     | Vincent |
 | 4.   | Packet Compress and Decompress              | Incomplete    |  |
-| 5.   | Packet Encrypt and Decrypt                  | Incomplete    |  |
+| 5.   | Packet Encrypt and Decrypt                  | Incomplete    | Gort |
 | 6.   | Data Validator                              | Incomplete    |  |
 | 7.   | Data Cache                                  | In Progress   | Vincent |
 | 8.   | Data Spooler                                | Incomplete    |  |
