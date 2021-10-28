@@ -18,10 +18,10 @@ Within each directory the respective directories are meta files. The meta file w
 | No.  | Module                                      | Status        | Who     |
 | ---- | ------------------------------------------- | ------------- | ------- |
 | 1.   | Network Node Connect and Disconnect         | In Progress   | Kirill |
-| 2.   | Documentation Site                          | Incomplete    |  |
+| 2.   | Documentation Site                          | In Progress    | Gort |
 | 3.   | Packet Reader and Writer                    | Completed     | Vincent |
 | 4.   | Packet Compress and Decompress              | Incomplete    |  |
-| 5.   | Packet Encrypt and Decrypt                  | In Progress   | Gort |
+| 5.   | Packet Encrypt and Decrypt                  | In Progress   | Ant |
 | 6.   | Data Validator                              | Incomplete    |  |
 | 7.   | Data Cache                                  | In Progress   | Vincent |
 | 8.   | Data Spooler                                | Incomplete    |  |
