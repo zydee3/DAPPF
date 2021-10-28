@@ -15,22 +15,35 @@ Within each directory the respective directories are meta files. The meta file w
 
 # Modules Task Sheet
 
-```
-No.  | Module                                      | Status        | Who
------|---------------------------------------------|---------------| :-------------
-1.   | Network Node Connect and Disconnect         | In Progress   | Kirill
-2.   | Network Node Analyzer                       | Incomplete    | 
-3.   | Network API                                 | In Progress   | Garrett
-4.   | Packet Reader and Writer                    | Completed     | Vincent
-5.   | Packet Compress and Decompress              | Incomplete    | 
-6.   | Packet Encrypt and Decrypt                  | Incomplete    | 
-7.   | Data Serializer and Deserializer            | Incomplete    | 
-8.   | Data Validator                              | Incomplete    | 
-9.   | Data Cache                                  | In Progress   | Vincent
-10.  | Data Spooler                                | Incomplete    |
-11.  | Task Pool                                   | Incomplete    |
-12.  | Delegates                                   | Incomplete    |
-13.  | Handlers                                    | Incomplete    | 
-14.  | Listeners                                   | Incomplete    |
-15.  | Example Project                             | In Progress   | *
-```
+| No.  | Module                                      | Status        | Who     |
+| ---- | ------------------------------------------- | ------------- | ------- |
+| 1.   | Network Node Connect and Disconnect         | In Progress   | Kirill |
+| 2.   | Documentation Site                          | In Progress    | Gort |
+| 3.   | Packet Reader and Writer                    | Completed     | Vincent |
+| 4.   | Packet Compress and Decompress              | Incomplete    |  |
+| 5.   | Packet Encrypt and Decrypt                  | In Progress   | Ant |
+| 6.   | Data Validator                              | Incomplete    |  |
+| 7.   | Data Cache                                  | In Progress   | Vincent |
+| 8.   | Data Spooler                                | Incomplete    |  |
+| 9.   | Task Pool                                   | Incomplete    |  |
+| 10.  | Delegates                                   | Incomplete    |  |
+| 11.  | Listeners                                   | Incomplete    |  |
+| 12.  | Example Project                             | In Progress   | * |
+
+
+# Module Functionality
+
+| No.  | Module                                                           |
+| ---- | ---------------------------------------------------------------- |
+| 1.   |  Network Node Connect and Disconnect <br /><br />This feature handles the connection between any two or more nodes in a network. The questions we ask here are, in the absence of a direct target, how would a new node enter the network? When a node would like to leave the network, it remembers some nodes and is able to use those records to re-enter the network without needing to find a way in like it did when it was a new node. Here we note that it is entirely possible for all records to disconnect prior to the current node re-entering the network, thus it is possible for a non-new node to be subject to new-node entry proceedures of finding an entry point.|
+| 2.   |  Documentation Site <br /><br /> We can create a website which has complete live documentation for future developers to use. The idea is since the github is hosted publically, the website can webscrape the repository for comments above functions and generate documentation. This is completely optional and should only be done towards the end.|
+| 3.   |  Packet Reader and Writer <br /><br />A packet is a sequence of bytes normally in the form of an array of bytes. Packets contain data represented in bytes and is the general way to send data between a connection. The packet reader accepts bytes and allows you to read 2^n bytes depending on the data type you're trying to read while the packet writer does the opposite and allows you to feed bytes into the writer and then construct the array of bytes when the packet is completed and ready to be sent. |
+| 4.   |  Packet Compress and Decompress  <br /><br />Packet Compression is when you take an array of bytes and reduce the total number of bytes in the array. Effectively, you're representing the same data, but in a way that uses less memory. This is good since you reduce the number of bytes on the local machine and being sent to peers. A simple approach to this is to use something called lossless compression. An example usage is as follows: lets say we have an array [a,a,b,c,d,d,d,d,d,d,f,f,f,f]. A simple way to compress this is to replace all the repeating values with a numerical representation. That is,  [a,a,b,c,d,d,d,d,d,d,f,f,f,f] => [2,a,1,b,1,c,6,d,4,f]. Though, it is entirely possible, using this method, for the array to get bigger but that is an edge case. For example, [a,b,c,d,e,f,g] => [1,a,1,b,1,c,1,d,1,e,1,f,1,g]|
+| 5.   |  Packet Encrypt and Decrypt<br /><br />Packet encryption is where we alter the bytes which represent our data such that it becomes "scrambled" and ultimately represents something completely useless and/or is now unreadable. A very abstract example is to consider the string "hello". "hello" as an array of bytes is [68, 65, 6c, 6c, 6f]. If we subtract 100d from each of the bytes, we get [04, 01, 08, 08, 0B] which is read as unknown ascii characters and thus the string is now unreadable from a basic transformation of bytes.|
+| 6.   |  Data Validator<br /><br />There are two simple forms of data validation which can be used right now, packet validation and type validation. Packet validation ensures the packet structure is correct. For example, at minimum, every packet will have (this is abitrarily made up, though theres a good chance we will use this structure) 18 bytes at the beginning of the packet: 16 byte for the target ivp6 and 2 bytes for the type of request. Any byte after the 2 bytes (short) for the type of request will be apart of the body. Packet validation checks if there is at minimum 18 bytes present. Data validation checks if the number of bytes needed for a request is present. For example, if a request is asking for a certain request that requires x bytes of data to fulfil the request but the body contains < x bytes, then the packet is invalid. |
+| 7.   | Data Cache<br /><br />This is a simple cache which keeps requests in memory in the event it can be used again so we don't have to repeatidly calculate the same data. This will be stored by key value as a hash and byte array. |
+| 8.   | Data Spooler<br /><br />A spooler is a way to predict a potential incoming request. For example, lets say request X is typically followed by another request Y, then we can automatically queue Y if applicable when X is requested such that Y is available in the cache the moment the request is made in the future.|
+| 9.   | Task Pool<br /><br />A task pool is a set of task which are executed after a delay. For example, if I want a function to be executed 5 minutes from now, I can add a task into the task pool with the current time + five minutes and then the task pool will execute the task when the time comes. |
+| 10.  | Delegates <br /><br />Delegates are a way to pass a function into another function to be executed. A simple example of a delegate is a predicate which resolves to true or false when applied to some set of data. If you've ever used a filter, most likely you've used a predicate and therefore a delegate. For example, [1,2,3,4,5].filter(num -> num < 3) results in [1, 2] where (num -> num < 3) is the predicate.  |
+| 11.  | Listeners <br /><br />Listeners, also known as event listeners, are handlers that get called when a specfic condition is met. For example, if you've ever played a browser game, then most likely theres an event listener for pressing a button on your keyboard where the developer than handles the input. A simple event listener like this would use a decorator @onKeyPressEvent and we label the function <br /><br />@onKeyPressEvent<br />function do_something(input)<br />    if input == "k" // do something |
+| 12.  | Example Project<br /><br />The example project is a simple project whose design should be as simple as possible and should highlight the simplicity and quickness of using this framework to develop their project from idea to production.|
