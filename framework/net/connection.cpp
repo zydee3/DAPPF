@@ -7,16 +7,16 @@
 #include <string>
 
 #include <sys/socket.h>
-#include <netdb.h>
 #include <arpa/inet.h>
 #include <cstring>
+#include <unistd.h>
 
 /**
-   Creates a socket for connecting to a server running on the same
-   computer, listening on the specified port number.  Returns the
-   socket file descriptor on success. On failure, throws error.
-   @param address the target's address
-   @param port the target's port
+ * Creates a socket for connecting to a server, listening on the specified port number.
+ * Returns the socket file descriptor on success. On failure, throws error.
+ * @param address the target's address
+ * @param port the target's port
+ * @return the file descriptor for the socket
  */
 int create_client_socket(std::string address, uint16_t port) {
     int clientfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -36,9 +36,10 @@ int create_client_socket(std::string address, uint16_t port) {
 }
 
 /**
-    Creates a socket for listening for connections.
-    Throws error if anything goes wrong.
-    @param port the port on which the socket should be opened
+ * Creates a socket for listening for connections.
+ * Throws error if anything goes wrong.
+ * @param port the port on which the socket should be opened
+ * @return the file descriptor for the socket
  */
 int create_listen_socket(uint16_t port) {
     struct sockaddr_in addr;
@@ -71,13 +72,18 @@ int create_listen_socket(uint16_t port) {
  * Attempts to join the network given the address and port of some node in that network
  * @param address the target node's address
  * @param port the target node's port
- * @return the file descriptor of the connection
+ * @return the list of active connections, initialized with a single element
  */
-int dappf::connection::join_network(std::string address, uint16_t port) {
+std::vector<dappf::connection::conn>* dappf::connection::join_network(std::string address, uint16_t port) {
     // in order for a node to connect, it must already have the address/port of a node in the network
     // how it obtains that will be outside the framework's responsibilities
 
-    return create_client_socket(address, port);
+    std::vector<conn> *connections = new std::vector<conn>;
+
+    int clientfd = create_client_socket(address, port);
+    connections->push_back(conn { address, clientfd });
+
+    return connections;
 }
 
 /**
@@ -90,13 +96,31 @@ int dappf::connection::join_network(std::string address, uint16_t port) {
     int listenfd = create_listen_socket(port);
 
     while (true) {
-        int connfd = accept(listenfd, NULL, NULL);
+        // just for getting the address of the incoming connection
+        sockaddr incoming_address;
+        socklen_t address_length = sizeof incoming_address;
+        std::memset(&incoming_address, 0, address_length);
+
+        int connfd = accept(listenfd, &incoming_address, &address_length);
         if (connfd < 0) {
-            // couldn't accept connection, but not fatal, just print a message to console for now
-            std::cout << "tried to accept connection, but failed" << std::endl;
+            // not fatal, so just print, no error throwing
+            std::cerr << "tried to accept connection, but failed" << std::endl;
         }
 
-        // how to get the connection's address?
-        connections->push_back(conn {"", connfd});
+        // extracting address
+        sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
+        connections->push_back(conn { std::string(inet_ntoa(addr_in->sin_addr)), connfd });
     }
+}
+
+/**
+ * Closes all connections, then frees the storage memory
+ * @param connections the list of active connections to close and free
+ */
+void dappf::connection::leave_network(std::vector<conn> *connections) {
+    for (conn connection : *connections) {
+        close(connection.connfd);
+    }
+
+    free(connections);
 }
