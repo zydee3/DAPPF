@@ -20,12 +20,11 @@ namespace dappf::connection {
         int connfd;
     } conn;
 
-    void join_network();
+    int join_network(std::string address, uint16_t port);
 
     [[noreturn]] void listen_for_connections(std::vector<conn> *connections, uint16_t port);
 
     void establish(std::string address, int port);
-
 };
 
 

@@ -11,34 +11,34 @@
 #include <arpa/inet.h>
 #include <cstring>
 
-void dappf::connection::join_network() {
-    /* at the moment, can't quite do that
-     * some ideas:
-     *
-     * have a central server keeping track of nodes' existences, ask it for a node and try connecting until one connects
-     * + straightforward
-     * - goes against the whole purpose
-     *
-     * have each node know its neighbor ahead of time, and connect to that one every time
-     * + also simple
-     * - what if that node is down?
-     * - how does the first node join the network?
-     *
-     * shout out to the whole internet that you want to connect to the network
-     * - malicious agents can pretend to be the network
-     * - how do we even do that
-     *
-     * have each node in the network shout out periodically that it exists
-     * - malicious agents can join the network
-     * - again how does one do this
-     *
-     * if anyone has any ideas on how to make this work please do let me know
-     */
+/**
+   Creates a socket for connecting to a server running on the same
+   computer, listening on the specified port number.  Returns the
+   socket file descriptor on success. On failure, throws error.
+   @param address the target's address
+   @param port the target's port
+ */
+int create_client_socket(std::string address, uint16_t port) {
+    int clientfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (clientfd < 0) {
+        throw std::runtime_error("couldn't open socket");
+    }
+
+    struct sockaddr_in addr;
+    memset(&addr, 0, sizeof addr);
+    addr.sin_family = AF_INET;
+    addr.sin_addr.s_addr = inet_addr(address.c_str());
+    addr.sin_port = htons(port);
+    if (connect(clientfd, (struct sockaddr*) &addr, sizeof addr)) {
+        throw std::runtime_error("couldn't connect to target");
+    }
+    return clientfd;
 }
 
 /**
     Creates a socket for listening for connections.
     Throws error if anything goes wrong.
+    @param port the port on which the socket should be opened
  */
 int create_listen_socket(uint16_t port) {
     struct sockaddr_in addr;
@@ -68,9 +68,23 @@ int create_listen_socket(uint16_t port) {
 }
 
 /**
+ * Attempts to join the network given the address and port of some node in that network
+ * @param address the target node's address
+ * @param port the target node's port
+ * @return the file descriptor of the connection
+ */
+int dappf::connection::join_network(std::string address, uint16_t port) {
+    // in order for a node to connect, it must already have the address/port of a node in the network
+    // how it obtains that will be outside the framework's responsibilities
+
+    return create_client_socket(address, port);
+}
+
+/**
  * Enters an non-busy infinite loop of accepting connections and adding them to a list
  * Call this from a dedicated thread - never exits unless an error occurs
  * @param connections pointer to a list of connections which will get added to
+ * @param port the port on which to listen for incoming connections
  */
 [[noreturn]] void dappf::connection::listen_for_connections(std::vector<conn> *connections, uint16_t port) {
     int listenfd = create_listen_socket(port);
@@ -85,8 +99,4 @@ int create_listen_socket(uint16_t port) {
         // how to get the connection's address?
         connections->push_back(conn {"", connfd});
     }
-};
-
-void dappf::connection::establish(std::string address, int port) {
-    std::cout << "establishing a connection to " << address << " on port " << port << std::endl;
 }
