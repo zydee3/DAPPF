@@ -70,7 +70,3 @@ for d in dirs:
     markdown.write(f"<hr>\n\n")
 
   markdown.close()
-
-
-
-
