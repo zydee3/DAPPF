@@ -69,30 +69,41 @@ int create_listen_socket(uint16_t port) {
 }
 
 /**
- * Attempts to join the network given the address and port of some node in that network
- * @param address the target node's address
- * @param port the target node's port
- * @return the list of active connections, initialized with a single element
+ * Listens for data coming from a connection, and calls the provided function when data is received
+ * @param connection the connection to listen to
+ * @param handler the function that should be called when data is received
  */
-std::vector<dappf::connection::conn>* dappf::connection::join_network(std::string address, uint16_t port) {
-    // in order for a node to connect, it must already have the address/port of a node in the network
-    // how it obtains that will be outside the framework's responsibilities
+[[noreturn]] void listen_connection(dappf::connection::conn connection, void (*handler)(int8_t *, int32_t)) {
+    int8_t *buffer = (int8_t *) malloc(dappf::connection::BUFFER_SIZE);
 
-    std::vector<conn> *connections = new std::vector<conn>;
-
-    int clientfd = create_client_socket(address, port);
-    connections->push_back(conn { address, clientfd });
-
-    return connections;
+    while (true) {
+        int32_t length_read_in = read(connection.connfd, buffer, dappf::connection::BUFFER_SIZE);
+        handler(buffer, length_read_in);
+    }
 }
 
 /**
- * Enters an non-busy infinite loop of accepting connections and adding them to a list
+ * Adds the new connection to the list, and creates a new thread which will listen to the connection for data
+ * @param connections the list of active connections to add to
+ * @param address the address of the new connection
+ * @param connfd the file descriptor of the new connection
+ * @param handler the function that should be called when data is received
+ */
+void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd, void (*handler)(int8_t *, int32_t)) {
+    dappf::connection::conn connection = dappf::connection::conn { address, connfd };
+    connections->push_back(dappf::connection::conn { address, connfd });
+
+    std::thread thread(listen_connection, connection, handler);
+}
+
+/**
+ * Enters a non-busy infinite loop of accepting connections and adding them to a list
  * Call this from a dedicated thread - never exits unless an error occurs
  * @param connections pointer to a list of connections which will get added to
  * @param port the port on which to listen for incoming connections
+ * @param handler the function that should be called when data is received
  */
-[[noreturn]] void dappf::connection::listen_for_connections(std::vector<conn> *connections, uint16_t port) {
+[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port, void (*handler)(int8_t *, int32_t)) {
     int listenfd = create_listen_socket(port);
 
     while (true) {
@@ -105,11 +116,47 @@ std::vector<dappf::connection::conn>* dappf::connection::join_network(std::strin
         if (connfd < 0) {
             // not fatal, so just print, no error throwing
             std::cerr << "tried to accept connection, but failed" << std::endl;
-        }
+        } else {
+            // extracting address
+            sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
+            std::string address(inet_ntoa(addr_in->sin_addr));
 
-        // extracting address
-        sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
-        connections->push_back(conn { std::string(inet_ntoa(addr_in->sin_addr)), connfd });
+            add_connection(connections, address, connfd, handler);
+        }
+    }
+}
+
+/**
+ * Attempts to join the network given the address and connect_port of some node in that network
+ * @param address the target node's address
+ * @param connect_port the target node's port
+ * @param listen_port the port on which the current node should listen for incoming connections
+ * @param handler the function that should be called when data is received
+ * @return the list of active connections, initialized with a single element
+ */
+dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t)) {
+    // in order for a node to connect, it must already have the address/connect_port of a node in the network
+    // how it obtains that will be outside the framework's responsibilities
+
+    std::vector<conn> *connections = new std::vector<conn>;
+
+    std::thread thread_listening_for_incoming_connections(listen_for_connections, connections, listen_port, handler);
+
+    int clientfd = create_client_socket(address, connect_port);
+    add_connection(connections, address, clientfd, handler);
+
+    return network { connections, thread_listening_for_incoming_connections };
+}
+
+/**
+ * Sends a message to all connections
+ * @param connections the list of connections to send the message to
+ * @param message the message to send
+ * @param length the length of the message
+ */
+void dappf::connection::broadcast_message(std::vector<conn> *connections, int8_t* message, int32_t length) {
+    for (conn connection : *connections) {
+        write(connection.connfd, message, length);
     }
 }
 
