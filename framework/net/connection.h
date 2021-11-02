@@ -22,12 +22,12 @@ namespace dappf::connection {
     typedef struct {
         std::string address;
         int connfd;
-        std::thread connection_thread;
+        std::thread *connection_thread;
     } conn;
 
     typedef struct {
         std::vector<conn> *connections;
-        std::thread thread_listening_for_incoming_connections;
+        std::thread *thread_listening_for_incoming_connections;
     } network;
 
     network join_network(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t));

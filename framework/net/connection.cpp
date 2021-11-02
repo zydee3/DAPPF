@@ -73,11 +73,11 @@ int create_listen_socket(uint16_t port) {
  * @param connection the connection to listen to
  * @param handler the function that should be called when data is received
  */
-[[noreturn]] void listen_connection(dappf::connection::conn connection, void (*handler)(int8_t *, int32_t)) {
+[[noreturn]] void listen_connection(int connfd, void (*handler)(int8_t *, int32_t)) {
     int8_t *buffer = (int8_t *) malloc(dappf::connection::BUFFER_SIZE);
 
     while (true) {
-        int32_t length_read_in = read(connection.connfd, buffer, dappf::connection::BUFFER_SIZE);
+        int32_t length_read_in = read(connfd, buffer, dappf::connection::BUFFER_SIZE);
         handler(buffer, length_read_in);
     }
 }
@@ -90,10 +90,8 @@ int create_listen_socket(uint16_t port) {
  * @param handler the function that should be called when data is received
  */
 void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd, void (*handler)(int8_t *, int32_t)) {
-    dappf::connection::conn connection = dappf::connection::conn { address, connfd };
-    connections->push_back(dappf::connection::conn { address, connfd });
-
-    std::thread thread(listen_connection, connection, handler);
+    std::thread *thread = new std::thread(listen_connection, connfd, handler);
+    connections->push_back(dappf::connection::conn { address, connfd, thread });
 }
 
 /**
@@ -140,7 +138,7 @@ dappf::connection::network dappf::connection::join_network(std::string address, 
 
     std::vector<conn> *connections = new std::vector<conn>;
 
-    std::thread thread_listening_for_incoming_connections(listen_for_connections, connections, listen_port, handler);
+    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, handler);
 
     int clientfd = create_client_socket(address, connect_port);
     add_connection(connections, address, clientfd, handler);
@@ -167,6 +165,7 @@ void dappf::connection::broadcast_message(std::vector<conn> *connections, int8_t
 void dappf::connection::leave_network(std::vector<conn> *connections) {
     for (conn connection : *connections) {
         close(connection.connfd);
+        delete(connection.connection_thread);
     }
 
     free(connections);
