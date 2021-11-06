@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include "../utility/array.h"
 
 namespace dappf::meta {
     class packet_writer {

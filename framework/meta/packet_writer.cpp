@@ -99,10 +99,5 @@ void dappf::meta::packet_writer::clear() {
  * @return Array of bytes (int8_t)
  */
 int8_t* dappf::meta::packet_writer::to_array() {
-    int32_t num_bytes = packet->size();
-    int8_t* array = new int8_t[num_bytes];
-    for(int32_t i = 0; i < num_bytes; i++){
-        array[i] = packet->at(i);
-    }
-    return array;
+    return dappf::utility::array::to_array(packet);
 }

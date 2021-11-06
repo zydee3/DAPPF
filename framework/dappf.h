@@ -6,10 +6,12 @@
 #define FRAMEWORK_DAAPF_HPP
 
 
+#include <cstdint>
+
 namespace dappf {
 
-    void test_function();
 
+    void initialize();
 }
 
 

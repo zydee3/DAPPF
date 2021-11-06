@@ -10,7 +10,7 @@
 #include <string>
 #include "./meta/CacheEntry.h"
 
-namespace dappf::data::meta {
+namespace dappf::data {
     class Cache {
     private:
         int update_interval;

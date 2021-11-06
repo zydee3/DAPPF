@@ -5,6 +5,6 @@
 #include "dappf.h"
 #include <iostream>
 
-void dappf::test_function() {
+void dappf::initialize() {
     std::cout << "hello from inside" << std::endl;
 }
