@@ -20,14 +20,14 @@ Within each directory the respective directories are meta files. The meta file w
 | 1.   | Network Node Connect and Disconnect         | Completed     | Kirill |
 | 2.   | Documentation Site                          | Completed     | Garrett |
 | 3.   | Packet Reader and Writer                    | Completed     | Vincent |
-| 4.   | Packet Compress and Decompress              | Completed     | Vincent |
+| 4.   | Packet Compress and Decompress              | In Progress   | Vincent |
 | 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony |
 | 6.   | Data Validator                              | In Progress   | Garrett |
 | 7.   | Data Cache                                  | In Progress   | Vincent |
 | 8.   | Data Spooler                                | Incomplete    |  |
-| 9.   | Task Pool                                   | Incomplete    |  |
+| 9.   | Task Pool                                   | In Progress   | Anthony |
 | 10.  | Delegates                                   | Incomplete    |  |
-| 11.  | Listeners                                   | In Progress    | Kirill |
+| 11.  | Listeners                                   | In Progress   | Kirill |
 | 12.  | Example Project                             | In Progress   | * |
 
 
@@ -43,7 +43,7 @@ Within each directory the respective directories are meta files. The meta file w
 | 6.   |  Data Validator<br /><br />There are two simple forms of data validation which can be used right now, packet validation and type validation. Packet validation ensures the packet structure is correct. For example, at minimum, every packet will have (this is abitrarily made up, though theres a good chance we will use this structure) 18 bytes at the beginning of the packet: 16 byte for the target ivp6 and 2 bytes for the type of request. Any byte after the 2 bytes (short) for the type of request will be apart of the body. Packet validation checks if there is at minimum 18 bytes present. Data validation checks if the number of bytes needed for a request is present. For example, if a request is asking for a certain request that requires x bytes of data to fulfil the request but the body contains < x bytes, then the packet is invalid. |
 | 7.   | Data Cache<br /><br />This is a simple cache which keeps requests in memory in the event it can be used again so we don't have to repeatidly calculate the same data. This will be stored by key value as a hash and byte array. |
 | 8.   | Data Spooler<br /><br />A spooler is a way to predict a potential incoming request. For example, lets say request X is typically followed by another request Y, then we can automatically queue Y if applicable when X is requested such that Y is available in the cache the moment the request is made in the future.|
-| 9.   | Task Pool<br /><br />A task pool is a set of task which are executed after a delay. For example, if I want a function to be executed 5 minutes from now, I can add a task into the task pool with the current time + five minutes and then the task pool will execute the task when the time comes. |
+| 9.   | Task Pool<br /><br />A task pool is a set of tasks which are executed after a delay. For example, if I want a function to be executed 5 minutes from now, I can add a task into the task pool with the current time + five minutes and then the task pool will execute the task when the time comes. |
 | 10.  | Delegates <br /><br />Delegates are a way to pass a function into another function to be executed. A simple example of a delegate is a predicate which resolves to true or false when applied to some set of data. If you've ever used a filter, most likely you've used a predicate and therefore a delegate. For example, [1,2,3,4,5].filter(num -> num < 3) results in [1, 2] where (num -> num < 3) is the predicate.  |
 | 11.  | Listeners <br /><br />Listeners, also known as event listeners, are handlers that get called when a specfic condition is met. For example, if you've ever played a browser game, then most likely theres an event listener for pressing a button on your keyboard where the developer than handles the input. A simple event listener like this would use a decorator @onKeyPressEvent and we label the function <br /><br />@onKeyPressEvent<br />function do_something(input)<br />    if input == "k" // do something |
 | 12.  | Example Project<br /><br />The example project is a simple project whose design should be as simple as possible and should highlight the simplicity and quickness of using this framework to develop their project from idea to production.|
