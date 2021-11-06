@@ -20,7 +20,7 @@ Within each directory the respective directories are meta files. The meta file w
 | 1.   | Network Node Connect and Disconnect         | Completed     | Kirill |
 | 2.   | Documentation Site                          | Completed     | Garrett |
 | 3.   | Packet Reader and Writer                    | Completed     | Vincent |
-| 4.   | Packet Compress and Decompress              | Completed     | Vincent |
+| 4.   | Packet Compress and Decompress              | In Progress   | Vincent |
 | 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony |
 | 6.   | Data Validator                              | In Progress   | Garrett |
 | 7.   | Data Cache                                  | In Progress   | Vincent |
