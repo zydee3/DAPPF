@@ -13,9 +13,12 @@
  * @param target_start Where the elements will begin being copied to
  */
 void dappf::utility::array::copy_over(int8_t* ref, int ref_start, int ref_end, int8_t* target, int target_start) {
-    for(int i = 0; i < (ref_end - ref_start); (target[target_start + i] = ref[ref_start + i]), i++);
+    for(int i = 0; i < (ref_end - ref_start); i++) {
+        (target[target_start + i] = ref[ref_start + i]);
+    }
 }
 
+#include <iostream>
 /**
  * Converts a vector to an array
  * @param ref Reference vector to be converted to an array
@@ -23,7 +26,9 @@ void dappf::utility::array::copy_over(int8_t* ref, int ref_start, int ref_end, i
  */
 int8_t* dappf::utility::array::to_array(std::vector<int8_t>* ref){
     int8_t* array = new int8_t[ref->size()];
-    for(int i = 0; i < ref->size();  array[i] = ref->at(i), i++);
+    for(int i = 0; i < ref->size(); i++) {
+        array[i] = ref->at(i);
+    }
     return array;
 }
 
@@ -35,7 +40,9 @@ int8_t* dappf::utility::array::to_array(std::vector<int8_t>* ref){
  */
 int8_t* dappf::utility::array::copy(int8_t* ref, int length){
     int8_t* array = new int8_t[length];
-    for(int i = 0; i < length;  array[i] = ref[i], i++);
+    for(int i = 0; i < length; i++) {
+        array[i] = ref[i];
+    }
     return array;
 }
 
