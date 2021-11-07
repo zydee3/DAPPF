@@ -15,7 +15,7 @@ Within each directory the respective directories are meta files. The meta file w
 
 # Modules Task Sheet
 
-| No.  | Module                                      | Status        | Who     | When    |
+| No.  | Module                                      | Status        | Who     | Completed On    |
 | ---- | ------------------------------------------- | ------------- | ------- | ------- |
 | 1.   | Network Node Connect and Disconnect         | Completed     | Kirill | |
 | 2.   | Documentation Site                          | Completed     | Garrett | |
