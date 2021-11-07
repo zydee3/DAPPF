@@ -13,12 +13,15 @@
 namespace dappf::data {
     class Compression {
 
-    private:
+    protected:
         static const int pos_compressed_flag = 7;
 
+        static void insert_flag(int8_t**, int, int);
+        static std::vector<int8_t>* compress(int8_t*, int, int);
+
     public:
-        static int compress(int8_t*, int);
-        static int decompress(int8_t*, int);
+        static int compress(int8_t**, int);
+        static int decompress(int8_t**, int);
 
     };
 }

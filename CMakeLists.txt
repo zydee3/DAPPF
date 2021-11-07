@@ -37,7 +37,21 @@ add_library(
         framework/net/connection.h
         framework/net/connection.cpp
 
-        framework/utility/tree.cpp framework/utility/tree.h framework/utility/tree_node.cpp framework/utility/tree_node.h framework/utility/array.cpp framework/utility/array.h framework/meta/event_listeners.cpp framework/meta/event_listeners.h)
+        framework/utility/tree.h
+        framework/utility/tree.cpp
+
+        framework/utility/tree_node.h
+        framework/utility/tree_node.cpp
+
+        framework/utility/array.h
+        framework/utility/array.cpp
+
+        framework/meta/event_listeners.h
+        framework/meta/event_listeners.cpp
+
+        framework/security/packet_cipher.h
+        framework/security/packet_cipher.cpp
+        framework/meta/Exception.cpp framework/meta/Exception.h)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)
