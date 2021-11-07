@@ -9,8 +9,6 @@
 #include <cstdint>
 
 namespace dappf {
-
-
     void initialize();
 }
 

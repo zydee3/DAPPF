@@ -40,8 +40,8 @@ add_library(
         framework/utility/tree.h
         framework/utility/tree.cpp
 
-        framework/utility/tree_node.h
-        framework/utility/tree_node.cpp
+        framework/utility/meta/tree_node.h
+        framework/utility/meta/tree_node.cpp
 
         framework/utility/array.h
         framework/utility/array.cpp
@@ -51,7 +51,7 @@ add_library(
 
         framework/security/packet_cipher.h
         framework/security/packet_cipher.cpp
-        framework/meta/Exception.cpp framework/meta/Exception.h)
+)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)
