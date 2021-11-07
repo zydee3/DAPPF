@@ -14,10 +14,14 @@ namespace dappf::meta {
         //static void _encrypt(int8_t *);
         //static void _decrypt(int8_t *);
 
+        static void encrypt(int8_t *, int32_t);
+        static void decrypt(int8_t *, int32_t);
+
     public:
         //static void encrypt(std::vector<int8_t> *);
-        static void encrypt(int8_t *, int32_t size);
-        static void decrypt(int8_t *, int32_t size);
+
+        auto get_encryptor() -> void(*)(int8_t*, int32_t);
+        auto get_decryptor() -> void(*)(int8_t*, int32_t);
     };
 }
 

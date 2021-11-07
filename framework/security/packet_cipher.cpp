@@ -101,37 +101,37 @@ rotr32d (argtype v,
 
 /**
  * Encrypts the contents of a packet using Caesar's cipher
- * @param aob is the array of bytes to be encrypted
- * @param size is the size of the aob
+ * @param array is the array of bytes to be encrypted
+ * @param length is the length of the array
  */
-void dappf::meta::packet_cipher::encrypt(int8_t *aob, int32_t size) {
+void dappf::meta::packet_cipher::encrypt(int8_t *array, int32_t length) {
     std::string error_null = "[packet_cipher] attempting to encrypt null data.";
     std::string error_size = "[packet_cipher] attempting to read an invalid amount of bytes.";
-    if (aob == nullptr)
+    if (array == nullptr)
         throw std::logic_error(error_null);
-    else if (size < 1)
+    else if (length < 1)
         throw std::logic_error(error_size);
 
-    for (int32_t i=0; i < size; i++) {
-        aob[i] = rotl32d(aob[i], BIT_SHIFT);
+    for (int32_t i=0; i < length; i++) {
+        array[i] = rotl32d(array[i], BIT_SHIFT);
     }
 }
 
 /**
  * Decrypts the contents of a packet using Caesar's cipher
- * @param aob is the array of bytes to be decrypted
- * @param size is the size of the aob
+ * @param array is the array of bytes to be decrypted
+ * @param length is the length of the array
  */
-void dappf::meta::packet_cipher::decrypt(int8_t *aob, int32_t size) {
+void dappf::meta::packet_cipher::decrypt(int8_t *array, int32_t length) {
     std::string error_null = "[packet_cipher] attempting to decrypt null data.";
     std::string error_size = "[packet_cipher] attempting to read an invalid amount of bytes.";
-    if (aob == nullptr)
+    if (array == nullptr)
         throw std::logic_error(error_null);
-    else if (size < 1)
+    else if (length < 1)
         throw std::logic_error(error_size);
 
-    for (int32_t i=0; i < size; i++) {
-        aob[i] = rotr32d(aob[i], BIT_SHIFT);
+    for (int32_t i=0; i < length; i++) {
+        array[i] = rotr32d(array[i], BIT_SHIFT);
     }
 }
 //
@@ -142,3 +142,11 @@ void dappf::meta::packet_cipher::decrypt(int8_t *aob, int32_t size) {
 //void dappf::meta::packet_cipher::_decrypt(int8_t *current_byte) {
 //    *current_byte = *current_byte >> BIT_SHIFT;
 //}
+
+auto dappf::meta::packet_cipher::get_encryptor() -> void(*)(int8_t *, int32_t){
+    return &dappf::meta::packet_cipher::encrypt;
+}
+
+auto dappf::meta::packet_cipher::get_decryptor() -> void(*)(int8_t *, int32_t){
+    return &dappf::meta::packet_cipher::decrypt;
+}
