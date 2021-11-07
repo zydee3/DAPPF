@@ -17,18 +17,18 @@ Within each directory the respective directories are meta files. The meta file w
 
 | No.  | Module                                      | Status        | Who     | Completed On    |
 | ---- | ------------------------------------------- | ------------- | ------- | ------- |
-| 1.   | Network Node Connect and Disconnect         | Completed     | Kirill | |
-| 2.   | Documentation Site                          | Completed     | Garrett | |
-| 3.   | Packet Reader and Writer                    | Completed     | Vincent | |
+| 1.   | Network Node Connect and Disconnect         | Completed     | Kirill | 11/1 |
+| 2.   | Documentation Site                          | Completed     | Garrett | 11/1 |
+| 3.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
 | 4.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
-| 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | |
+| 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
 | 6.   | Data Validator                              | In Progress   | Garrett | |
 | 7.   | Data Cache                                  | In Progress   | Vincent | |
 | 8.   | Data Spooler                                | Incomplete    |  | |
 | 9.   | Task Pool                                   | In Progress   | Anthony | |
 | 10.  | Delegates                                   | Incomplete    |  | |
-| 11.  | Listeners                                   | In Progress   | Kirill | |
-| 12.  | Example Project                             | In Progress   | * | |
+| 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
+| 12.  | Example Project                             | In Progress   | Kirill | |
 
 
 # Module Functionality
