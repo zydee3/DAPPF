@@ -29,6 +29,7 @@ Within each directory the respective directories are meta files. The meta file w
 | 10.  | Delegates                                   | Incomplete    |  | |
 | 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
 | 12.  | Example Project                             | In Progress   | Kirill | |
+| 13.  | Combining Modules                           | In Progress   | Vincent | | 
 
 
 # Module Functionality
