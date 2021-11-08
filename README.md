@@ -24,7 +24,7 @@ Within each directory the respective directories are meta files. The meta file w
 | 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
 | 6.   | Data Validator                              | In Progress   | Garrett | |
 | 7.   | Data Cache                                  | In Progress   | Vincent | |
-| 8.   | Data Spooler                                | Incomplete    |  | |
+| 8.   | Data Spooler                                | Incomplete    | Vincent | |
 | 9.   | Task Pool                                   | In Progress   | Anthony | |
 | 10.  | Delegates                                   | Incomplete    |  | |
 | 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
