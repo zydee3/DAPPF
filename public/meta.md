@@ -127,6 +127,142 @@ int8_t* dappf::meta::packet_writer::to_array()
 
 <hr>
 
+## event_listeners
+
+#### set_on_connection_request_event_listener()
+
+```cpp
+void dappf::meta::event_listeners::set_on_connection_request_event_listener(void(*handle)(std::string))
+```
+
+> Sets handler for handling connection requests.  
+> @param handle Pointer to function that handles connection requests.  
+> When invoked, the handler passes in a string parameter representing the ipv6  
+> address of the requesting node.  
+
+#### get_on_connection_request_event_listener()
+
+```cpp
+auto dappf::meta::event_listeners::get_on_connection_request_event_listener()
+```
+
+> Returns handler for handling connection requests.  
+> @return Pointer to function that handles connection requests.  
+> When invoked, the handler passes in a string parameter representing the ipv6  
+> address of the requesting node.  
+
+#### set_on_connection_established_event_listener()
+
+```cpp
+void dappf::meta::event_listeners::set_on_connection_established_event_listener(void(*handle)(std::string))
+```
+
+> Sets handler for handling post-connection events.  
+> @param handle Pointer to function that handles post-connection events.  
+> When invoked, the handler passes in a string parameter representing the ipv6  
+> address of the connected neighbor.  
+
+#### get_on_connection_established_event_listener()
+
+```cpp
+auto dappf::meta::event_listeners::get_on_connection_established_event_listener()
+```
+
+> Gets handler for handling post-connection events.  
+> @return Pointer to function that handles post-connection events.  
+> When invoked, the handler passes in a string parameter representing the ipv6  
+> address of the connected neighbor.  
+
+#### set_on_connection_dropped_event_listener()
+
+```cpp
+void dappf::meta::event_listeners::set_on_connection_dropped_event_listener(void(*handle)(std::string))
+```
+
+> Sets handler for handling post-disconnection events.  
+> @param handle Pointer to function that handles post-disconnection events.  
+> When invoked, the handler passes in a string parameter representing the ipv6  
+> address of the disconnected neighbor.  
+
+#### get_on_connection_dropped_event_listener()
+
+```cpp
+auto dappf::meta::event_listeners::get_on_connection_dropped_event_listener()
+```
+
+> Gets handler for handling post-disconnection events.  
+> @param handle Pointer to function that handles post-disconnection events.  
+> When invoked, the handler passes in a string parameter representing the ipv6  
+> address of the disconnected neighbor.  
+
+#### set_on_packet_received_event_listener()
+
+```cpp
+void dappf::meta::event_listeners::set_on_packet_received_event_listener(void(*handle)(dappf::meta::packet_reader*))
+```
+
+> Sets handler for handing received packets from neighbors.  
+> @param handle Pointer to function that handles received packets from neighbors.  
+> When invoked, the handler passes in an instantiated packet reader which contains  
+> the bytes received.  
+
+#### get_on_packet_received_event_listener()
+
+```cpp
+auto dappf::meta::event_listeners::get_on_packet_received_event_listener()
+```
+
+> Gets handler for handing received packets from neighbors.  
+> @param handle Pointer to function that handles received packets from neighbors.  
+> When invoked, the handler passes in an instantiated packet reader which contains  
+> the bytes received.  
+
+#### set_on_packet_sent_event_listener()
+
+```cpp
+void dappf::meta::event_listeners::set_on_packet_sent_event_listener(void(*handle)(dappf::meta::packet_writer*))
+```
+
+> Sets handler for handing sent packets to neighbors.  
+> @param handle Pointer to function that handles sent packets to neighbors.  
+> When invoked, the handler passes in an instantiated packet writer which contains  
+> the bytes written and sent.  
+
+#### get_on_packet_sent_event_listener()
+
+```cpp
+auto dappf::meta::event_listeners::get_on_packet_sent_event_listener()
+```
+
+> Gets handler for handing sent packets to neighbors.  
+> @param handle Pointer to function that handles sent packets to neighbors.  
+> When invoked, the handler passes in an instantiated packet writer which contains  
+> the bytes written and sent.  
+
+#### set_packet_validator()
+
+```cpp
+void dappf::meta::event_listeners::set_packet_validator(bool(*handle)(int8_t*, int))
+```
+
+> Sets the handler for validating an incoming packet.  
+> @param handle Pointer to function that validates packets.  
+> When invoked, the handler accepts the array of bytes, the length of the array of bytes  
+> and whats returned is true or false representing the state; true if valid, otherwise false.  
+
+#### get_packet_validator()
+
+```cpp
+auto dappf::meta::event_listeners::get_packet_validator()
+```
+
+> Gets the handler for validating an incoming packet.  
+> @param handle Pointer to function that validates packets.  
+> When invoked, the handler accepts the array of bytes, the length of the array of bytes  
+> and whats returned is true or false representing the state; true if valid, otherwise false.  
+
+<hr>
+
 ## packet_reader
 
 #### packet_reader()
