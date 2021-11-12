@@ -11,6 +11,8 @@
 #include <cstring>
 #include <unistd.h>
 
+//int32_t dappf::connection::BUFFER_SIZE = 8192; // 8 bytes
+
 /**
  * Creates a socket for connecting to a server, listening on the specified port number.
  * Returns the socket file descriptor on success. On failure, throws error.
@@ -124,6 +126,13 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
     }
 }
 
+dappf::connection::network dappf::connection::start_network(uint16_t listen_port, void (*handler)(int8_t *, int32_t)) {
+    std::vector<conn> *connections = new std::vector<conn>;
+    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, handler);
+
+    return network { connections, thread_listening_for_incoming_connections };
+}
+
 /**
  * Attempts to join the network given the address and connect_port of some node in that network
  * @param address the target node's address
@@ -136,14 +145,12 @@ dappf::connection::network dappf::connection::join_network(std::string address, 
     // in order for a node to connect, it must already have the address/connect_port of a node in the network
     // how it obtains that will be outside the framework's responsibilities
 
-    std::vector<conn> *connections = new std::vector<conn>;
-
-    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, handler);
+    network net = start_network(listen_port, handler);
 
     int clientfd = create_client_socket(address, connect_port);
-    add_connection(connections, address, clientfd, handler);
+    add_connection(net.connections, address, clientfd, handler);
 
-    return network { connections, thread_listening_for_incoming_connections };
+    return net;
 }
 
 /**
