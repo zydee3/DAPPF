@@ -75,11 +75,13 @@ int create_listen_socket(uint16_t port) {
  * @param connection the connection to listen to
  * @param handler the function that should be called when data is received
  */
-[[noreturn]] void listen_connection(int connfd, void (*handler)(int8_t *, int32_t)) {
+void listen_connection(int connfd, void (*handler)(int8_t *, int32_t)) {
     int8_t *buffer = (int8_t *) malloc(dappf::connection::BUFFER_SIZE);
 
     while (true) {
         int32_t length_read_in = read(connfd, buffer, dappf::connection::BUFFER_SIZE);
+        if (length_read_in == 0) break;
+
         handler(buffer, length_read_in);
     }
 }
@@ -130,7 +132,7 @@ dappf::connection::network dappf::connection::start_network(uint16_t listen_port
     std::vector<conn> *connections = new std::vector<conn>;
     std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, handler);
 
-    return network { connections, thread_listening_for_incoming_connections };
+    return network { listen_port, 0, connections, thread_listening_for_incoming_connections };
 }
 
 /**
@@ -172,7 +174,7 @@ void dappf::connection::broadcast_message(std::vector<conn> *connections, int8_t
 void dappf::connection::leave_network(std::vector<conn> *connections) {
     for (conn connection : *connections) {
         close(connection.connfd);
-        delete(connection.connection_thread);
+        delete connection.connection_thread;
     }
 
     free(connections);

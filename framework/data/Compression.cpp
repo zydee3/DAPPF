@@ -56,7 +56,7 @@ int dappf::data::Compression::compress(int8_t** packet, int length) {
     dappf::data::Compression::insert_flag(packet, ++length, 0);
 
     // apply lossless compression starting after address and op code
-    std::vector<int8_t>* compressed_bytes = dappf::data::Compression::compress(*packet, 0, length);
+    std::vector<int8_t>* compressed_bytes = dappf::data::Compression::compress(*packet, pos_compressed_flag+1, length);
 
     if(compressed_bytes->size() >= length) {
         // the compression actually inflated the packet, so don't use it.
@@ -70,7 +70,7 @@ int dappf::data::Compression::compress(int8_t** packet, int length) {
         // and convert the vector into an array. also, the new packet is no longer
         // needed so we can delete it to prevent any memory leaks. everything we
         // need is inside the vector.
-        delete packet;
+        delete *packet;
 
         // we're using the compressed bytes, so set the flag so the receiver knows
         // the bytes were compressed
@@ -106,7 +106,7 @@ int dappf::data::Compression::decompress(int8_t** packet, int length) {
     }
 
     // we no longer need packet. delete and update it.
-    delete packet;
+    delete *packet;
     *packet = dappf::utility::array::to_array(uncompressed_bytes);
 
     // get the new length

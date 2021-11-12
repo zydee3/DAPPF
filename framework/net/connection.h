@@ -25,6 +25,8 @@ namespace dappf::connection {
     } conn;
 
     typedef struct {
+        uint16_t listen_port;
+        uint64_t message_counter;
         std::vector<conn> *connections;
         std::thread *thread_listening_for_incoming_connections;
     } network;
