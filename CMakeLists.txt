@@ -51,7 +51,7 @@ add_library(
 
         framework/security/packet_cipher.h
         framework/security/packet_cipher.cpp
-)
+        framework/net/task_pool.cpp framework/net/task_pool.h)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)
