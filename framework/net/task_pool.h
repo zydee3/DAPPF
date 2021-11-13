@@ -39,14 +39,19 @@ namespace dappf::net {
         }
     };
 
+    /**
+     * Task pool
+     */
     class task_pool {
     private:
         std::set<dappf::net::task> task_queue;
 
+        int generate_uid();
         int enqueue();
         void dequeue(int uid);
     public:
-        //@todo
+        int add(); //@todo
+        int remove(); //@todo
     };
 }
 
