@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace dappf::meta {
+namespace dappf::security {
     class packet_cipher {
     private:
         //static void _encrypt(int8_t *);

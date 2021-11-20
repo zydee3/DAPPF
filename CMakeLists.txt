@@ -22,14 +22,14 @@ add_library(
         framework/test/unit_test_packet.h
         framework/test/unit_test_packet.cpp
 
-        framework/data/cache.h
-        framework/data/cache.cpp
+        framework/data/Cache.h
+        framework/data/Cache.cpp
 
-        framework/data/compression.h
-        framework/data/compression.cpp
+        framework/data/meta/CacheEntry.h
+        framework/data/meta/CacheEntry.cpp
 
-        framework/data/validator.h
-        framework/data/validator.cpp
+        framework/data/Compression.h
+        framework/data/Compression.cpp
 
         framework/test/unit_test_compression.h
         framework/test/unit_test_compression.cpp
@@ -51,6 +51,7 @@ add_library(
 
         framework/security/packet_cipher.h
         framework/security/packet_cipher.cpp
+        framework/net/task_pool.cpp framework/net/task_pool.h
 
         framework/data/cache.h
         framework/data/cache.cpp
