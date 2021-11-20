@@ -5,30 +5,29 @@
 #ifndef DAPPF_CACHE_H
 #define DAPPF_CACHE_H
 
+#include <list>
 #include <mutex>
-#include <map>
 #include <string>
-#include "./meta/CacheEntry.h"
+#include <utility>
 
 namespace dappf::data {
-    class Cache {
+    class cache {
     private:
         int update_interval;
-        std::mutex *cache_lock;
-        std::map<std::string, CacheEntry*>* cache_entries;
+        std::mutex *lock;
+        std::list<std::pair<std::string, int8_t**>> entries;
 
     public:
-        Cache();
-        ~Cache();
+        cache();
+        ~cache();
 
-        void update_cache();
+        void update();
 
         bool exists(std::string);
-        int8_t* get(std::string);
+        std::pair<std::string, int8_t**>* get(std::string);
         bool put(std::string, int8_t*);
     };
 }
-
 
 
 #endif //DAPPF_CACHE_H

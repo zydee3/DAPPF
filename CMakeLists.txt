@@ -22,14 +22,14 @@ add_library(
         framework/test/unit_test_packet.h
         framework/test/unit_test_packet.cpp
 
-        framework/data/Cache.h
-        framework/data/Cache.cpp
+        framework/data/cache.h
+        framework/data/cache.cpp
 
-        framework/data/meta/CacheEntry.h
-        framework/data/meta/CacheEntry.cpp
+        framework/data/compression.h
+        framework/data/compression.cpp
 
-        framework/data/Compression.h
-        framework/data/Compression.cpp
+        framework/data/validator.h
+        framework/data/validator.cpp
 
         framework/test/unit_test_compression.h
         framework/test/unit_test_compression.cpp
@@ -51,7 +51,13 @@ add_library(
 
         framework/security/packet_cipher.h
         framework/security/packet_cipher.cpp
-)
+
+        framework/data/cache.h
+        framework/data/cache.cpp
+
+        framework/meta/config.h
+        framework/meta/config.cpp
+        framework/meta/handler.cpp framework/meta/handler.h)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)

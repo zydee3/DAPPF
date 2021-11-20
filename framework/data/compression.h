@@ -11,7 +11,7 @@
 #include "../utility/array.h"
 
 namespace dappf::data {
-    class Compression {
+    class compression {
 
     protected:
         static const int pos_compressed_flag = 7;
