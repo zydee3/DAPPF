@@ -57,7 +57,14 @@ add_library(
 
         framework/security/packet_cipher.h
         framework/security/packet_cipher.cpp
-)
+        framework/net/task_pool.cpp framework/net/task_pool.h
+
+        framework/data/cache.h
+        framework/data/cache.cpp
+
+        framework/meta/config.h
+        framework/meta/config.cpp
+        framework/meta/handler.cpp framework/meta/handler.h)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)

@@ -2,10 +2,10 @@
 The project is built in jetbrain's clion IDE. You should be able to just open the file and compile straight away as the project was set up already for you. Connect your github so you can make pull requests to the main branch.
 
 # DAPPF
-I created both the work [example] environment and library itself under a single project. The work enviornment compiles down and ran as an executable. The framework is compiled to a shared library which cannot be ran as a standalone. 
+I created both the work [example] environment and library itself under a single project. The work enviornment compiles down and ran as an executable. The framework is compiled to a shared library which cannot be ran as a standalone.
 
 # Framework
-Within the framework are four main directories which pertains to each layer of the framework:
+Within the framework are four main directories which pertains to each layer (1-3) of the framework. The fourth layer is written by the user however the framework provides an interface for interaction between handlers and the framework.
  - Layer 1: Net (Communication Layer)
  - Layer 2: Security
  - Layer 3: Data
@@ -24,12 +24,12 @@ Within each directory the respective directories are meta files. The meta file w
 | 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
 | 6.   | Data Validator                              | In Progress   | Garrett | |
 | 7.   | Data Cache                                  | In Progress   | Vincent | |
-| 8.   | Data Spooler                                | Incomplete    | Vincent | |
+| 8.   | Data Spooler                                | In Progress    | Shishir | |
 | 9.   | Task Pool                                   | In Progress   | Anthony | |
-| 10.  | Delegates                                   | Incomplete    |  | |
+| 10.  | Delegates                                   | In Progress    | Shishir | |
 | 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
 | 12.  | Example Project                             | In Progress   | Kirill | |
-| 13.  | Combining Modules                           | In Progress   | Vincent | | 
+| 13.  | Combining Modules                           | In Progress   | Vincent | |
 
 
 # Module Functionality
@@ -48,3 +48,22 @@ Within each directory the respective directories are meta files. The meta file w
 | 10.  | Delegates <br /><br />Delegates are a way to pass a function into another function to be executed. A simple example of a delegate is a predicate which resolves to true or false when applied to some set of data. If you've ever used a filter, most likely you've used a predicate and therefore a delegate. For example, [1,2,3,4,5].filter(num -> num < 3) results in [1, 2] where (num -> num < 3) is the predicate.  |
 | 11.  | Listeners <br /><br />Listeners, also known as event listeners, are handlers that get called when a specfic condition is met. For example, if you've ever played a browser game, then most likely theres an event listener for pressing a button on your keyboard where the developer than handles the input. A simple event listener like this would use a decorator @onKeyPressEvent and we label the function <br /><br />@onKeyPressEvent<br />function do_something(input)<br />    if input == "k" // do something |
 | 12.  | Example Project<br /><br />The example project is a simple project whose design should be as simple as possible and should highlight the simplicity and quickness of using this framework to develop their project from idea to production.|
+
+# Provided Utility
+
+| No.  | Utility                                                         |
+| ---- | --------------------------------------------------------------- |
+| 1.   | **packet_reader** <br /><br />The packet reader provides an interface for reading bytes sequentially in a safe and efficient way. The reader must be given an array to read from as well as the length of the array. See [dappf::meta::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_reader.h) for documentation and [dappf::examples::example_usage_packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_reader.cpp) for example usage(s).
+| 1.   | **packet_writer** <br /><br />The packet writer provides an interface for writing bytes sequentially in a safe and efficient way. The writer encodes most primitive data types and maintains the length of the total number of bytes encoded. See [dappf::meta::packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_writer.h) for documentation and [dappf::examples::example_usage_packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_writer.cpp) for example usage(s).
+
+
+# Discoverable Event Listeners
+Event listeners provides a series of methods provided to the developer to execute certain tasks in addition to some background tasks performed by the framework. A simple example is if the developer implements a logging system which logs every incoming packet. The developer can implement the "on_packet_received" event listener which provides the developer access to an immutable instance of the packet reader which is used to handler the recieved bytes internally. From there, the developer can log the bytes received or a deserialized form of those bytes. All event listeners are of type void.
+
+| No.  | Event Listener                                                  |
+| ---- | --------------------------------------------------------------- |
+| 1.   | void dappf::meta::event_listeners::[**on_connection_request**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the ipv4 address of the requesting node. |
+| 2.   | void dappf::meta::event_listeners::[**on_connection_established**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when a previous request to connect has been fulfilled and connection between the two nodes has been established. The given string parameter holds the ipv4 address of the requesting node. |
+| 3.   | void dappf::meta::event_listeners::[**on_connection_dropped**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when an existing connection is dropped. The given string parameter holds the ipv4 address of the requesting node. |
+| 4.   | void dappf::meta::event_listeners::[**on_packet_received**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)([dappf::meta::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_reader.h));<br /><br />Called when a packet is received from a current established connection.  |
+| 5.   | void dappf::meta::event_listeners::[**on_packet_sent**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)([dappf::meta::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_writer.h));<br /><br />Called when a packet is sent to current established neighbors. The packet writer in this state is immutable. | 

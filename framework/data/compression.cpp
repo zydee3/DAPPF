@@ -3,10 +3,10 @@
 //
 
 #include <iostream>
-#include "Compression.h"
+#include "compression.h"
 #include "../meta/log.h"
 
-void dappf::data::Compression::insert_flag(int8_t** packet, int length, int flag_value){
+void dappf::data::compression::insert_flag(int8_t** packet, int length, int flag_value){
     int8_t* new_packet = new int8_t[length];
 
     dappf::utility::array::copy_over(*packet, 0, pos_compressed_flag - 1, new_packet, 0);
@@ -18,7 +18,7 @@ void dappf::data::Compression::insert_flag(int8_t** packet, int length, int flag
     *packet = new_packet;
 }
 
-std::vector<int8_t>* dappf::data::Compression::compress(int8_t* packet, int start, int end){
+std::vector<int8_t>* dappf::data::compression::compress(int8_t* packet, int start, int end){
     std::vector<int8_t>* compressed_bytes = new std::vector<int8_t>();
 
     for(int i = start; i < end; i++){
@@ -48,15 +48,15 @@ std::vector<int8_t>* dappf::data::Compression::compress(int8_t* packet, int star
  * array of bytes does not change, then the packet increases by 1 to contain
  * the change flag. Otherwise, the new size is equal to the compressed bytes + 1.
  */
-int dappf::data::Compression::compress(int8_t** packet, int length) {
+int dappf::data::compression::compress(int8_t** packet, int length) {
     // if the only thing to compress is the address and op code, then don't compress
     if(pos_compressed_flag >= length) return length;
 
     // insert the flag to represent if the packet was compressed
-    dappf::data::Compression::insert_flag(packet, ++length, 0);
+    dappf::data::compression::insert_flag(packet, ++length, 0);
 
     // apply lossless compression starting after address and op code
-    std::vector<int8_t>* compressed_bytes = dappf::data::Compression::compress(*packet, pos_compressed_flag+1, length);
+    std::vector<int8_t>* compressed_bytes = dappf::data::compression::compress(*packet, 0, length);
 
     if(compressed_bytes->size() >= length) {
         // the compression actually inflated the packet, so don't use it.
@@ -86,7 +86,13 @@ int dappf::data::Compression::compress(int8_t** packet, int length) {
     return length;
 }
 
-int dappf::data::Compression::decompress(int8_t** packet, int length) {
+/**
+ * Tries to undo a compression
+ * @param packet
+ * @param length
+ * @return
+ */
+int dappf::data::compression::decompress(int8_t** packet, int length) {
     // if the only things present are the address and op code or the flag
     // is 0 (false) then theres nothing to decompress.
     if(length < pos_compressed_flag || *(*packet + pos_compressed_flag) == 0) return length;

@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "unit_test_compression.h"
-#include "../data/Compression.h"
+#include "../data/compression.h"
 #include "../meta/packet_writer.h"
 #include "../meta/log.h"
 
@@ -22,12 +22,12 @@ void dappf::test::unit_test_compression::unit_test_compression(){
 
     // compress the array of bytes
     std::cout << std::endl << "Compressed: " << std::endl;
-    int length = dappf::data::Compression::compress(&packet, writer->length());
+    int length = dappf::data::compression::compress(&packet, writer->length());
     dappf::meta::log::cout_hex_array(packet, length);
 
     // decompress the array of bytes
     std::cout << std::endl << "Decompressed: " << std::endl;
-    length = dappf::data::Compression::decompress(&packet, length);
+    length = dappf::data::compression::decompress(&packet, length);
 
     dappf::meta::log::cout_hex_array(packet, length);
 }

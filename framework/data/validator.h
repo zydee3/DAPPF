@@ -9,7 +9,7 @@
 #include <cstdint>
 
 namespace dappf::data {
-    class VALIDATOR {
+    class validator {
 
     protected:
         static const int pos_compressed_flag = 7;
@@ -18,7 +18,7 @@ namespace dappf::data {
         // static std::vector<int8_t>* compress(int8_t*, int, int);
 
     public:
-        static int handle(int8_t*, int);
+        bool handle(int8_t*, int);
         // static int decompress(int8_t*, int);
 
     };
