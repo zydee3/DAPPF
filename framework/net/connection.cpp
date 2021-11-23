@@ -75,14 +75,14 @@ int create_listen_socket(uint16_t port) {
  * @param connection the connection to listen to
  * @param handler the function that should be called when data is received
  */
-void listen_connection(int connfd, void (*handler)(int8_t *, int32_t)) {
+void listen_connection(int connfd, dappf::DappfNetworkInterface *app) {
     int8_t *buffer = (int8_t *) malloc(dappf::connection::BUFFER_SIZE);
 
     while (true) {
         int32_t length_read_in = read(connfd, buffer, dappf::connection::BUFFER_SIZE);
         if (length_read_in == 0) break;
 
-        handler(buffer, length_read_in);
+        app->receive(buffer, length_read_in);
     }
 }
 
@@ -93,8 +93,8 @@ void listen_connection(int connfd, void (*handler)(int8_t *, int32_t)) {
  * @param connfd the file descriptor of the new connection
  * @param handler the function that should be called when data is received
  */
-void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd, void (*handler)(int8_t *, int32_t)) {
-    std::thread *thread = new std::thread(listen_connection, connfd, handler);
+void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd, dappf::DappfNetworkInterface *app) {
+    std::thread *thread = new std::thread(listen_connection, connfd, app);
     connections->push_back(dappf::connection::conn { address, connfd, thread });
 }
 
@@ -105,7 +105,7 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
  * @param port the port on which to listen for incoming connections
  * @param handler the function that should be called when data is received
  */
-[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port, void (*handler)(int8_t *, int32_t)) {
+[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port, dappf::DappfNetworkInterface *app) {
     int listenfd = create_listen_socket(port);
 
     while (true) {
@@ -123,14 +123,14 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
             sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
             std::string address(inet_ntoa(addr_in->sin_addr));
 
-            add_connection(connections, address, connfd, handler);
+            add_connection(connections, address, connfd, app);
         }
     }
 }
 
-dappf::connection::network dappf::connection::start_network(uint16_t listen_port, void (*handler)(int8_t *, int32_t)) {
+dappf::connection::network dappf::connection::start_network(uint16_t listen_port, DappfNetworkInterface *app) {
     std::vector<conn> *connections = new std::vector<conn>;
-    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, handler);
+    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, app);
 
     return network { listen_port, 0, connections, thread_listening_for_incoming_connections };
 }
@@ -143,14 +143,14 @@ dappf::connection::network dappf::connection::start_network(uint16_t listen_port
  * @param handler the function that should be called when data is received
  * @return the list of active connections, initialized with a single element
  */
-dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t)) {
+dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port, DappfNetworkInterface *app) {
     // in order for a node to connect, it must already have the address/connect_port of a node in the network
     // how it obtains that will be outside the framework's responsibilities
 
-    network net = start_network(listen_port, handler);
+    network net = start_network(listen_port, app);
 
     int clientfd = create_client_socket(address, connect_port);
-    add_connection(net.connections, address, clientfd, handler);
+    add_connection(net.connections, address, clientfd, app);
 
     return net;
 }

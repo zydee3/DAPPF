@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 #include <signal.h>
-#include <unordered_set>
 #include "../framework/dappf.h"
 #include "../framework/data/Compression.h"
 #include "../framework/security/packet_cipher.h"
@@ -27,6 +26,7 @@ void receive(int8_t *data, int32_t length) {
 }
 
 [[noreturn]] int main(int argc, char **argv) {
+    dappf::meta::packet_writer *packet = new dappf::meta::packet_writer; // this works when it's here, but not just before the while loop TODO: figure it out
     dappf::Dappf *dappf_handle;
 
     if (argc == 2) {
@@ -51,7 +51,6 @@ void receive(int8_t *data, int32_t length) {
     sigaction(SIGINT, &sigint_handler, NULL);
 
     // keep reading in from console and sending through the network
-    dappf::meta::packet_writer *packet = new dappf::meta::packet_writer;
     std::string message;
     while (true) {
         std::cin >> message;

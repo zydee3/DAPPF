@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <thread>
+#include "../dappf_network.h"
 
 namespace dappf::connection {
 
@@ -31,9 +32,9 @@ namespace dappf::connection {
         std::thread *thread_listening_for_incoming_connections;
     } network;
 
-    network start_network(uint16_t listen_port, void (*handler)(int8_t *, int32_t));
+    network start_network(uint16_t listen_port, dappf::DappfNetwork *app); // void (*handler)(int8_t *, int32_t)
 
-    network join_network(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t));
+    network join_network(std::string address, uint16_t connect_port, uint16_t listen_port, dappf::DappfNetwork *app);
 
     void broadcast_message(std::vector<conn> *connections, int8_t* message, int32_t length);
 
