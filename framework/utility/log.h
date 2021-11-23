@@ -7,7 +7,7 @@
 
 #include<iostream>
 
-namespace dappf::meta {
+namespace dappf::utility {
     class log {
     public:
         static void cout_hex(int32_t n);
