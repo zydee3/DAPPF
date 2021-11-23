@@ -22,9 +22,9 @@ Within each directory the respective directories are meta files. The meta file w
 | 3.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
 | 4.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
 | 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
-| 6.   | Data Validator                              | In Progress   | Garrett | |
-| 7.   | Data Cache                                  | In Progress   | Vincent | |
-| 8.   | Data Spooler                                | In Progress    | Shishir | |
+| 6.   | Data Validator                              | In Progress   | Garrett | 11/10 |
+| 7.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
+| 8.   | Data Spooler                                | In Progress    | ~~Shishir~~ | |
 | 9.   | Task Pool                                   | In Progress   | Anthony | |
 | 10.  | Delegates                                   | In Progress    | Shishir | |
 | 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
