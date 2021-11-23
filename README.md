@@ -25,11 +25,12 @@ Within each directory the respective directories are meta files. The meta file w
 | 6.   | Data Validator                              | In Progress   | Garrett | 11/10 |
 | 7.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
 | 8.   | Data Spooler                                | In Progress    | ~~Shishir~~ Vincent | |
-| 9.   | Task Pool                                   | In Progress   | Anthony | |
+| 9.   | Task Pool                                   | In Progress   | Anthony, Vincent | |
 | 10.  | Delegates                                   | In Progress    | Shishir | |
 | 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
-| 12.  | Example Project                             | In Progress   | Kirill | |
-| 13.  | Combining Modules                           | In Progress   | Vincent | |
+| 12.  | Handlers                                    | In Progress | Vincent | | 
+| 13.  | Example Project                             | In Progress   | Kirill | |
+| 14.  | Combining Modules                           | In Progress   | Vincent | |
 
 
 # Module Functionality
