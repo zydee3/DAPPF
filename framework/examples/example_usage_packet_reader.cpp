@@ -34,4 +34,13 @@ void example_usage_packet_reader(int8_t* packet, int packet_length){
 
     // read 4 bytes, exception thrown since no readable bytes present
     int num_4 = reader->decode_4();
+
+    // get the original packet being interfaced
+    int8_t* original_packet = reader->get_packet();
+
+    // dispose of the packet
+    ~original_packet();
+
+    // dispose of the packet writer
+    ~reader;
 }

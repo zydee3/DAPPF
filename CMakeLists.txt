@@ -16,17 +16,14 @@ add_library(
         framework/meta/packet_reader.h
         framework/meta/packet_reader.cpp
 
-        framework/meta/log.h
-        framework/meta/log.cpp
+        framework/utility/log.h
+        framework/utility/log.cpp
 
         framework/test/unit_test_packet.h
         framework/test/unit_test_packet.cpp
 
         framework/data/Cache.h
         framework/data/Cache.cpp
-
-        framework/data/meta/CacheEntry.h
-        framework/data/meta/CacheEntry.cpp
 
         framework/data/Compression.h
         framework/data/Compression.cpp

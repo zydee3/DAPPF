@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "compression.h"
-#include "../meta/log.h"
+#include "../utility/log.h"
 
 void dappf::data::compression::insert_flag(int8_t** packet, int length, int flag_value){
     int8_t* new_packet = new int8_t[length];

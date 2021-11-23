@@ -6,7 +6,7 @@
 #include "unit_test_compression.h"
 #include "../data/compression.h"
 #include "../meta/packet_writer.h"
-#include "../meta/log.h"
+#include "../utility/log.h"
 
 void dappf::test::unit_test_compression::unit_test_compression(){
     dappf::meta::packet_writer* writer = new dappf::meta::packet_writer();

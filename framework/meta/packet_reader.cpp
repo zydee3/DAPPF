@@ -109,3 +109,11 @@ std::string dappf::meta::packet_reader::decode_string(int32_t num_chars) {
 int32_t dappf::meta::packet_reader::remaining() {
     return length - position;
 }
+
+/**
+ * Returns the original packet being interfaced.
+ * @return packet
+ */
+int8_t* dappf::meta::packet_reader::get_packet(){
+    return packet;
+}
