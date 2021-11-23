@@ -10,54 +10,12 @@
 #include "data/Compression.h"
 #include "security/packet_cipher.h"
 
-void receive_global(int8_t *data_full, int32_t length) {
-    /*// decompress
-    int8_t **data_loc = &data_full;
-
-    dappf::data::Compression compressor;
-    compressor.decompress(data_loc, length);
-
-    data_full = *data_loc;
-
-    // decrypt
-    dappf::meta::packet_cipher cipher;
-    cipher.get_decryptor()(data_full, length);*/
-
-    // get string
-    std::string message((char *) data_full, length);
-    std::cout << message << std::endl;
+dappf::Dappf::Dappf(uint16_t listen_port) {
+    net = connection::start_network(listen_port);
 }
 
-void dappf::Dappf::receive(int8_t *data, int32_t length) {
-    // check metadata
-    uint64_t *key = (uint64_t *) data+2;
-    if (seen_map.contains(*key)) return;
-    seen_map.insert(*key);
-
-    // decompress
-    /*int8_t **data_loc = &data;
-
-    dappf::data::Compression compressor;
-    length = compressor.decompress(data_loc, length);
-
-    data = *data_loc;*/
-
-    // decrypt
-    /*dappf::meta::packet_cipher cipher;
-    cipher.get_decryptor()(data, length);*/
-
-    on_data(data+14, length);
-}
-
-dappf::Dappf::Dappf(uint16_t listen_port, void (*handler)(int8_t *, int32_t)) {
-    interface = DappfNetworkInterface();
-    on_data = handler;
-    net = connection::start_network(listen_port, *this);
-}
-
-dappf::Dappf::Dappf(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t)) {
-    on_data = handler;
-    net = connection::join_network(address, connect_port, listen_port, *this);
+dappf::Dappf::Dappf(std::string address, uint16_t connect_port, uint16_t listen_port) {
+    net = connection::join_network(address, connect_port, listen_port);
 }
 
 void dappf::Dappf::broadcast(meta::packet_writer *packet) {

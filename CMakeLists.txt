@@ -10,6 +10,12 @@ add_library(
         framework/dappf.h
         framework/dappf.cpp
 
+        framework/meta/message_id_tracker.h
+        framework/meta/message_id_tracker.cpp
+
+        framework/meta/packet_preproccessing.h
+        framework/meta/packet_preproccessing.cpp
+
         framework/meta/packet_writer.h
         framework/meta/packet_writer.cpp
 

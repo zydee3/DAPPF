@@ -75,7 +75,7 @@ int create_listen_socket(uint16_t port) {
  * @param connection the connection to listen to
  * @param handler the function that should be called when data is received
  */
-void listen_connection(int connfd, dappf::DappfNetworkInterface *app) {
+void listen_connection(int connfd) {
     int8_t *buffer = (int8_t *) malloc(dappf::connection::BUFFER_SIZE);
 
     while (true) {

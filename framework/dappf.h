@@ -8,21 +8,19 @@
 
 #include <cstdint>
 #include <unordered_set>
-#include "dappf_network.h"
 #include "meta/packet_writer.h"
+#include "net/connection.h"
+#include "meta/message_id_tracker.h"
 
 namespace dappf {
     class Dappf {
     private:
-        DappfNetworkInterface interface;
-        void (*on_data)(int8_t *, int32_t);
+        connection::network net;
+        MessageIdTracker tracker;
 
     public:
-        Dappf(uint16_t listen_port, void (*handler)(int8_t *, int32_t));
-        Dappf(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t));
-
-        // i wish this weren't public to everyone
-        void receive(int8_t *data, int32_t length);
+        Dappf(uint16_t listen_port);
+        Dappf(std::string address, uint16_t connect_port, uint16_t listen_port);
 
         void broadcast(meta::packet_writer *packet);
         void send(meta::packet_writer *packet, std::string address, uint16_t target_port);
