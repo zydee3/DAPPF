@@ -19,18 +19,19 @@ Within each directory the respective directories are meta files. The meta file w
 | ---- | ------------------------------------------- | ------------- | ------- | ------- |
 | 1.   | Network Node Connect and Disconnect         | Completed     | Kirill | 11/1 |
 | 2.   | Documentation Site                          | Completed     | Garrett | 11/1 |
-| 3.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
-| 4.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
-| 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
-| 6.   | Data Validator                              | In Progress   | Garrett | 11/10 |
-| 7.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
-| 8.   | Data Spooler                                | In Progress    | ~~Shishir~~ Vincent | |
-| 9.   | Task Pool                                   | In Progress   | Anthony, Vincent | |
-| 10.  | Delegates                                   | In Progress    | Shishir | |
-| 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
-| 12.  | Handlers                                    | In Progress | Vincent | | 
-| 13.  | Example Project                             | In Progress   | Kirill | |
-| 14.  | Combining Modules                           | In Progress   | Vincent | |
+| 3.  | Documentation Github (Readme)                | In Progress   | Vincent | 
+| 4.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
+| 5.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
+| 6.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
+| 7.   | Data Validator                              | In Progress   | Garrett | 11/10 |
+| 8.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
+| 9.   | Data Spooler                                | In Progress   | ~~Shishir~~ Vincent | |
+| 10.   | Task Pool                                  | In Progress   | Anthony, Vincent | |
+| 11.  | Delegates                                   | In Progress   | Shishir | |
+| 12.  | Listeners                                   | Completed     | Vincent | 11/6 |
+| 13.  | Handlers                                    | In Progress   | Vincent | | 
+| 14.  | Example Project                             | In Progress   | Kirill | |
+| 15.  | Combining Modules                           | In Progress   | Vincent | |
 
 
 # Module Functionality
