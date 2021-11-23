@@ -19,18 +19,19 @@ Within each directory the respective directories are meta files. The meta file w
 | ---- | ------------------------------------------- | ------------- | ------- | ------- |
 | 1.   | Network Node Connect and Disconnect         | Completed     | Kirill | 11/1 |
 | 2.   | Documentation Site                          | Completed     | Garrett | 11/1 |
-| 3.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
-| 4.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
-| 5.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
-| 6.   | Data Validator                              | In Progress   | Garrett | 11/10 |
-| 7.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
-| 8.   | Data Spooler                                | In Progress    | ~~Shishir~~ Vincent | |
-| 9.   | Task Pool                                   | In Progress   | Anthony, Vincent | |
-| 10.  | Delegates                                   | In Progress    | Shishir | |
-| 11.  | Listeners                                   | Completed   | Vincent | 11/6 |
-| 12.  | Handlers                                    | In Progress | Vincent | | 
-| 13.  | Example Project                             | In Progress   | Kirill | |
-| 14.  | Combining Modules                           | In Progress   | Vincent | |
+| 3.  | Documentation Github (Readme)                | In Progress   | Vincent | 
+| 4.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
+| 5.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
+| 6.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
+| 7.   | Data Validator                              | In Progress   | Garrett | 11/10 |
+| 8.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
+| 9.   | Data Spooler                                | In Progress   | ~~Shishir~~ Vincent | |
+| 10.   | Task Pool                                  | In Progress   | Anthony, Vincent | |
+| 11.  | Delegates                                   | In Progress   | Shishir | |
+| 12.  | Listeners                                   | Completed     | Vincent | 11/6 |
+| 13.  | Handlers                                    | In Progress   | Vincent | | 
+| 14.  | Example Project                             | In Progress   | Kirill | |
+| 15.  | Combining Modules                           | In Progress   | Vincent | |
 
 
 # Module Functionality
@@ -50,15 +51,23 @@ Within each directory the respective directories are meta files. The meta file w
 | 11.  | Listeners <br /><br />Listeners, also known as event listeners, are handlers that get called when a specfic condition is met. For example, if you've ever played a browser game, then most likely theres an event listener for pressing a button on your keyboard where the developer than handles the input. A simple event listener like this would use a decorator @onKeyPressEvent and we label the function <br /><br />@onKeyPressEvent<br />function do_something(input)<br />    if input == "k" // do something |
 | 12.  | Example Project<br /><br />The example project is a simple project whose design should be as simple as possible and should highlight the simplicity and quickness of using this framework to develop their project from idea to production.|
 
-# Provided Utility
+# Available Utility
 
 | No.  | Utility                                                         |
 | ---- | --------------------------------------------------------------- |
-| 1.   | **packet_reader** <br /><br />The packet reader provides an interface for reading bytes sequentially in a safe and efficient way. The reader must be given an array to read from as well as the length of the array. See [dappf::meta::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_reader.h) for documentation and [dappf::examples::example_usage_packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_reader.cpp) for example usage(s).
-| 1.   | **packet_writer** <br /><br />The packet writer provides an interface for writing bytes sequentially in a safe and efficient way. The writer encodes most primitive data types and maintains the length of the total number of bytes encoded. See [dappf::meta::packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_writer.h) for documentation and [dappf::examples::example_usage_packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_writer.cpp) for example usage(s).
+| 1.   | **Packet Reader** <br /><br />The packet reader provides an interface for reading bytes sequentially in a safe and efficient way. The reader must be given an array to read from as well as the length of the array. See [dappf::meta::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_reader.h) for documentation and [dappf::examples::example_usage_packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_reader.cpp) for example usage(s).
+| 2.   | **Packet Writer** <br /><br />The packet writer provides an interface for writing bytes sequentially in a safe and efficient way. The writer encodes most primitive data types and maintains the length of the total number of bytes encoded. See [dappf::meta::packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/meta/packet_writer.h) for documentation and [dappf::examples::example_usage_packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_writer.cpp) for example usage(s). | 
+
+# Available Internal Overrides
+| No.  | Utility                                                         |
+| ---- | --------------------------------------------------------------- |
+| 1.   | **Packet Encryptor**  | 
+| 2.   | **Packet Validator**  | 
+| 3.   | **Packet Compressor** |
 
 
-# Discoverable Event Listeners
+
+# Available Event Listeners
 Event listeners provides a series of methods provided to the developer to execute certain tasks in addition to some background tasks performed by the framework. A simple example is if the developer implements a logging system which logs every incoming packet. The developer can implement the "on_packet_received" event listener which provides the developer access to an immutable instance of the packet reader which is used to handler the recieved bytes internally. From there, the developer can log the bytes received or a deserialized form of those bytes. All event listeners are of type void.
 
 | No.  | Event Listener                                                  |
