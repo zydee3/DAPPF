@@ -53,8 +53,8 @@ add_library(
         framework/data/cache.h
         framework/data/cache.cpp
 
-        framework/meta/config.h
-        framework/meta/config.cpp
+        framework/constants.h
+        framework/constants.cpp
         framework/meta/handler.cpp framework/meta/handler.h)
 
 # link entry point to project

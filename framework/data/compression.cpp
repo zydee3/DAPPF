@@ -5,18 +5,7 @@
 #include <iostream>
 #include "compression.h"
 #include "../utility/log.h"
-
-void dappf::data::compression::insert_flag(int8_t** packet, int length, int flag_value){
-    int8_t* new_packet = new int8_t[length];
-
-    dappf::utility::array::copy_over(*packet, 0, pos_compressed_flag - 1, new_packet, 0);
-    new_packet[pos_compressed_flag - 1] = flag_value;
-    dappf::utility::array::copy_over(*packet, pos_compressed_flag, length - 1, new_packet, pos_compressed_flag + 1);
-
-    // this will cause a memory leak but we error with it here :shrug:
-    // delete packet;
-    *packet = new_packet;
-}
+#include "../constants.h"
 
 std::vector<int8_t>* dappf::data::compression::compress(int8_t* packet, int start, int end){
     std::vector<int8_t>* compressed_bytes = new std::vector<int8_t>();
@@ -50,13 +39,13 @@ std::vector<int8_t>* dappf::data::compression::compress(int8_t* packet, int star
  */
 int dappf::data::compression::compress(int8_t** packet, int length) {
     // if the only thing to compress is the address and op code, then don't compress
-    if(pos_compressed_flag >= length) return length;
+    if(dappf::constants::num_bytes_header >= length) return length;
 
     // insert the flag to represent if the packet was compressed
     dappf::data::compression::insert_flag(packet, ++length, 0);
 
     // apply lossless compression starting after address and op code
-    std::vector<int8_t>* compressed_bytes = dappf::data::compression::compress(*packet, 0, length);
+    std::vector<int8_t>* compressed_bytes = dappf::data::compression::compress(*packet, dappf::constants::num_bytes_header + 1, length);
 
     if(compressed_bytes->size() >= length) {
         // the compression actually inflated the packet, so don't use it.
@@ -74,7 +63,7 @@ int dappf::data::compression::compress(int8_t** packet, int length) {
 
         // we're using the compressed bytes, so set the flag so the receiver knows
         // the bytes were compressed
-        compressed_bytes->at(pos_compressed_flag) = 1;
+        compressed_bytes->at(dappf::constants::pos_compression_flag) = 1;
 
         *packet = dappf::utility::array::to_array(compressed_bytes);
 
@@ -95,14 +84,14 @@ int dappf::data::compression::compress(int8_t** packet, int length) {
 int dappf::data::compression::decompress(int8_t** packet, int length) {
     // if the only things present are the address and op code or the flag
     // is 0 (false) then theres nothing to decompress.
-    if(length < pos_compressed_flag || *(*packet + pos_compressed_flag) == 0) return length;
+    if(length <= dappf::constants::num_bytes_header || *(*packet + dappf::constants::pos_compression_flag) == 0) return length;
     dappf::meta::log::cout_hex_array(*packet, length);
 
     // will hold our uncompressed bytes.
     std::vector<int8_t>* uncompressed_bytes = new std::vector<int8_t>();
 
     // undo lossless compression
-    for(int i = 0; i < length; i += 2){
+    for(int i = dappf::constants::num_bytes_header; i < length; i += 2){
         int num_bytes = *packet[i];
         int8_t byte = *packet[i+1];
 
