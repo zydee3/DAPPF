@@ -54,5 +54,5 @@ Event listeners provides a series of methods provided to the developer to execut
 
 | No.  | Event Listener                                                  |
 | ---- | --------------------------------------------------------------- |
-| 1.   | void dappf::meta::event_listeners::**on_connection_request**(std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the ipv4 address of the requesting node. |
-| 2.   | void dappf::meta::event_listeners::**on_connection_established**(std::string);<br /><br />Called when a previous request to connect has been fulfilled and connection between the two nodes has been established. The given string parameter holds the ipv4 address of the requesting node.
+| 1.   | void dappf::meta::event_listeners::[**on_connection_request**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the ipv4 address of the requesting node. |
+| 2.   | void dappf::meta::event_listeners::[**on_connection_established**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when a previous request to connect has been fulfilled and connection between the two nodes has been established. The given string parameter holds the ipv4 address of the requesting node.
