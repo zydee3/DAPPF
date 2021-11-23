@@ -23,6 +23,7 @@ bool dappf::meta::handler_director::remove(int16_t op_code) {
  */
 bool dappf::meta::handler_director::put(int16_t op_code, dappf::meta::handler* handler) {
     if (dappf::internal_state != dappf::state::stopped) {
+        dappf::meta::event_listeners::get_on_internal_error_event_listener()()
         throw std::logic_error("Attempting to modify (put) handler on non-stopped internal state.");
     }
 

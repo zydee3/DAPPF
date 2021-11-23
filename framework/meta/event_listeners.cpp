@@ -5,16 +5,7 @@
 #include "event_listeners.h"
 
 
-
 // region on connection request
-
-/**
- * Invoked by default when a connection request is made to establish a new connection.
- * @param address Ipv4 address of the requesting node.
- */
-void dappf::meta::event_listeners::default_on_connection_request(std::string address){
-    std::cout << "A connection request has been made from " << address << ".";
-}
 
 /**
  * Sets handler for handling connection requests.
@@ -41,15 +32,6 @@ auto dappf::meta::event_listeners::get_on_connection_request_event_listener() {
 // region on connection established
 
 /**
- * Invoked by default when a new connection has been establish.
- * @param address Ipv4 address of the requesting node.
- * @param port port the new connection is established on
- */
-void dappf::meta::event_listeners::default_on_connection_established(std::string address, int port){
-    std::cout << "A connection has been made with " << address << ":" << port << ".";
-}
-
-/**
  * Sets handler for handling post-connection events.
  * @param handle Pointer to function that handles post-connection events.
  * When invoked, the handler passes in a string parameter representing the ipv6
@@ -72,10 +54,6 @@ auto dappf::meta::event_listeners::get_on_connection_established_event_listener(
 // endregion
 
 // region on connection dropped
-
-void dappf::meta::event_listeners::default_on_connection_dropped(std::string address, int port){
-    std::cout << "A connection has been dropped with " << address << ":" << port << std::endl;
-}
 
 /**
  * Sets handler for handling post-disconnection events.
@@ -101,11 +79,6 @@ auto dappf::meta::event_listeners::get_on_connection_dropped_event_listener() {
 
 // region on packet received
 
-void dappf::meta::event_listeners::default_on_packet_received(dappf::meta::packet_reader* reader){
-    std::cout << "Packet Received: ";
-    dappf::utility::log::cout_hex_array(reader->get_packet(), reader->remaining());
-}
-
 /**
  * Sets handler for handing received packets from neighbors.
  * @param handle Pointer to function that handles received packets from neighbors.
@@ -129,11 +102,6 @@ auto dappf::meta::event_listeners::get_on_packet_received_event_listener(){
 // endregion
 
 // region on packet send
-
-void dappf::meta::event_listeners::default_on_packet_sent_event(int8_t* packet, int length){
-    std::cout << "Packet Sent: ";
-    dappf::utility::log::cout_hex_array(packet, length);
-}
 
 /**
  * Sets handler for handing sent packets to neighbors.
@@ -159,9 +127,6 @@ auto dappf::meta::event_listeners::get_on_packet_sent_event_listener(){
 
 // region on internal error
 
-void dappf::meta::event_listeners::default_on_internal_error(std::string error){
-    std::cout << "Internal error: " << error << std::endl;
-}
 /**
  * Sets handler for handing internal errors.
  * @param handle Pointer to function that handles internal errors.

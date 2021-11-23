@@ -12,7 +12,7 @@
  * char representation being printed out.
  * @param n byte to be printed as a hexadecimal.
  */
-void dappf::meta::log::cout_hex(int32_t n) {
+void dappf::utility::log::cout_hex(int32_t n) {
     std::cout << std::hex << std::setfill('0') << std::setw(2) << n << " " << std::dec;
 }
 
@@ -22,7 +22,7 @@ void dappf::meta::log::cout_hex(int32_t n) {
  * @param a array of bytes (int8_t) to be printed.
  * @param length number of elements inside provided array of bytes (int8_t).
  */
-void dappf::meta::log::cout_hex_array(int8_t* a, int32_t length) {
+void dappf::utility::log::cout_hex_array(int8_t* a, int32_t length) {
     for(int32_t i = 0; i < length; i++){
         cout_hex((int32_t) (0xFF & *(a + i)));
     }
