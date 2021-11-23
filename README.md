@@ -48,3 +48,8 @@ Within each directory the respective directories are meta files. The meta file w
 | 10.  | Delegates <br /><br />Delegates are a way to pass a function into another function to be executed. A simple example of a delegate is a predicate which resolves to true or false when applied to some set of data. If you've ever used a filter, most likely you've used a predicate and therefore a delegate. For example, [1,2,3,4,5].filter(num -> num < 3) results in [1, 2] where (num -> num < 3) is the predicate.  |
 | 11.  | Listeners <br /><br />Listeners, also known as event listeners, are handlers that get called when a specfic condition is met. For example, if you've ever played a browser game, then most likely theres an event listener for pressing a button on your keyboard where the developer than handles the input. A simple event listener like this would use a decorator @onKeyPressEvent and we label the function <br /><br />@onKeyPressEvent<br />function do_something(input)<br />    if input == "k" // do something |
 | 12.  | Example Project<br /><br />The example project is a simple project whose design should be as simple as possible and should highlight the simplicity and quickness of using this framework to develop their project from idea to production.|
+
+# Discoverable Event Listeners
+| No.  | Event Listener |  Description                                    |
+| ---- | ---------------| ------------------------------------------------ |
+| 1.   | On Packet Sent | |
