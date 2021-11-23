@@ -50,6 +50,8 @@ Within each directory the respective directories are meta files. The meta file w
 | 12.  | Example Project<br /><br />The example project is a simple project whose design should be as simple as possible and should highlight the simplicity and quickness of using this framework to develop their project from idea to production.|
 
 # Discoverable Event Listeners
-| No.  | Event Listener |  Description                                    |
-| ---- | ---------------| ------------------------------------------------ |
-| 1.   | On Packet Sent | |
+Event listeners provides a series of methods provided to the developer to execute certain tasks in addition to some background tasks performed by the framework. A simple example is if the developer implements a logging system which logs every incoming packet. The developer can implement the "on_packet_received" event listener which provides the developer access to an immutable instance of the packet reader which is used to handler the recieved bytes internally. From there, the developer can log the bytes received or a deserialized form of those bytes. All event listeners are of type void.
+
+| No.  | Event Listener                                                  |
+| ---- | --------------------------------------------------------------- |
+| 1.   | dappf::meta::event_listeners::on_connection_request(std::string) <br /><br />Called when a request to connect is made to the user. The given parameter of type string holds the pv4 address of the requesting node. |
