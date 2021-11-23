@@ -5,7 +5,7 @@
 #include "unit_test_cipher.h"
 #include "../meta/packet_reader.h"
 #include "../meta/packet_writer.h"
-#include "../meta/log.h"
+#include "../utility/log.h"
 #include "../security/packet_cipher.h"
 
 #include <iostream>

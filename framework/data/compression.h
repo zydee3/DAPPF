@@ -14,8 +14,6 @@ namespace dappf::data {
     class compression {
 
     protected:
-        static const int pos_compressed_flag = 15;
-
         static void insert_flag(int8_t**, int, int);
         static std::vector<int8_t>* compress(int8_t*, int, int);
 

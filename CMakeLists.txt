@@ -22,11 +22,17 @@ add_library(
         framework/meta/packet_reader.h
         framework/meta/packet_reader.cpp
 
-        framework/meta/log.h
-        framework/meta/log.cpp
+        framework/utility/log.h
+        framework/utility/log.cpp
 
         framework/test/unit_test_packet.h
         framework/test/unit_test_packet.cpp
+
+        framework/data/Cache.h
+        framework/data/Cache.cpp
+
+        framework/data/Compression.h
+        framework/data/Compression.cpp
 
         framework/test/unit_test_compression.h
         framework/test/unit_test_compression.cpp
@@ -53,14 +59,8 @@ add_library(
         framework/data/cache.h
         framework/data/cache.cpp
 
-        framework/data/compression.h
-        framework/data/compression.cpp
-
-        framework/data/validator.h
-        framework/data/validator.cpp
-
-        framework/meta/config.h
-        framework/meta/config.cpp
+        framework/constants.h
+        framework/constants.cpp
         framework/meta/handler.cpp framework/meta/handler.h)
 
 # link entry point to project

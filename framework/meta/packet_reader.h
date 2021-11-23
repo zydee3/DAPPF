@@ -27,6 +27,8 @@ namespace dappf::meta {
         int64_t decode_8();
         std::string decode_string(int32_t);
         int32_t remaining();
+
+        int8_t* get_packet();
     };
 }
 
