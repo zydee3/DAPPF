@@ -55,7 +55,12 @@ add_library(
 
         framework/constants.h
         framework/constants.cpp
-        framework/meta/handler.cpp framework/meta/handler.h)
+
+        framework/meta/handler.h
+        framework/meta/handler.cpp
+
+        framework/utility/string.h
+        framework/utility/string.cpp)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)

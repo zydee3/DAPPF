@@ -7,7 +7,11 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
+#include "../constants.h"
 #include "../utility/array.h"
+#include "../utility/string.h"
+
 
 namespace dappf::meta {
     class packet_writer {
@@ -17,6 +21,12 @@ namespace dappf::meta {
     public:
         packet_writer();
         ~packet_writer();
+
+        void encode_address(std::string);
+        void encode_port(int16_t);
+        void encode_message_id(int64_t);
+        void encode_op_code(int16_t);
+        void encode_compression_flag(bool);
 
         void encode_1(int8_t);
         void encode_2(int16_t);
