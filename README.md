@@ -54,4 +54,4 @@ Event listeners provides a series of methods provided to the developer to execut
 
 | No.  | Event Listener                                                  |
 | ---- | --------------------------------------------------------------- |
-| 1.   | void dappf::meta::event_listeners::on_connection_request(std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the pv4 address of the requesting node. |
+| 1.   | void dappf::meta::event_listeners::**on_connection_request**(std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the pv4 address of the requesting node. |
