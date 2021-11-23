@@ -4,13 +4,26 @@
 
 #include "handler_director.h"
 
+bool dappf::meta::handler_director::check_state(std::string source) {
+    if (dappf::internal_state != dappf::state::stopped) {
+        auto handler = dappf::meta::event_listeners::get_on_internal_error_event_listener();
+        if(handler != nullptr){
+            (*handler)("Attempting to modify (" + source + ") handler on non-stopped internal state.");
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
 /**
  * Removes a handler associated by the op_code.
  * @param op_code op_code to be removed
  * @return true if an associated op_code existed, otherwise false
  */
 bool dappf::meta::handler_director::remove(int16_t op_code) {
-    return handlers->erase(op_code) == 1;
+    return dappf::meta::handler_director::check_state("remove") && handlers->erase(op_code) == 1;
 }
 
 /**
@@ -22,14 +35,13 @@ bool dappf::meta::handler_director::remove(int16_t op_code) {
  *         false if op_code was inserted without overwriting a previous instance.
  */
 bool dappf::meta::handler_director::put(int16_t op_code, dappf::meta::handler* handler) {
-    if (dappf::internal_state != dappf::state::stopped) {
-        dappf::meta::event_listeners::get_on_internal_error_event_listener()()
-        throw std::logic_error("Attempting to modify (put) handler on non-stopped internal state.");
+    if(dappf::meta::handler_director::check_state("remove")) {
+        bool replaced = handlers->find(op_code) != handlers->end();
+        handlers->insert({op_code, handler});
+        return replaced;
     }
 
-    bool replaced = handlers->find(op_code) != handlers->end();
-    handlers->insert({op_code, handler});
-    return replaced;
+    return false;
 }
 
 /**
@@ -38,10 +50,6 @@ bool dappf::meta::handler_director::put(int16_t op_code, dappf::meta::handler* h
  * @return handler associated to the op code
  */
 dappf::meta::handler *dappf::meta::handler_director::get(int16_t op_code) {
-    if (dappf::internal_state != dappf::state::stopped) {
-        throw std::logic_error("Attempting to modify (put) handler on non-stopped internal state.");
-    }
-
     std::map<int16_t, handler*>::iterator iterator = handlers->find(op_code);
     if(iterator == handlers->end()) {
         return nullptr;

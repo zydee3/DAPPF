@@ -19,6 +19,7 @@ namespace dappf::meta {
         std::map<int16_t, handler*>* handlers = new std::map<int16_t, handler*>();
 
     public:
+        bool check_state(std::string);
         bool remove(int16_t);
         bool put(int16_t, handler*);
         handler* get(int16_t);
