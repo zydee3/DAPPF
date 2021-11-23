@@ -4,6 +4,7 @@
 #include "../framework/dappf.h"
 #include "../framework/data/Compression.h"
 #include "../framework/security/packet_cipher.h"
+#include "../framework/meta/event_listeners.h"
 
 void interrupt_handler(int s) {
     std::cout << "terminating" << std::endl;
@@ -19,26 +20,26 @@ uint16_t strtouint16(char number[]) {
     return num;
 }
 
-void receive(int8_t *data, int32_t length) {
-    // get string
-    std::string message((char *) data, length);
-    std::cout << message << std::endl;
+void receive(dappf::meta::packet_reader *reader) {
+    std::cout << reader->decode_string(reader->remaining()) << std::endl;
 }
 
 [[noreturn]] int main(int argc, char **argv) {
     dappf::meta::packet_writer *packet = new dappf::meta::packet_writer; // this works when it's here, but not just before the while loop TODO: figure it out
     dappf::Dappf *dappf_handle;
 
+    dappf::meta::event_listeners::set_on_packet_received_event_listener(receive);
+
     if (argc == 2) {
         uint16_t listen_port = strtouint16(argv[1]);
 
-        dappf_handle = new dappf::Dappf(listen_port, receive);
+        dappf_handle = new dappf::Dappf(listen_port);
     } else {
         std::string address(argv[1]);
         uint16_t connect_port = strtouint16(argv[2]);
         uint16_t listen_port = strtouint16(argv[3]);
 
-        dappf_handle = new dappf::Dappf(address, connect_port, listen_port, receive);
+        dappf_handle = new dappf::Dappf(address, connect_port, listen_port);
     }
 
     // setup the signal handler so that we can quit gracefully

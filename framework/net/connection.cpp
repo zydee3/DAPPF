@@ -11,7 +11,8 @@
 #include <cstring>
 #include <unistd.h>
 
-//int32_t dappf::connection::BUFFER_SIZE = 8192; // 8 bytes
+#include "../meta/event_listeners.h"
+#include "../meta/packet_proccessing.h"
 
 /**
  * Creates a socket for connecting to a server, listening on the specified port number.
@@ -82,7 +83,8 @@ void listen_connection(int connfd) {
         int32_t length_read_in = read(connfd, buffer, dappf::connection::BUFFER_SIZE);
         if (length_read_in == 0) break;
 
-        app->receive(buffer, length_read_in);
+        dappf::meta::event_listeners::on_packet_received(dappf::meta::packet_processing::unwrap(buffer, length_read_in));
+
     }
 }
 
@@ -93,8 +95,8 @@ void listen_connection(int connfd) {
  * @param connfd the file descriptor of the new connection
  * @param handler the function that should be called when data is received
  */
-void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd, dappf::DappfNetworkInterface *app) {
-    std::thread *thread = new std::thread(listen_connection, connfd, app);
+void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd) {
+    std::thread *thread = new std::thread(listen_connection, connfd);
     connections->push_back(dappf::connection::conn { address, connfd, thread });
 }
 
@@ -105,7 +107,7 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
  * @param port the port on which to listen for incoming connections
  * @param handler the function that should be called when data is received
  */
-[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port, dappf::DappfNetworkInterface *app) {
+[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port) {
     int listenfd = create_listen_socket(port);
 
     while (true) {
@@ -123,14 +125,14 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
             sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
             std::string address(inet_ntoa(addr_in->sin_addr));
 
-            add_connection(connections, address, connfd, app);
+            add_connection(connections, address, connfd);
         }
     }
 }
 
-dappf::connection::network dappf::connection::start_network(uint16_t listen_port, DappfNetworkInterface *app) {
+dappf::connection::network dappf::connection::start_network(uint16_t listen_port) {
     std::vector<conn> *connections = new std::vector<conn>;
-    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, app);
+    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port);
 
     return network { listen_port, 0, connections, thread_listening_for_incoming_connections };
 }
@@ -143,14 +145,14 @@ dappf::connection::network dappf::connection::start_network(uint16_t listen_port
  * @param handler the function that should be called when data is received
  * @return the list of active connections, initialized with a single element
  */
-dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port, DappfNetworkInterface *app) {
+dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port) {
     // in order for a node to connect, it must already have the address/connect_port of a node in the network
     // how it obtains that will be outside the framework's responsibilities
 
-    network net = start_network(listen_port, app);
+    network net = start_network(listen_port);
 
     int clientfd = create_client_socket(address, connect_port);
-    add_connection(net.connections, address, clientfd, app);
+    add_connection(net.connections, address, clientfd);
 
     return net;
 }

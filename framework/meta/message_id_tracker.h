@@ -16,6 +16,8 @@ namespace dappf {
         void insert(uint64_t id);
         bool contains(uint64_t);
     };
+
+    MessageIdTracker message_id_tracker;
 }
 
 #endif //DAPPF_MESSAGE_ID_TRACKER_H

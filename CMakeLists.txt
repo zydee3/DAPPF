@@ -13,8 +13,8 @@ add_library(
         framework/meta/message_id_tracker.h
         framework/meta/message_id_tracker.cpp
 
-        framework/meta/packet_preproccessing.h
-        framework/meta/packet_preproccessing.cpp
+        framework/meta/packet_proccessing.h
+        framework/meta/packet_proccessing.cpp
 
         framework/meta/packet_writer.h
         framework/meta/packet_writer.cpp
@@ -27,15 +27,6 @@ add_library(
 
         framework/test/unit_test_packet.h
         framework/test/unit_test_packet.cpp
-
-        framework/data/Cache.h
-        framework/data/Cache.cpp
-
-        framework/data/meta/CacheEntry.h
-        framework/data/meta/CacheEntry.cpp
-
-        framework/data/Compression.h
-        framework/data/Compression.cpp
 
         framework/test/unit_test_compression.h
         framework/test/unit_test_compression.cpp
@@ -61,6 +52,12 @@ add_library(
 
         framework/data/cache.h
         framework/data/cache.cpp
+
+        framework/data/compression.h
+        framework/data/compression.cpp
+
+        framework/data/validator.h
+        framework/data/validator.cpp
 
         framework/meta/config.h
         framework/meta/config.cpp

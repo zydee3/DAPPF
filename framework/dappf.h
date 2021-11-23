@@ -16,7 +16,6 @@ namespace dappf {
     class Dappf {
     private:
         connection::network net;
-        MessageIdTracker tracker;
 
     public:
         Dappf(uint16_t listen_port);
