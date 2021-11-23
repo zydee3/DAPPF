@@ -10,6 +10,13 @@
 
 namespace dappf {
 
+    enum state {
+        stopped,
+        running,
+        paused,
+    };
+
+    static state internal_state = state::stopped;
 }
 
 

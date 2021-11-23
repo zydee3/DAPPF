@@ -60,7 +60,10 @@ add_library(
         framework/meta/handler.cpp
 
         framework/utility/string.h
-        framework/utility/string.cpp)
+        framework/utility/string.cpp
+
+        framework/meta/handler_director.h
+        framework/meta/handler_director.cpp)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)
