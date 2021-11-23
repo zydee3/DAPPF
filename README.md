@@ -9,7 +9,7 @@ Within the framework are four main directories which pertains to each layer of t
  - Layer 1: Net (Communication Layer)
  - Layer 2: Security
  - Layer 3: Data
- - Layer 4: Handlers (Processing)
+ - ~~Layer 4: Handlers (Processing)~~
 
 Within each directory the respective directories are meta files. The meta file will hold meta data to the main files within the module. A meta file is like that of an inner class to a parent class. Using a game as an example, an example of meta data to Player class is PlayerStats which holds the stats of the player. Meta data allows us to break apart classes into smaller more organized classes in order to premote clean code and precent god classes.
 
@@ -55,4 +55,5 @@ Event listeners provides a series of methods provided to the developer to execut
 | No.  | Event Listener                                                  |
 | ---- | --------------------------------------------------------------- |
 | 1.   | void dappf::meta::event_listeners::[**on_connection_request**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the ipv4 address of the requesting node. |
-| 2.   | void dappf::meta::event_listeners::[**on_connection_established**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when a previous request to connect has been fulfilled and connection between the two nodes has been established. The given string parameter holds the ipv4 address of the requesting node.
+| 2.   | void dappf::meta::event_listeners::[**on_connection_established**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when a previous request to connect has been fulfilled and connection between the two nodes has been established. The given string parameter holds the ipv4 address of the requesting node. |
+| 3.   | void dappf::meta::event_listeners::[**on_connection_dropped**](https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners.cpp)(std::string);<br /><br />Called when an existing connection is dropped. The given string parameter holds the ipv4 address of the requesting node. |
