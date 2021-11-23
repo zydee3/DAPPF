@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <functional>
 
 namespace dappf::security {
     class packet_cipher {
@@ -18,10 +19,9 @@ namespace dappf::security {
         static void decrypt(int8_t *, int32_t);
 
     public:
-        //static void encrypt(std::vector<int8_t> *);
 
-        auto get_encryptor() -> void(*)(int8_t*, int32_t);
-        auto get_decryptor() -> void(*)(int8_t*, int32_t);
+        auto get_encryptor() -> std::function<void(int8_t*, int32_t)>;
+        auto get_decryptor() -> std::function<void(int8_t*, int32_t)>;
     };
 }
 

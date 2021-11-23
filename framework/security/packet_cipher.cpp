@@ -143,10 +143,10 @@ void dappf::security::packet_cipher::decrypt(int8_t *array, int32_t length) {
 //    *current_byte = *current_byte >> BIT_SHIFT;
 //}
 
-auto dappf::security::packet_cipher::get_encryptor() -> void(*)(int8_t *, int32_t){
+auto dappf::security::packet_cipher::get_encryptor() -> std::function<void(int8_t*, int32_t)>{
     return &dappf::security::packet_cipher::encrypt;
 }
 
-auto dappf::security::packet_cipher::get_decryptor() -> void(*)(int8_t *, int32_t){
+auto dappf::security::packet_cipher::get_decryptor() -> std::function<void(int8_t*, int32_t)>{
     return &dappf::security::packet_cipher::decrypt;
 }
