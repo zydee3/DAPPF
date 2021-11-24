@@ -23,7 +23,7 @@ Within each directory the respective directories are meta files. The meta file w
 | 4.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
 | 5.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
 | 6.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
-| 7.   | Data Validator                              | In Progress   | Garrett | 11/10 |
+| 7.   | Data Validator                              | In Progress   | Garrett, Vincent | 11/10 |
 | 8.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
 | 9.   | Data Spooler                                | In Progress   | ~~Shishir~~ Vincent | |
 | 10.   | Task Pool                                  | In Progress   | Anthony, Vincent | |
