@@ -26,7 +26,8 @@ Within each directory the respective directories are meta files. The meta file w
 | 7.   | Data Validator                              | In Progress   | Garrett, Vincent | 11/10 |
 | 8.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
 | 9.   | Data Spooler                                | In Progress   | ~~Shishir~~ Vincent | |
-| 10.   | Task Pool                                  | In Progress   | Anthony, Vincent | |
+| 10.  | Predictor                                   | In Progress   | Vincent | |
+| 10.  | Task Pool                                   | In Progress   | Anthony, Vincent | |
 | 11.  | Delegates                                   | In Progress   | Shishir | |
 | 12.  | Listeners                                   | Completed     | Vincent | 11/6 |
 | 13.  | Handlers                                    | In Progress   | Vincent | | 
