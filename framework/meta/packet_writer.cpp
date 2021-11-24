@@ -9,6 +9,50 @@
  */
 dappf::meta::packet_writer::packet_writer() {
     packet = new std::vector<int8_t>();
+    encode_4(0); // ipv4 address
+    encode_2(0); // port
+    encode_8(0); // message id
+    encode_2(0); // op code
+    encode_1(0); // compression flag
+}
+
+void dappf::meta::packet_writer::encode_address(std::string address){
+    std::vector<int8_t>* network_field = dappf::utility::string::split_as_int8(address, dappf::constants::address_delimiter);
+
+    if(network_field->size() != dappf::constants::num_bytes_address) {
+        throw std::logic_error("Invalid ipv4 provided.");
+    }
+
+    int index_address =  dappf::constants::pos_address - 1;
+    for(int i = 0; i < dappf::constants::num_bytes_address; i++)
+        packet->at(index_address + i) = network_field->at(i);
+}
+
+void dappf::meta::packet_writer::encode_port(int16_t port){
+    packet->at(dappf::constants::pos_port - 1) = (int8_t) (port);
+    packet->at(dappf::constants::pos_port) = (int8_t) (port >> 8);
+}
+
+void dappf::meta::packet_writer::encode_message_id(int64_t message_id){
+    int index_message_id = dappf::constants::pos_message_id - 1;
+    packet->at(index_message_id) = (int8_t) (message_id);
+    packet->at(index_message_id + 1) = (int8_t) (message_id >> 8);
+    packet->at(index_message_id + 2) = (int8_t) (message_id >> 16);
+    packet->at(index_message_id + 3) = (int8_t) (message_id >> 24);
+    packet->at(index_message_id + 4) = (int8_t) (message_id >> 32);
+    packet->at(index_message_id + 5) = (int8_t) (message_id >> 40);
+    packet->at(index_message_id + 6) = (int8_t) (message_id >> 48);
+    packet->at(index_message_id + 7) = (int8_t) (message_id >> 56);
+
+}
+
+void dappf::meta::packet_writer::encode_op_code(int16_t op_code){
+    packet->at(dappf::constants::pos_op_code - 1) = (int8_t) (op_code);
+    packet->at(dappf::constants::pos_op_code) = (int8_t) (op_code >> 8);
+}
+
+void dappf::meta::packet_writer::encode_compression_flag(bool is_compressed){
+    packet->at(dappf::constants::pos_compression_flag - 1) = (int8_t) (is_compressed);
 }
 
 /**

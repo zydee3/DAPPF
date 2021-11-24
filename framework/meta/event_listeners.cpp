@@ -4,7 +4,8 @@
 
 #include "event_listeners.h"
 
-// on connection request
+
+// region on connection request
 
 /**
  * Sets handler for handling connection requests.
@@ -12,7 +13,7 @@
  * When invoked, the handler passes in a string parameter representing the ipv6
  * address of the requesting node.
  */
-void dappf::meta::event_listeners::set_on_connection_request_event_listener(void(*handle)(std::string)){
+void dappf::meta::event_listeners::set_on_connection_request_event_listener(std::function<void(std::string)>* handle){
     on_connection_request = handle;
 }
 
@@ -22,11 +23,13 @@ void dappf::meta::event_listeners::set_on_connection_request_event_listener(void
  * When invoked, the handler passes in a string parameter representing the ipv6
  * address of the requesting node.
  */
-auto dappf::meta::event_listeners::get_on_connection_request_event_listener() {
+std::function<void(std::string)>* dappf::meta::event_listeners::get_on_connection_request_event_listener() {
     return on_connection_request;
 }
 
-// on connection established
+// endregion  on connection request
+
+// region on connection established
 
 /**
  * Sets handler for handling post-connection events.
@@ -34,7 +37,7 @@ auto dappf::meta::event_listeners::get_on_connection_request_event_listener() {
  * When invoked, the handler passes in a string parameter representing the ipv6
  * address of the connected neighbor.
  */
-void dappf::meta::event_listeners::set_on_connection_established_event_listener(void(*handle)(std::string)){
+void dappf::meta::event_listeners::set_on_connection_established_event_listener(std::function<void(std::string, int)>* handle){
     on_connection_established = handle;
 }
 
@@ -44,11 +47,13 @@ void dappf::meta::event_listeners::set_on_connection_established_event_listener(
  * When invoked, the handler passes in a string parameter representing the ipv6
  * address of the connected neighbor.
  */
-auto dappf::meta::event_listeners::get_on_connection_established_event_listener() {
+std::function<void(std::string, int)>* dappf::meta::event_listeners::get_on_connection_established_event_listener() {
     return on_connection_established;
 }
 
-// on connection dropped
+// endregion
+
+// region on connection dropped
 
 /**
  * Sets handler for handling post-disconnection events.
@@ -56,7 +61,7 @@ auto dappf::meta::event_listeners::get_on_connection_established_event_listener(
  * When invoked, the handler passes in a string parameter representing the ipv6
  * address of the disconnected neighbor.
  */
-void dappf::meta::event_listeners::set_on_connection_dropped_event_listener(void(*handle)(std::string)){
+void dappf::meta::event_listeners::set_on_connection_dropped_event_listener(std::function<void(std::string, int)>* handle){
     on_connection_dropped = handle;
 }
 
@@ -66,11 +71,13 @@ void dappf::meta::event_listeners::set_on_connection_dropped_event_listener(void
  * When invoked, the handler passes in a string parameter representing the ipv6
  * address of the disconnected neighbor.
  */
-auto dappf::meta::event_listeners::get_on_connection_dropped_event_listener() {
+std::function<void(std::string, int)>* dappf::meta::event_listeners::get_on_connection_dropped_event_listener() {
     return on_connection_dropped;
 }
 
-// on packet received
+// endregion
+
+// region on packet received
 
 /**
  * Sets handler for handing received packets from neighbors.
@@ -78,7 +85,7 @@ auto dappf::meta::event_listeners::get_on_connection_dropped_event_listener() {
  * When invoked, the handler passes in an instantiated packet reader which contains
  * the bytes received.
  */
-void dappf::meta::event_listeners::set_on_packet_received_event_listener(void(*handle)(dappf::meta::packet_reader*)){
+void dappf::meta::event_listeners::set_on_packet_received_event_listener(std::function<void(dappf::meta::packet_reader*)>* handle){
     on_packet_received = handle;
 }
 
@@ -88,11 +95,13 @@ void dappf::meta::event_listeners::set_on_packet_received_event_listener(void(*h
  * When invoked, the handler passes in an instantiated packet reader which contains
  * the bytes received.
  */
-auto dappf::meta::event_listeners::get_on_packet_received_event_listener(){
+std::function<void(dappf::meta::packet_reader*)>* dappf::meta::event_listeners::get_on_packet_received_event_listener(){
     return on_packet_received;
 }
 
-// on packet send
+// endregion
+
+// region on packet send
 
 /**
  * Sets handler for handing sent packets to neighbors.
@@ -100,7 +109,7 @@ auto dappf::meta::event_listeners::get_on_packet_received_event_listener(){
  * When invoked, the handler passes in an instantiated packet writer which contains
  * the bytes written and sent.
  */
-void dappf::meta::event_listeners::set_on_packet_sent_event_listener(void(*handle)(dappf::meta::packet_writer*)){
+void dappf::meta::event_listeners::set_on_packet_sent_event_listener(std::function<void(int8_t*, int)>* handle){
     on_packet_sent = handle;
 }
 
@@ -110,9 +119,35 @@ void dappf::meta::event_listeners::set_on_packet_sent_event_listener(void(*handl
  * When invoked, the handler passes in an instantiated packet writer which contains
  * the bytes written and sent.
  */
-auto dappf::meta::event_listeners::get_on_packet_sent_event_listener(){
+std::function<void(int8_t*, int)>* dappf::meta::event_listeners::get_on_packet_sent_event_listener(){
     return on_packet_sent;
 }
+
+// endregion
+
+// region on internal error
+
+/**
+ * Sets handler for handing internal errors.
+ * @param handle Pointer to function that handles internal errors.
+ * These are typically errors which are not critical and thus should
+ * not crash or halt the entire program.
+ */
+void dappf::meta::event_listeners::set_on_internal_error_event_listener(std::function<void(std::string)>* handle){
+    on_internal_error = handle;
+}
+
+/**
+ * Gets handler for handing internal errors.
+ * @param handle Pointer to function that handles internal errors.
+ * These are typically errors which are not critical and thus should
+ * not crash or halt the entire program.
+ */
+std::function<void(std::string)>* dappf::meta::event_listeners::get_on_internal_error_event_listener(){
+    return on_internal_error;
+}
+
+// endregion
 
 // do packet validator
 
