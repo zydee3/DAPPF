@@ -3,8 +3,8 @@
 //
 
 #include "unit_test_packet.h"
-#include "../meta/packet_reader.h"
-#include "../meta/packet_writer.h"
+#include "../data/packet/packet_reader.h"
+#include "../data/packet/packet_writer.h"
 #include "../utility/log.h"
 
 #include <iostream>

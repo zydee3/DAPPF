@@ -9,10 +9,10 @@
 #include <cstdint>
 #include <iostream>
 #include <functional>
-#include "packet_writer.h"
-#include "packet_reader.h"
+#include "../../data/packet/packet_writer.h"
+#include "../../data/packet/packet_reader.h"
 
-#include "../utility/log.h"
+#include "../../utility/log.h"
 
 
 namespace dappf::meta {

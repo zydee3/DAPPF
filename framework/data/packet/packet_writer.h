@@ -8,9 +8,9 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include "../constants.h"
-#include "../utility/array.h"
-#include "../utility/string.h"
+#include "../../constants.h"
+#include "../../utility/array.h"
+#include "../../utility/string.h"
 
 
 namespace dappf::meta {

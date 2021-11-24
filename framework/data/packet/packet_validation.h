@@ -9,7 +9,7 @@
 #include <cstdint>
 
 namespace dappf::data {
-    class validator {
+    class validation {
 
     protected:
         static const int pos_compressed_flag = 7;

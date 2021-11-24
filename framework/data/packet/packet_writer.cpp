@@ -13,7 +13,7 @@ dappf::meta::packet_writer::packet_writer() {
     encode_2(0); // port
     encode_8(0); // message id
     encode_2(0); // op code
-    encode_1(0); // compression flag
+    encode_1(0); // packet_compression flag
 }
 
 void dappf::meta::packet_writer::encode_address(std::string address){

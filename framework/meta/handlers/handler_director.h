@@ -9,8 +9,8 @@
 #include <map>
 #include <stdexcept>
 #include "handler.h"
-#include "event_listeners.h"
-#include "../dappf.h"
+#include "../event_listeners/event_listeners.h"
+#include "../../dappf.h"
 
 
 namespace dappf::meta {
@@ -18,8 +18,8 @@ namespace dappf::meta {
     private:
         std::map<int16_t, handler*>* handlers = new std::map<int16_t, handler*>();
 
-    public:
         bool check_state(std::string);
+    public:
         bool remove(int16_t);
         bool put(int16_t, handler*);
         handler* get(int16_t);
