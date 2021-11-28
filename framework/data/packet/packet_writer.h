@@ -8,12 +8,12 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include "../constants.h"
-#include "../utility/array.h"
-#include "../utility/string.h"
+#include "../../constants.h"
+#include "../../utility/array.h"
+#include "../../utility/string.h"
 
 
-namespace dappf::meta {
+namespace dappf::meta::packet {
     class packet_writer {
     private:
         std::vector<int8_t>* packet;

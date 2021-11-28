@@ -3,11 +3,11 @@
 //
 
 #include <iostream>
-#include "compression.h"
-#include "../utility/log.h"
-#include "../constants.h"
+#include "packet_compression.h"
+#include "../../utility/log.h"
+#include "../../constants.h"
 
-std::vector<int8_t>* dappf::data::compression::compress(int8_t* packet, int start, int end){
+std::vector<int8_t>* dappf::data::packet::packet_compression::compress(int8_t* packet, int start, int end){
     std::vector<int8_t>* compressed_bytes = new std::vector<int8_t>();
 
     for(int i = start; i < end; i++){
@@ -28,7 +28,7 @@ std::vector<int8_t>* dappf::data::compression::compress(int8_t* packet, int star
 }
 
 /**
- * Tries to reduce the number of bytes in the array of bytes. If the compression
+ * Tries to reduce the number of bytes in the array of bytes. If the packet_compression
  * inflates the packet, the original array of bytes is returned with a flag byte.
  * A flag is inserted into the packet to signify if the packet was compressed.
  * @param packet Array of bytes
@@ -37,18 +37,15 @@ std::vector<int8_t>* dappf::data::compression::compress(int8_t* packet, int star
  * array of bytes does not change, then the packet increases by 1 to contain
  * the change flag. Otherwise, the new size is equal to the compressed bytes + 1.
  */
-int dappf::data::compression::compress(int8_t** packet, int length) {
+int dappf::data::packet::packet_compression::compress(int8_t** packet, int length) {
     // if the only thing to compress is the address and op code, then don't compress
     if(dappf::constants::num_bytes_header >= length) return length;
 
-    // insert the flag to represent if the packet was compressed
-    dappf::data::compression::insert_flag(packet, ++length, 0);
-
-    // apply lossless compression starting after address and op code
-    std::vector<int8_t>* compressed_bytes = dappf::data::compression::compress(*packet, dappf::constants::num_bytes_header + 1, length);
+    // apply lossless packet_compression starting after address and op code
+    std::vector<int8_t>* compressed_bytes = dappf::data::packet::packet_compression::compress(*packet, dappf::constants::num_bytes_header + 1, length);
 
     if(compressed_bytes->size() >= length) {
-        // the compression actually inflated the packet, so don't use it.
+        // the packet_compression actually inflated the packet, so don't use it.
         // note, this leaves the flag as 0 (false) so whoever receives this packet
         // knows to skip the decryption process
         compressed_bytes->clear();
@@ -76,21 +73,21 @@ int dappf::data::compression::compress(int8_t** packet, int length) {
 }
 
 /**
- * Tries to undo a compression
+ * Tries to undo a packet_compression
  * @param packet
  * @param length
  * @return
  */
-int dappf::data::compression::decompress(int8_t** packet, int length) {
+int dappf::data::packet::packet_compression::decompress(int8_t** packet, int length) {
     // if the only things present are the address and op code or the flag
     // is 0 (false) then theres nothing to decompress.
     if(length <= dappf::constants::num_bytes_header || *(*packet + dappf::constants::pos_compression_flag) == 0) return length;
-    dappf::meta::log::cout_hex_array(*packet, length);
+    dappf::utility::log::cout_hex_array(*packet, length);
 
     // will hold our uncompressed bytes.
     std::vector<int8_t>* uncompressed_bytes = new std::vector<int8_t>();
 
-    // undo lossless compression
+    // undo lossless packet_compression
     for(int i = dappf::constants::num_bytes_header; i < length; i += 2){
         int num_bytes = *packet[i];
         int8_t byte = *packet[i+1];

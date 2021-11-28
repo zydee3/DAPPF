@@ -2,19 +2,18 @@
 // Created by Vince on 11/1/2021.
 //
 
-#ifndef DAPPF_COMPRESSION_H
-#define DAPPF_COMPRESSION_H
+#ifndef DAPPF_PACKET_COMPRESSION_H
+#define DAPPF_PACKET_COMPRESSION_H
 
 
 #include <cstdint>
 #include <vector>
-#include "../utility/array.h"
+#include "../../utility/array.h"
 
-namespace dappf::data {
-    class compression {
+namespace dappf::data::packet {
+    class packet_compression {
 
     protected:
-        static void insert_flag(int8_t**, int, int);
         static std::vector<int8_t>* compress(int8_t*, int, int);
 
     public:
@@ -25,4 +24,4 @@ namespace dappf::data {
 }
 
 
-#endif //DAPPF_COMPRESSION_H
+#endif //DAPPF_PACKET_COMPRESSION_H

@@ -8,12 +8,12 @@
 
 #include <cstdint>
 
-namespace dappf::meta {
+namespace dappf::meta::handlers {
 
     class handler {
     private:
-
         long timestamp;
+        int num_times_repeated;
         int8_t* ipv4 = nullptr;
         int8_t* packet = nullptr;
 

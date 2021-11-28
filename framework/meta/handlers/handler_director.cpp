@@ -4,9 +4,9 @@
 
 #include "handler_director.h"
 
-bool dappf::meta::handler_director::check_state(std::string source) {
+bool dappf::meta::handlers::handler_director::check_state(std::string source) {
     if (dappf::internal_state != dappf::state::stopped) {
-        auto handler = dappf::meta::event_listeners::get_on_internal_error_event_listener();
+        auto handler = dappf::meta::event_listeners::on_internal_error::get();
         if(handler != nullptr){
             (*handler)("Attempting to modify (" + source + ") handler on non-stopped internal state.");
         }
@@ -22,8 +22,8 @@ bool dappf::meta::handler_director::check_state(std::string source) {
  * @param op_code op_code to be removed
  * @return true if an associated op_code existed, otherwise false
  */
-bool dappf::meta::handler_director::remove(int16_t op_code) {
-    return dappf::meta::handler_director::check_state("remove") && handlers->erase(op_code) == 1;
+bool dappf::meta::handlers::handler_director::remove(int16_t op_code) {
+    return dappf::meta::handlers::handler_director::check_state("remove") && handlers->erase(op_code) == 1;
 }
 
 /**
@@ -34,8 +34,8 @@ bool dappf::meta::handler_director::remove(int16_t op_code) {
  * @return true  if previous instance of op_code was overwritten,
  *         false if op_code was inserted without overwriting a previous instance.
  */
-bool dappf::meta::handler_director::put(int16_t op_code, dappf::meta::handler* handler) {
-    if(dappf::meta::handler_director::check_state("remove")) {
+bool dappf::meta::handlers::handler_director::put(int16_t op_code, dappf::meta::handlers::handler* handler) {
+    if(dappf::meta::handlers::handler_director::check_state("remove")) {
         bool replaced = handlers->find(op_code) != handlers->end();
         handlers->insert({op_code, handler});
         return replaced;
@@ -49,7 +49,7 @@ bool dappf::meta::handler_director::put(int16_t op_code, dappf::meta::handler* h
  * @param op_code op code associated to the desired handler
  * @return handler associated to the op code
  */
-dappf::meta::handler *dappf::meta::handler_director::get(int16_t op_code) {
+dappf::meta::handlers::handler *dappf::meta::handlers::handler_director::get(int16_t op_code) {
     std::map<int16_t, handler*>::iterator iterator = handlers->find(op_code);
     if(iterator == handlers->end()) {
         return nullptr;
@@ -57,3 +57,5 @@ dappf::meta::handler *dappf::meta::handler_director::get(int16_t op_code) {
         return iterator->second;
     }
 }
+
+

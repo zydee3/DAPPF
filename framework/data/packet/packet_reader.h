@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace dappf::meta {
+namespace dappf::meta::packet {
     class packet_reader {
     private:
         int32_t length;

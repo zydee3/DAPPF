@@ -9,17 +9,17 @@
 #include <map>
 #include <stdexcept>
 #include "handler.h"
-#include "event_listeners.h"
-#include "../dappf.h"
+#include "../event_listeners/on_internal_error.h"
+#include "../../dappf.h"
 
 
-namespace dappf::meta {
+namespace dappf::meta::handlers {
     class handler_director {
     private:
         std::map<int16_t, handler*>* handlers = new std::map<int16_t, handler*>();
 
-    public:
         bool check_state(std::string);
+    public:
         bool remove(int16_t);
         bool put(int16_t, handler*);
         handler* get(int16_t);
