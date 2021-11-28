@@ -3,3 +3,7 @@
 //
 
 #include "task_pool.h"
+
+void dappf::meta::task_pool::task_pool::insert(long, std::function<void()>) {
+
+}

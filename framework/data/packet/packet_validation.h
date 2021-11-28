@@ -8,7 +8,7 @@
 
 #include <cstdint>
 
-namespace dappf::data {
+namespace dappf::data::packet {
     class validation {
 
     protected:

@@ -9,11 +9,11 @@
 #include <map>
 #include <stdexcept>
 #include "handler.h"
-#include "../event_listeners/event_listeners.h"
+#include "../event_listeners/on_internal_error.h"
 #include "../../dappf.h"
 
 
-namespace dappf::meta {
+namespace dappf::meta::handlers {
     class handler_director {
     private:
         std::map<int16_t, handler*>* handlers = new std::map<int16_t, handler*>();

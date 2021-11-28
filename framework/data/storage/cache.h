@@ -10,7 +10,7 @@
 #include <string>
 #include <utility>
 
-namespace dappf::data {
+namespace dappf::data::storage {
     class cache {
     private:
         int update_interval;

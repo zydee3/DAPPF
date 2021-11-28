@@ -13,7 +13,7 @@ void dappf::test::unit_test_packet::test() {
     std::string test_message = "hello world!";
 
     // creating a writer
-    dappf::meta::packet_writer* writer = new dappf::meta::packet_writer();
+    dappf::meta::packet::packet_writer* writer = new dappf::meta::packet::packet_writer();
     writer->encode_1(22);
     writer->encode_2(32000);
     writer->encode_4(2000000);
@@ -21,10 +21,10 @@ void dappf::test::unit_test_packet::test() {
 
     // creating the array of bytes
     int8_t* packet = writer->to_array();
-    dappf::meta::log::cout_hex_array(packet, writer->length());
+    dappf::utility::log::cout_hex_array(packet, writer->length());
 
     // creating a reader
-    dappf::meta::packet_reader* reader = new dappf::meta::packet_reader(packet, writer->length());
+    dappf::meta::packet::packet_reader* reader = new dappf::meta::packet::packet_reader(packet, writer->length());
     std::cout << (uint32_t) reader->decode_1() << std::endl;
     std::cout << reader->decode_2() << std::endl;
     std::cout << reader->decode_4() << std::endl;

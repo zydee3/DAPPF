@@ -4,8 +4,18 @@
 
 #include "task.h"
 
-dappf::meta::task::task(long timestamp, std::function<void()> handler) : timestamp(timestamp), t(handler) {}
+dappf::meta::task_pool::task::task(long, std::function<void()>) {
 
-dappf::meta::task::~task(){
+}
+
+dappf::meta::task_pool::task::~task() {
+
+}
+
+bool dappf::meta::task_pool::task::can_run() {
+    return false;
+}
+
+void dappf::meta::task_pool::task::run() {
 
 }

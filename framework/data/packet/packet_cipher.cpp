@@ -104,7 +104,7 @@ rotr32d (argtype v,
  * @param array is the array of bytes to be encrypted
  * @param length is the length of the array
  */
-void dappf::security::packet_cipher::encrypt(int8_t *array, int32_t length) {
+void dappf::data::packet::packet_cipher::encrypt(int8_t *array, int32_t length) {
     std::string error_null = "[packet_cipher] attempting to encrypt null data.";
     std::string error_size = "[packet_cipher] attempting to read an invalid amount of bytes.";
     if (array == nullptr)
@@ -122,7 +122,7 @@ void dappf::security::packet_cipher::encrypt(int8_t *array, int32_t length) {
  * @param array is the array of bytes to be decrypted
  * @param length is the length of the array
  */
-void dappf::security::packet_cipher::decrypt(int8_t *array, int32_t length) {
+void dappf::data::packet::packet_cipher::decrypt(int8_t *array, int32_t length) {
     std::string error_null = "[packet_cipher] attempting to decrypt null data.";
     std::string error_size = "[packet_cipher] attempting to read an invalid amount of bytes.";
     if (array == nullptr)
@@ -143,10 +143,10 @@ void dappf::security::packet_cipher::decrypt(int8_t *array, int32_t length) {
 //    *current_byte = *current_byte >> BIT_SHIFT;
 //}
 
-auto dappf::security::packet_cipher::get_encryptor() -> std::function<void(int8_t*, int32_t)>{
-    return &dappf::security::packet_cipher::encrypt;
+auto dappf::data::packet::packet_cipher::get_encryptor() -> std::function<void(int8_t*, int32_t)>{
+    return &dappf::data::packet::packet_cipher::encrypt;
 }
 
-auto dappf::security::packet_cipher::get_decryptor() -> std::function<void(int8_t*, int32_t)>{
-    return &dappf::security::packet_cipher::decrypt;
+auto dappf::data::packet::packet_cipher::get_decryptor() -> std::function<void(int8_t*, int32_t)>{
+    return &dappf::data::packet::packet_cipher::decrypt;
 }

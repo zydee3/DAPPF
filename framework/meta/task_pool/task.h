@@ -7,7 +7,7 @@
 
 #include <functional>
 
-namespace dappf::meta {
+namespace dappf::meta::task_pool {
     class task {
     private:
         int iterations;

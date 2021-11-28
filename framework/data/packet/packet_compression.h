@@ -10,11 +10,10 @@
 #include <vector>
 #include "../../utility/array.h"
 
-namespace dappf::data {
+namespace dappf::data::packet {
     class packet_compression {
 
     protected:
-        static void insert_flag(int8_t**, int, int);
         static std::vector<int8_t>* compress(int8_t*, int, int);
 
     public:

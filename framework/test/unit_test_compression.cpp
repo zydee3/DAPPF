@@ -9,7 +9,7 @@
 #include "../utility/log.h"
 
 void dappf::test::unit_test_compression::unit_test_compression(){
-    dappf::meta::packet_writer* writer = new dappf::meta::packet_writer();
+    dappf::meta::packet::packet_writer* writer = new dappf::meta::packet::packet_writer();
     writer->encode_1(22);
     writer->encode_2(32000);
     writer->encode_4(2000000);
@@ -18,16 +18,16 @@ void dappf::test::unit_test_compression::unit_test_compression(){
     // creating the array of bytes
     int8_t* packet = writer->to_array();
     std::cout << "Original: " << std::endl;
-    dappf::meta::log::cout_hex_array(packet, writer->length());
+    dappf::utility::log::cout_hex_array(packet, writer->length());
 
     // compress the array of bytes
     std::cout << std::endl << "Compressed: " << std::endl;
-    int length = dappf::data::packet_compression::compress(&packet, writer->length());
-    dappf::meta::log::cout_hex_array(packet, length);
+    int length = dappf::data::packet::packet_compression::compress(&packet, writer->length());
+    dappf::utility::log::cout_hex_array(packet, length);
 
     // decompress the array of bytes
     std::cout << std::endl << "Decompressed: " << std::endl;
-    length = dappf::data::packet_compression::decompress(&packet, length);
+    length = dappf::data::packet::packet_compression::decompress(&packet, length);
 
-    dappf::meta::log::cout_hex_array(packet, length);
+    dappf::utility::log::cout_hex_array(packet, length);
 }

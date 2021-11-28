@@ -43,8 +43,8 @@ add_library(
         framework/utility/array.h
         framework/utility/array.cpp
 
-        framework/meta/event_listeners/event_listeners.h
-        framework/meta/event_listeners/event_listeners.cpp
+        framework/meta/event_listeners/event_listener.h
+        framework/meta/event_listeners/event_listener.cpp
 
         framework/data/packet/packet_cipher.h
         framework/data/packet/packet_cipher.cpp
@@ -63,9 +63,38 @@ add_library(
         framework/utility/string.cpp
 
         framework/meta/handlers/handler_director.h
-        framework/meta/handlers/handler_director.cpp framework/meta/task_pool/task.cpp framework/meta/task_pool/task.h framework/utility/time.cpp framework/utility/time.h
+        framework/meta/handlers/handler_director.cpp
 
-        framework/security/local_contract.cpp framework/security/local_contract.h framework/security/remote_contract.cpp framework/security/remote_contract.h)
+        framework/meta/task_pool/task.cpp
+        framework/meta/task_pool/task.h
+
+        framework/utility/time.cpp
+        framework/utility/time.h
+
+        framework/security/local_contract.cpp
+        framework/security/local_contract.h
+
+        framework/security/remote_contract.cpp
+        framework/security/remote_contract.h
+
+        framework/meta/event_listeners/on_connection_request.cpp
+        framework/meta/event_listeners/on_connection_request.h
+
+        framework/meta/event_listeners/on_connection_established.cpp
+        framework/meta/event_listeners/on_connection_established.h
+
+        framework/meta/event_listeners/on_connection_dropped.cpp
+        framework/meta/event_listeners/on_connection_dropped.h
+
+        framework/meta/event_listeners/on_packet_received.cpp
+        framework/meta/event_listeners/on_packet_received.h
+
+        framework/meta/event_listeners/on_packet_sent.cpp
+        framework/meta/event_listeners/on_packet_sent.h
+
+        framework/meta/event_listeners/on_internal_error.cpp
+        framework/meta/event_listeners/on_internal_error.h
+)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)

@@ -8,7 +8,7 @@
 
 #include <cstdint>
 
-namespace dappf::meta {
+namespace dappf::meta::handlers {
 
     class handler {
     private:

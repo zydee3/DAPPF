@@ -1,5 +1,5 @@
 #include "packet_validation.h"
 
-bool dappf::data::validation::handle(int8_t* packet, int length){
+bool dappf::data::packet::validation::handle(int8_t* packet, int length){
   return true;
 }

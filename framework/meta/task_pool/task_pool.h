@@ -8,10 +8,10 @@
 #include <vector>
 #include "task.h"
 
-namespace dappf::meta {
+namespace dappf::meta::task_pool {
     class task_pool {
     private:
-        std::vector<dappf::meta::task> pool;
+        std::vector<dappf::meta::task_pool::task> pool;
     public:
         void insert(long, std::function<void()>);
 
