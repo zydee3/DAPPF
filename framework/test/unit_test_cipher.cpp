@@ -3,10 +3,10 @@
 //
 
 #include "unit_test_cipher.h"
-#include "../meta/packet_reader.h"
-#include "../meta/packet_writer.h"
+#include "../data/packet/packet_reader.h"
+#include "../data/packet/packet_writer.h"
 #include "../utility/log.h"
-#include "../security/packet_cipher.h"
+#include "../data/packet/packet_cipher.h"
 
 #include <iostream>
 
