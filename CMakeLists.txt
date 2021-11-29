@@ -94,7 +94,7 @@ add_library(
 )
 
 # link entry point to project
-add_executable(Dappf environment/main.cpp)
+add_executable(Dappf environment/main.cpp framework/meta/predictor/predictor.cpp framework/meta/predictor/predictor.h)
 
 # link framework to project
 target_link_libraries(Dappf lib)
