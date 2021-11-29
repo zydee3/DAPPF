@@ -29,7 +29,7 @@ bool dappf::meta::handlers::handler_director::check_state(std::string source) {
  * @return true if an associated op_code existed, otherwise false
  */
 bool dappf::meta::handlers::handler_director::remove(int16_t op_code) {
-    return dappf::meta::handlers::handler_director::check_state("remove") && handlers->erase(op_code) == 1;
+    return dappf::meta::handlers::handler_director::check_state("remove") && handlers.erase(op_code) == 1;
 }
 
 /**
@@ -42,8 +42,8 @@ bool dappf::meta::handlers::handler_director::remove(int16_t op_code) {
  */
 bool dappf::meta::handlers::handler_director::put(int16_t op_code, dappf::meta::handlers::handler* handler) {
     if(dappf::meta::handlers::handler_director::check_state("remove")) {
-        bool replaced = handlers->find(op_code) != handlers->end();
-        handlers->insert({op_code, handler});
+        bool replaced = handlers.find(op_code) != handlers.end();
+        handlers.insert({op_code, handler});
         return replaced;
     }
 
@@ -56,8 +56,8 @@ bool dappf::meta::handlers::handler_director::put(int16_t op_code, dappf::meta::
  * @return handler associated to the op code
  */
 dappf::meta::handlers::handler *dappf::meta::handlers::handler_director::get(int16_t op_code) {
-    std::map<int16_t, handler*>::iterator iterator = handlers->find(op_code);
-    if(iterator == handlers->end()) {
+    std::map<int16_t, handler*>::iterator iterator = handlers.find(op_code);
+    if(iterator == handlers.end()) {
         return nullptr;
     } else {
         return iterator->second;

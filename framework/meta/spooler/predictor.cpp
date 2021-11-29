@@ -177,7 +177,7 @@ void dappf::meta::spooler::predictor::set(std::function<std::vector<int>(int)>* 
     handle = _handle;
 }
 
-std::function<std::vector<int>(int)> *dappf::meta::spooler::predictor::get() {
+std::function<std::vector<int>(int)>* dappf::meta::spooler::predictor::get() {
     return handle;
 }
 

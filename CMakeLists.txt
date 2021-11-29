@@ -94,7 +94,7 @@ add_library(
 )
 
 # link entry point to project
-add_executable(Dappf environment/main.cpp framework/meta/spooler/predictor.cpp framework/meta/spooler/predictor.h)
+add_executable(Dappf environment/main.cpp framework/meta/spooler/predictor.cpp framework/meta/spooler/predictor.h framework/meta/spooler/spooler.cpp framework/meta/spooler/spooler.h)
 
 # link framework to project
 target_link_libraries(Dappf lib)

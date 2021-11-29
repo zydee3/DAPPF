@@ -46,15 +46,15 @@ namespace dappf::meta::spooler {
         void unassociate(int value);
         void move();
 
-        std::function<std::vector<int>(int)>* handle;
+        static std::function<std::vector<int>(int)>* handle;
 
     public:
 
         void insert(int value);
         std::vector<int> predict(int key);
 
-        std::function<std::vector<int>(int)>* get();
-        void set(std::function<std::vector<int>(int)>*);
+        static std::function<std::vector<int>(int)>* get();
+        static void set(std::function<std::vector<int>(int)>*);
 
     };
 }

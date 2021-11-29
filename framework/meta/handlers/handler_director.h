@@ -16,13 +16,12 @@
 namespace dappf::meta::handlers {
     class handler_director {
     private:
-        std::map<int16_t, handler*>* handlers = new std::map<int16_t, handler*>();
-
-        bool check_state(std::string);
+        static std::map<int16_t, handler*> handlers;
+        static bool check_state(std::string);
     public:
-        bool remove(int16_t);
-        bool put(int16_t, handler*);
-        handler* get(int16_t);
+        static bool remove(int16_t);
+        static bool put(int16_t, handler*);
+        static handler* get(int16_t);
     };
 }
 
