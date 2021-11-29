@@ -32,9 +32,9 @@ Within each directory the respective directories are meta files. The meta file w
 | 16.  | Combining Modules                           | In Progress   | Vincent | |
 
 # Backlog
-| No.  | Task.                                       | 
-| ---- | ------------------------------------------- |
-| 1.   | Need to implement semaphore or conditional lock into task_pool since the thread is currently busy waiting | 
+| No.  | Date | Task                                       | 
+| ---- | --------|-------------------------------------- |
+| 1.   | 11/29 | Need to implement semaphore or conditional lock into task_pool since the thread is currently busy waiting | 
 
 # Module Functionality
 
