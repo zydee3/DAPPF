@@ -7,23 +7,20 @@
 
 
 #include <cstdint>
+#include <functional>
 #include "../../constants.h"
 
 namespace dappf::data::packet {
     class validation {
     private:
         bool is_valid_character(char);
-
-    protected:
-        static const int pos_compressed_flag = 7;
-
-
-        // static void insert_flag(int8_t**, int, int);
-        // static std::vector<int8_t>* compress(int8_t*, int, int);
+        std::function<bool(int8_t*, int)>* handle;
 
     public:
-        bool handle(int8_t*, int);
-        // static int decompress(int8_t*, int);
+        bool validate_packet(int8_t*, int);
+
+        void set(std::function<bool(int8_t*, int)>*);
+        std::function<bool(int8_t*, int)>* get();
 
     };
 }

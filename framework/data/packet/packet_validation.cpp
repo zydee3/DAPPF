@@ -28,7 +28,7 @@ bool dappf::data::packet::validation::is_valid_character(char c) {
  * @param length Number of elements in packet
  * @return True if the entire packet header contains only valid characters, otherwise false
  */
-bool dappf::data::packet::validation::handle(int8_t* packet, int length){
+bool dappf::data::packet::validation::validate_packet(int8_t* packet, int length){
 
     const int num_bytes_header = dappf::constants::num_bytes_header;
     if(length < num_bytes_header){
@@ -42,6 +42,22 @@ bool dappf::data::packet::validation::handle(int8_t* packet, int length){
     }
 
   return true;
+}
+
+/**
+ * Sets handler pointer for handler
+ * @param _handle function pointer to set dappf::data::packet::validation::handler
+ */
+void dappf::data::packet::validation::set(std::function<bool(int8_t *, int)>* _handle) {
+    handle = _handle;
+}
+
+/**
+ * Returns handler pointer for handler
+ * @return function pointer to set dappf::data::packet::validation::handler, otherwise nullptr if not set
+ */
+std::function<bool(int8_t *, int)> *dappf::data::packet::validation::get() {
+    return handle;
 }
 
 
