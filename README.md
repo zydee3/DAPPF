@@ -1,9 +1,6 @@
 # Starting Off
 The project is built in jetbrain's clion IDE. You should be able to just open the file and compile straight away as the project was set up already for you. Connect your github so you can make pull requests to the main branch.
 
-# DAPPF
-I created both the work [example] environment and library itself under a single project. The work enviornment compiles down and ran as an executable. The framework is compiled to a shared library which cannot be ran as a standalone.
-
 # Framework
 Within the framework are four main directories which pertains to each layer (1-3) of the framework. The fourth layer is written by the user however the framework provides an interface for interaction between handlers and the framework.
  - Layer 1: Net (Communication Layer)
@@ -34,6 +31,10 @@ Within each directory the respective directories are meta files. The meta file w
 | 15.  | Example Project                             | In Progress   | Kirill | |
 | 16.  | Combining Modules                           | In Progress   | Vincent | |
 
+# Backlog
+| No.  | Task.                                       | 
+| ---- | ------------------------------------------- |
+| 1.   | Need to implement semaphore or conditional lock into task_pool since the thread is currently busy waiting | 
 
 # Module Functionality
 
