@@ -26,6 +26,8 @@ namespace dappf::constants {
     static const int num_bytes_header = pos_compression_flag + num_bytes_compression_flag;
 
     static const char address_delimiter = ':';
+
+    static const bool throw_exceptions = false;
 }
 
 

@@ -22,12 +22,6 @@ namespace dappf::meta::event_listeners {
 
     public:
 
-        //bool(*packet_validator)(int8_t*, int) = nullptr;
-        //void set_packet_validator(bool(*)(int8_t*, int));
-        //auto get_packet_validator();
-
-    // packet compressor
-    // packet encryptor
     };
 }
 

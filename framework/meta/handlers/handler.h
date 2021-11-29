@@ -7,6 +7,9 @@
 
 
 #include <cstdint>
+#include <exception>
+#include "../../constants.h"
+#include "../event_listeners/on_internal_error.h"
 
 namespace dappf::meta::handlers {
 
@@ -17,12 +20,15 @@ namespace dappf::meta::handlers {
         int8_t* ipv4 = nullptr;
         int8_t* packet = nullptr;
 
+        void throw_unhandled_exception(std::string);
+
     public:
 
         handler(int8_t *ipv4, int8_t *packet);
         virtual ~handler();
         virtual bool process();
         virtual bool handle();
+        virtual bool delay();
 
     };
 }
