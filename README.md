@@ -16,18 +16,18 @@ Within each directory the respective directories are meta files. The meta file w
 | ---- | ------------------------------------------- | ------------- | ------- | ------- |
 | 1.   | Network Node Connect and Disconnect         | Completed     | Kirill | 11/1 |
 | 2.   | Documentation Site                          | Completed     | Garrett | 11/1 |
-| 3.  | Documentation Github (Readme)                | In Progress   | Vincent | 
+| 3.   | Documentation Github (Readme)               | In Progress   | Vincent | 
 | 4.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
 | 5.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
 | 6.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
-| 7.   | Data Validator                              | In Progress   | Garrett, Vincent | 11/10 |
+| 7.   | Data Validator                              | Completed     | Garrett, Vincent | 11/10 |
 | 8.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
-| 9.   | Data Spooler                                | In Progress   | ~~Shishir~~ Vincent | |
-| 10.  | Predictor                                   | In Progress   | Vincent | |
-| 11.  | Task Pool                                   | In Progress   | Anthony, Vincent | |
+| 9.   | Data Spooler                                | Completed     | ~~Shishir~~ Vincent | 11/29 |
+| 10.  | Predictor                                   | Completed     | Vincent | 11/27 |
+| 11.  | Task Pool                                   | Completed     | Anthony, Vincent | 11/29 |
 | 12.  | Delegates                                   | In Progress   | Shishir | |
 | 13.  | Listeners                                   | Completed     | Vincent | 11/6 |
-| 14.  | Handlers                                    | In Progress   | Vincent | | 
+| 14.  | Handlers                                    | Completed     | Vincent | 11/29 | 
 | 15.  | Example Project                             | In Progress   | Kirill | |
 | 16.  | Combining Modules                           | In Progress   | Vincent | |
 
