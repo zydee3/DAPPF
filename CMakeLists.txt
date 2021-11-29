@@ -94,6 +94,9 @@ add_library(
 
         framework/meta/event_listeners/on_internal_error.cpp
         framework/meta/event_listeners/on_internal_error.h
+
+        framework/data/packet/packet_validation.cpp
+        framework/data/packet/packet_validation.h
 )
 
 # link entry point to project
