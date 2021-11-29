@@ -12,9 +12,6 @@
 namespace dappf::data::packet {
     class packet_cipher {
     private:
-        //static void _encrypt(int8_t *);
-        //static void _decrypt(int8_t *);
-
         static void encrypt(int8_t *, int32_t);
         static void decrypt(int8_t *, int32_t);
 

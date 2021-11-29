@@ -4,6 +4,12 @@
 
 #include "handler_director.h"
 
+/**
+ * Checks the current state of the framework. You can only modify an op code
+ * and it's associated handler when the framework is not actively running.
+ * @param source
+ * @return
+ */
 bool dappf::meta::handlers::handler_director::check_state(std::string source) {
     if (dappf::internal_state != dappf::state::stopped) {
         auto handler = dappf::meta::event_listeners::on_internal_error::get();

@@ -2,11 +2,19 @@
 // Created by Vince on 11/1/2021.
 //
 
-#include <iostream>
 #include "packet_compression.h"
 #include "../../utility/log.h"
 #include "../../constants.h"
 
+/**
+ * Helper function for the public compress function. This function specifically
+ * performs only the reduction of bytes using a lossless method. This function
+ * compresses the packet's bytes with indexes between start and finish: [start, finish)
+ * @param packet Array of bytes
+ * @param start Where to begin compressing the packet
+ * @param end Where to stop compressing the packet
+ * @return The compressed packet
+ */
 std::vector<int8_t>* dappf::data::packet::packet_compression::compress(int8_t* packet, int start, int end){
     std::vector<int8_t>* compressed_bytes = new std::vector<int8_t>();
 
@@ -73,10 +81,12 @@ int dappf::data::packet::packet_compression::compress(int8_t** packet, int lengt
 }
 
 /**
- * Tries to undo a packet_compression
- * @param packet
- * @param length
- * @return
+ * Tries to undo the packet compression done by dappf::data::packet::packet_compression::compress(int8_t**, int).
+ * First checks to see if the flag has been set signifying if the packet was compressed. Flag = 1 if compressed,
+ * otherwise 0. If compressed, then perform the associated decompression.
+ * @param packet Array of bytes
+ * @param length Number of bytes in the packet
+ * @return Decompressed packet if the given packet was compressed, otherwise the original packet.
  */
 int dappf::data::packet::packet_compression::decompress(int8_t** packet, int length) {
     // if the only things present are the address and op code or the flag

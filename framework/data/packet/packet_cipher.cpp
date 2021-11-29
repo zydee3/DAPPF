@@ -134,19 +134,19 @@ void dappf::data::packet::packet_cipher::decrypt(int8_t *array, int32_t length) 
         array[i] = rotr32d(array[i], BIT_SHIFT);
     }
 }
-//
-///**
-// * Helper function for packet_cipher::decrypt()
-// * @param current_byte is the byte to be decrypted
-// */
-//void dappf::meta::packet_cipher::_decrypt(int8_t *current_byte) {
-//    *current_byte = *current_byte >> BIT_SHIFT;
-//}
 
+/**
+ * Returns the the function used to encrypt a packet.
+ * @return dappf::data::packet::packet_cipher::encrypt(int8_t *, int32_t);
+ */
 auto dappf::data::packet::packet_cipher::get_encryptor() -> std::function<void(int8_t*, int32_t)>{
     return &dappf::data::packet::packet_cipher::encrypt;
 }
 
+/**
+ * Returns the the function used to decrypt a packet.
+ * @return dappf::data::packet::packet_cipher::decrypt(int8_t *, int32_t);
+ */
 auto dappf::data::packet::packet_cipher::get_decryptor() -> std::function<void(int8_t*, int32_t)>{
     return &dappf::data::packet::packet_cipher::decrypt;
 }
