@@ -4,6 +4,8 @@
 
 #include "predictor.h"
 
+std::function<std::vector<int>(int)>* dappf::meta::spooler::predictor::handle;
+
 /**
  * Returns a new pair with a value being parameter value and an occurrence being 1
  * @param value Value of pair.left

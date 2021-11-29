@@ -5,6 +5,8 @@
 #include "on_connection_dropped.h"
 #include "on_internal_error.h"
 
+std::function<void(std::string, int)>* dappf::meta::event_listeners::on_connection_dropped::handle;
+
 void dappf::meta::event_listeners::on_connection_dropped::set(std::function<void(std::string, int)>* _handle) {
     handle = _handle;
 }

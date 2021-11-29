@@ -4,6 +4,8 @@
 
 #include "on_connection_request.h"
 
+std::function<void(std::string)>* dappf::meta::event_listeners::on_connection_request::handle;
+
 void dappf::meta::event_listeners::on_connection_request::set(std::function<void(std::string)>* _handle) {
     handle = _handle;
 }

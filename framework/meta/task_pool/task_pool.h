@@ -15,7 +15,6 @@ namespace dappf::meta::task_pool {
     class task_pool {
     private:
         static std::mutex lock;
-        static std::mutex conditional;
         static std::vector<dappf::meta::task_pool::task*> pool;
 
     public:

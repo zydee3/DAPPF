@@ -4,6 +4,8 @@
 
 #include "handler_director.h"
 
+std::map<int16_t, dappf::meta::handlers::handler*> dappf::meta::handlers::handler_director::handlers;
+
 /**
  * Checks the current state of the framework. You can only modify an op code
  * and it's associated handler when the framework is not actively running.

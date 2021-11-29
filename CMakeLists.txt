@@ -91,10 +91,19 @@ add_library(
 
         framework/data/packet/packet_validation.cpp
         framework/data/packet/packet_validation.h
+
+        framework/test/unit_test.cpp
+        framework/test/unit_test.h
+
+        framework/meta/spooler/predictor.cpp
+        framework/meta/spooler/predictor.h
+
+        framework/meta/spooler/spooler.cpp
+        framework/meta/spooler/spooler.h
 )
 
 # link entry point to project
-add_executable(Dappf environment/main.cpp framework/meta/spooler/predictor.cpp framework/meta/spooler/predictor.h framework/meta/spooler/spooler.cpp framework/meta/spooler/spooler.h)
+add_executable(Dappf environment/main.cpp)
 
 # link framework to project
 target_link_libraries(Dappf lib)

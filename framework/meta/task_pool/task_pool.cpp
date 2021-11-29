@@ -4,6 +4,9 @@
 
 #include "task_pool.h"
 
+std::mutex dappf::meta::task_pool::task_pool::lock;
+std::vector<dappf::meta::task_pool::task*> dappf::meta::task_pool::task_pool::pool;
+
 /**
  * Inserts a task into the task pool. Acquires the lock while inserting to prevent any
  * race conditions.
