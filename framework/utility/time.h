@@ -11,6 +11,10 @@ namespace dappf::utility {
     class time {
     public:
         static long now();
+        static long to_milliseconds(int);
+        static long to_milliseconds(int, int);
+        static long to_milliseconds(int, int, int);
+        static long to_milliseconds(int, int, int, int);
     };
 }
 
