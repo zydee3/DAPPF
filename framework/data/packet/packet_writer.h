@@ -22,12 +22,6 @@ namespace dappf::meta::packet {
         packet_writer();
         ~packet_writer();
 
-        void encode_address(std::string);
-        void encode_port(int16_t);
-        void encode_message_id(int64_t);
-        void encode_op_code(int16_t);
-        void encode_compression_flag(bool);
-
         void encode_1(int8_t);
         void encode_2(int16_t);
         void encode_4(int32_t);
