@@ -16,15 +16,13 @@ namespace dappf::meta::handlers {
     class handler {
     private:
         long timestamp;
-        int num_times_repeated;
         int8_t* ipv4 = nullptr;
         int8_t* packet = nullptr;
 
         void throw_unhandled_exception(std::string);
 
     public:
-
-        handler(int8_t *ipv4, int8_t *packet);
+        handler(int8_t *ipv4, int8_t *packet, long);
         virtual ~handler();
         virtual bool process();
         virtual bool handle();

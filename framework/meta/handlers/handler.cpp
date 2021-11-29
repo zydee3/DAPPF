@@ -10,9 +10,10 @@
  * of 4 numbers [aaa,bbb,ccc,ddd] such that the ipv4 constructed is aaa.bbb.ccc.ddd
  * @param _packet The packet to be sent and/or constructed, nullptr if unneeded.
  */
-dappf::meta::handlers::handler::handler(int8_t* _ipv4, int8_t* _packet) {
+dappf::meta::handlers::handler::handler(int8_t* _ipv4, int8_t* _packet, long _timestamp) {
     ipv4 = _ipv4;
     packet = _packet;
+    timestamp = _timestamp;
 }
 
 /**
