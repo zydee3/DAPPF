@@ -34,12 +34,6 @@ add_library(
         framework/net/connection.h
         framework/net/connection.cpp
 
-        framework/utility/tree.h
-        framework/utility/tree.cpp
-
-        framework/utility/meta/tree_node.h
-        framework/utility/meta/tree_node.cpp
-
         framework/utility/array.h
         framework/utility/array.cpp
 
