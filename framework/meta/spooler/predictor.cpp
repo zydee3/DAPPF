@@ -9,20 +9,20 @@
  * @param value
  * @return
  */
-std::pair<int, int> dappf::meta::predictor::predictor::get_new_pair_entry(int value) {
+std::pair<int, int> dappf::meta::spooler::predictor::get_new_pair_entry(int value) {
     std::pair<int, int> new_pair_entry;
     new_pair_entry.first = value;
     new_pair_entry.second = 1;
     return new_pair_entry;
 }
 
-std::vector<std::pair<int, int>> dappf::meta::predictor::predictor::get_new_vector_entry(int initial_value) {
+std::vector<std::pair<int, int>> dappf::meta::spooler::predictor::get_new_vector_entry(int initial_value) {
     std::vector<std::pair<int, int>> new_vector_entry;
     new_vector_entry.push_back(get_new_pair_entry(initial_value));
     return new_vector_entry;
 }
 
-void dappf::meta::predictor::predictor::increment(int key, int value) {
+void dappf::meta::spooler::predictor::increment(int key, int value) {
     std::map<int, std::vector<std::pair<int, int>>>::iterator map_entry = references.find(key);
 
     if (map_entry == references.end()) {
@@ -52,7 +52,7 @@ void dappf::meta::predictor::predictor::increment(int key, int value) {
     }
 }
 
-void dappf::meta::predictor::predictor::decrement(int key, int value) {
+void dappf::meta::spooler::predictor::decrement(int key, int value) {
     std::map<int, std::vector<std::pair<int, int>>>::iterator map_entry = references.find(key);
     std::vector<std::pair<int, int>> value_vector = (*map_entry).second;
 
@@ -71,7 +71,7 @@ void dappf::meta::predictor::predictor::decrement(int key, int value) {
 }
 
 // step 2.  associate z to i, j, k by 2a or 2b.
-void dappf::meta::predictor::predictor::associate(int value) {
+void dappf::meta::spooler::predictor::associate(int value) {
     int upper_bound = previous_values.size();
     int lower_bound = std::max(0, upper_bound - max_lookback);
 
@@ -80,13 +80,13 @@ void dappf::meta::predictor::predictor::associate(int value) {
     }
 }
 
-void dappf::meta::predictor::predictor::unassociate(int value) {
+void dappf::meta::spooler::predictor::unassociate(int value) {
     for (int i = 0; i < lookback_values.size(); i++) {
         decrement(lookback_values[i], value);
     }
 }
 
-void dappf::meta::predictor::predictor::move() {
+void dappf::meta::spooler::predictor::move() {
     lookback_values.push_back(previous_values[0]);
     previous_values.erase(previous_values.begin());
     if (lookback_values.size() >= max_lookback) {
@@ -135,7 +135,7 @@ void dappf::meta::predictor::predictor::move() {
  *
  * @param value
  */
-void dappf::meta::predictor::predictor::insert(int value) {
+void dappf::meta::spooler::predictor::insert(int value) {
     if(!dappf::constants::use_spooler){
         return;
     }
@@ -149,7 +149,7 @@ void dappf::meta::predictor::predictor::insert(int value) {
     }
 }
 
-std::vector<int> dappf::meta::predictor::predictor::predict(int key) {
+std::vector<int> dappf::meta::spooler::predictor::predict(int key) {
     std::vector<int> predictions;
 
     if(dappf::constants::use_spooler) {
@@ -173,11 +173,11 @@ std::vector<int> dappf::meta::predictor::predictor::predict(int key) {
     return predictions;
 }
 
-void dappf::meta::predictor::predictor::set(std::function<std::vector<int>(int)>* _handle) {
+void dappf::meta::spooler::predictor::set(std::function<std::vector<int>(int)>* _handle) {
     handle = _handle;
 }
 
-std::function<std::vector<int>(int)> *dappf::meta::predictor::predictor::get() {
+std::function<std::vector<int>(int)> *dappf::meta::spooler::predictor::get() {
     return handle;
 }
 

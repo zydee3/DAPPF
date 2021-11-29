@@ -16,7 +16,7 @@
 
 #include "../../constants.h"
 
-namespace dappf::meta::predictor {
+namespace dappf::meta::spooler {
     class predictor {
 
     private:
