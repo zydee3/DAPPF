@@ -9,7 +9,7 @@
 #include <functional>
 #include "event_listener.h"
 
-namespace dappf::meta::event_listeners {
+namespace dappf::data::event_listeners {
     class on_connection_established : event_listener {
     private:
         static std::function<void(std::string)>* handle;

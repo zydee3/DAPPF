@@ -15,7 +15,7 @@
 #include "../../utility/log.h"
 
 
-namespace dappf::meta::event_listeners {
+namespace dappf::data::event_listeners {
     class event_listener {
 
     private:

@@ -13,7 +13,7 @@
 #include "../../dappf.h"
 
 
-namespace dappf::meta::handlers {
+namespace dappf::data::handlers {
     class handler_director {
     private:
         static std::map<int16_t, handler*> handlers;

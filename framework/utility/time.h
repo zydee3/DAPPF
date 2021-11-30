@@ -6,6 +6,7 @@
 #define DAPPF_TIME_H
 
 #include <chrono>
+#include <ctime>
 
 namespace dappf::utility {
     class time {

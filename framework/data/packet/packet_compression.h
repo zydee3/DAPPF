@@ -19,7 +19,6 @@ namespace dappf::data::packet {
     public:
         static int compress(int8_t**, int);
         static int decompress(int8_t**, int);
-
     };
 }
 

@@ -9,7 +9,7 @@
 #include "../../data/packet/packet_reader.h"
 #include "event_listener.h"
 
-namespace dappf::meta::event_listeners {
+namespace dappf::data::event_listeners {
     class on_packet_sent : event_listener {
 
     private:

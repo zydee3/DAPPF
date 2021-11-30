@@ -10,7 +10,7 @@
  * of 4 numbers [aaa,bbb,ccc,ddd] such that the ipv4 constructed is aaa.bbb.ccc.ddd
  * @param _packet The packet to be sent and/or constructed, nullptr if unneeded.
  */
-dappf::meta::handlers::handler::handler(int8_t* _ipv4, int8_t* _packet, long _timestamp) {
+dappf::data::handlers::handler::handler(int8_t* _ipv4, int8_t* _packet, long _timestamp) {
     ipv4 = _ipv4;
     packet = _packet;
     timestamp = _timestamp;
@@ -19,7 +19,7 @@ dappf::meta::handlers::handler::handler(int8_t* _ipv4, int8_t* _packet, long _ti
 /**
  * Super deconstructor to any class which implements this handler
  */
-dappf::meta::handlers::handler::~handler() {
+dappf::data::handlers::handler::~handler() {
     delete ipv4;
     delete packet;
 }
@@ -29,12 +29,12 @@ dappf::meta::handlers::handler::~handler() {
  * implement their own methods for handling the associated member function.
  * @param error Error message to be outputted.
  */
-void dappf::meta::handlers::handler::throw_unhandled_exception(std::string error) {
+void dappf::data::handlers::handler::throw_unhandled_exception(std::string error) {
     if(dappf::constants::throw_exceptions) {
         throw std::runtime_error(error);
     }
 
-    auto listener = dappf::meta::event_listeners::on_internal_error::get();
+    auto listener = dappf::data::event_listeners::on_internal_error::get();
     if(listener != nullptr){
         (*listener)(error);
     }
@@ -49,7 +49,7 @@ void dappf::meta::handlers::handler::throw_unhandled_exception(std::string error
  *
  * @return False for not processed
  */
-bool dappf::meta::handlers::handler::process() {
+bool dappf::data::handlers::handler::process() {
     throw_unhandled_exception("handler::process unhandled");
     return false;
 }
@@ -63,7 +63,7 @@ bool dappf::meta::handlers::handler::process() {
  *
  * @return False for not handled
  */
-bool dappf::meta::handlers::handler::handle() {
+bool dappf::data::handlers::handler::handle() {
     throw_unhandled_exception("handler::handle unhandled");
     return false;
 }
@@ -80,7 +80,7 @@ bool dappf::meta::handlers::handler::handle() {
  *
  * @return
  */
-bool dappf::meta::handlers::handler::delay() {
+bool dappf::data::handlers::handler::delay() {
     throw_unhandled_exception("handler::delay unhandled");
     return false;
 }

@@ -11,8 +11,8 @@
  * @param key value associated to handler which acts as the handler id
  * @return handler if present in handler_director, otherwise nullptr
  */
-dappf::meta::handlers::handler* dappf::meta::spooler::spooler::fetch_handler(int key) {
-    auto handler = dappf::meta::handlers::handler_director::get(key);
+dappf::data::handlers::handler* dappf::data::spooler::spooler::fetch_handler(int key) {
+    auto handler = dappf::data::handlers::handler_director::get(key);
 
     std::string error = "spooler::fetch_handler: unhandled op code";
 
@@ -21,7 +21,7 @@ dappf::meta::handlers::handler* dappf::meta::spooler::spooler::fetch_handler(int
             throw std::runtime_error(error);
         }
 
-        auto listener = dappf::meta::event_listeners::on_internal_error::get();
+        auto listener = dappf::data::event_listeners::on_internal_error::get();
         if(listener != nullptr){
             (*listener)(error);
         }
@@ -41,12 +41,12 @@ dappf::meta::handlers::handler* dappf::meta::spooler::spooler::fetch_handler(int
  * @param source Requester, generally an Ipv4
  * @param value op code
  */
-void dappf::meta::spooler::spooler::spool(std::string source, int value) {
+void dappf::data::spooler::spooler::spool(std::string source, int value) {
     if(!dappf::constants::use_spooler){
         return;
     }
 
-    auto predictor = dappf::meta::spooler::predictor::get();
+    auto predictor = dappf::data::spooler::predictor::get();
     if(predictor == nullptr) {
         return;
     }
@@ -54,13 +54,13 @@ void dappf::meta::spooler::spooler::spool(std::string source, int value) {
     std::vector<int> to_spool = (*predictor)(value);
     for(int i = 0; i < to_spool.size(); i++){
         int key = to_spool[i];
-        dappf::meta::handlers::handler* handler = fetch_handler(key);
+        dappf::data::handlers::handler* handler = fetch_handler(key);
         if(handler == nullptr){
             continue;
         }
 
         if(!handler->process()){
-            auto listener = dappf::meta::event_listeners::on_internal_error::get();
+            auto listener = dappf::data::event_listeners::on_internal_error::get();
             if(listener != nullptr){
                 (*listener)("unable to process handler");
             }

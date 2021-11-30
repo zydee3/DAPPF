@@ -4,7 +4,7 @@
 
 #include "handler_director.h"
 
-std::map<int16_t, dappf::meta::handlers::handler*> dappf::meta::handlers::handler_director::handlers;
+std::map<int16_t, dappf::data::handlers::handler*> dappf::data::handlers::handler_director::handlers;
 
 /**
  * Checks the current state of the framework. You can only modify an op code
@@ -12,9 +12,9 @@ std::map<int16_t, dappf::meta::handlers::handler*> dappf::meta::handlers::handle
  * @param source
  * @return
  */
-bool dappf::meta::handlers::handler_director::check_state(std::string source) {
+bool dappf::data::handlers::handler_director::check_state(std::string source) {
     if (dappf::internal_state != dappf::state::stopped) {
-        auto handler = dappf::meta::event_listeners::on_internal_error::get();
+        auto handler = dappf::data::event_listeners::on_internal_error::get();
         if(handler != nullptr){
             (*handler)("Attempting to modify (" + source + ") handler on non-stopped internal state.");
         }
@@ -30,8 +30,8 @@ bool dappf::meta::handlers::handler_director::check_state(std::string source) {
  * @param op_code op_code to be removed
  * @return true if an associated op_code existed, otherwise false
  */
-bool dappf::meta::handlers::handler_director::remove(int16_t op_code) {
-    return dappf::meta::handlers::handler_director::check_state("remove") && handlers.erase(op_code) == 1;
+bool dappf::data::handlers::handler_director::remove(int16_t op_code) {
+    return dappf::data::handlers::handler_director::check_state("remove") && handlers.erase(op_code) == 1;
 }
 
 /**
@@ -42,8 +42,8 @@ bool dappf::meta::handlers::handler_director::remove(int16_t op_code) {
  * @return true  if previous instance of op_code was overwritten,
  *         false if op_code was inserted without overwriting a previous instance.
  */
-bool dappf::meta::handlers::handler_director::put(int16_t op_code, dappf::meta::handlers::handler* handler) {
-    if(dappf::meta::handlers::handler_director::check_state("remove")) {
+bool dappf::data::handlers::handler_director::put(int16_t op_code, dappf::data::handlers::handler* handler) {
+    if(dappf::data::handlers::handler_director::check_state("remove")) {
         bool replaced = handlers.find(op_code) != handlers.end();
         handlers.insert({op_code, handler});
         return replaced;
@@ -57,7 +57,7 @@ bool dappf::meta::handlers::handler_director::put(int16_t op_code, dappf::meta::
  * @param op_code op code associated to the desired handler
  * @return handler associated to the op code
  */
-dappf::meta::handlers::handler *dappf::meta::handlers::handler_director::get(int16_t op_code) {
+dappf::data::handlers::handler *dappf::data::handlers::handler_director::get(int16_t op_code) {
     std::map<int16_t, handler*>::iterator iterator = handlers.find(op_code);
     if(iterator == handlers.end()) {
         return nullptr;

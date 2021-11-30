@@ -11,11 +11,11 @@
 #include "task.h"
 
 
-namespace dappf::meta::task_pool {
+namespace dappf::data::task_pool {
     class task_pool {
     private:
         static std::mutex lock;
-        static std::vector<dappf::meta::task_pool::task*> pool;
+        static std::vector<dappf::data::task_pool::task*> pool;
 
     public:
         static void insert(long, std::function<void()>*);
