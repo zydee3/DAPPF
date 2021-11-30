@@ -5,16 +5,22 @@
 #include "unit_test_packet.h"
 
 void dappf::test::unit_test_packet::test() {
-    test_1(); // This test will encode numbers
-    test_2(); // This test will encode a string
-    test_3(); // This test attempts to read more bytes from the buffer than available.
+    test_encode_numbers();
+    test_encode_string();
+    test_decode_exception();
+    test_validation_1();
+    test_validation_2();
+    test_compression_1();
+    test_compression_2();
+    test_cipher_1();
+    test_cipher_2();
 }
 
 /**
  * This test will encode numbers
  * @return True if result is correct, otherwise false.
  */
-bool dappf::test::unit_test_packet::test_1() {
+bool dappf::test::unit_test_packet::test_encode_numbers() {
     // creating a writer
     int8_t b = 22;
     int16_t s = 32000;
@@ -41,7 +47,7 @@ bool dappf::test::unit_test_packet::test_1() {
                 && reader->decode_4() == i
                 && reader->decode_8() == l;
 
-    display_test_result("dappf::test::unit_test_packet::test_1()", result);
+    display_test_result("dappf::test::unit_test_packet::test_encode_numbers()", result);
 
     return result;
 }
@@ -50,7 +56,7 @@ bool dappf::test::unit_test_packet::test_1() {
  * This test will encode a string
  * @return True if result is correct, otherwise false
  */
-bool dappf::test::unit_test_packet::test_2() {
+bool dappf::test::unit_test_packet::test_encode_string() {
     std::string test_string = "this is a random message";
 
     // create a writer
@@ -70,7 +76,7 @@ bool dappf::test::unit_test_packet::test_2() {
 
     bool result = test_string == decoded_string;
 
-    display_test_result("dappf::test::unit_test_packet::test_2()", result);
+    display_test_result("dappf::test::unit_test_packet::test_encode_string()", result);
 
     return result;
 }
@@ -79,7 +85,7 @@ bool dappf::test::unit_test_packet::test_2() {
  * This test attempts to read more bytes from the buffer than available.
  * @return True if result is correct, otherwise false
  */
-bool dappf::test::unit_test_packet::test_3() {
+bool dappf::test::unit_test_packet::test_decode_exception() {
     int32_t num_1 = 1000;
     int32_t num_2 = 9999;
 
@@ -110,15 +116,51 @@ bool dappf::test::unit_test_packet::test_3() {
     return result;
 }
 
-bool dappf::test::unit_test_packet::test_4() {
+/**
+ *
+ * @return
+ */
+bool dappf::test::unit_test_packet::test_validation_1() {
     return false;
 }
 
-bool dappf::test::unit_test_packet::test_5() {
+/**
+ *
+ * @return
+ */
+bool dappf::test::unit_test_packet::test_validation_2() {
     return false;
 }
 
-bool dappf::test::unit_test_packet::test_6() {
+/**
+ *
+ * @return
+ */
+bool dappf::test::unit_test_packet::test_compression_1() {
+    return false;
+}
+
+/**
+ *
+ * @return
+ */
+bool dappf::test::unit_test_packet::test_compression_2() {
+    return false;
+}
+
+/**
+ *
+ * @return
+ */
+bool dappf::test::unit_test_packet::test_cipher_1() {
+    return false;
+}
+
+/**
+ *
+ * @return
+ */
+bool dappf::test::unit_test_packet::test_cipher_2() {
     return false;
 }
 

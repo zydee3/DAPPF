@@ -17,12 +17,15 @@
 namespace dappf::test {
     class unit_test_packet : unit_test {
     private:
-        static bool test_1();
-        static bool test_2();
-        static bool test_3();
-        static bool test_4();
-        static bool test_5();
-        static bool test_6();
+        static bool test_encode_numbers();
+        static bool test_encode_string();
+        static bool test_decode_exception();
+        static bool test_validation_1();
+        static bool test_validation_2();
+        static bool test_compression_1();
+        static bool test_compression_2();
+        static bool test_cipher_1();
+        static bool test_cipher_2();
     public:
         static void test();
     };
