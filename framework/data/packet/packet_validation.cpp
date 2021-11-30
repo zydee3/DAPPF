@@ -44,20 +44,3 @@ bool dappf::data::packet::validation::validate_packet(int8_t* packet, int length
   return true;
 }
 
-/**
- * Sets handler pointer for handler
- * @param _handle function pointer to set dappf::data::packet::validation::handler
- */
-void dappf::data::packet::validation::set(std::function<bool(int8_t *, int)>* _handle) {
-    handle = _handle;
-}
-
-/**
- * Returns handler pointer for handler
- * @return function pointer to set dappf::data::packet::validation::handler, otherwise nullptr if not set
- */
-std::function<bool(int8_t *, int)> *dappf::data::packet::validation::get() {
-    return handle;
-}
-
-
