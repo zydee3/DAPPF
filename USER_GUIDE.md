@@ -5,7 +5,7 @@ Installing the DAPPF framework into your project is a fairly staightforward proc
 
 #### 1. Download the source code
 The first step is to clone the DAPPF repository into a folder within your project. This can be either the root folder or its own directory
-(which is preffered for better organization).
+(which is preferred for better organization).
 
 #### 2. Include the Framework Header
 The second step is to add include the header file `dappf.h` into your main project file or wherever you need to access/use the framework. This will enable you to use the
