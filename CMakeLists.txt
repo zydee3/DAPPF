@@ -1,4 +1,4 @@
-project(Dappf)
+project(Dappf C CXX)
 set(CMAKE_CXX_STANDARD 20)
 cmake_minimum_required(VERSION 3.19)
 
@@ -36,9 +36,6 @@ add_library(
 
         framework/data/packet/packet_processing.h
         framework/data/packet/packet_processing.cpp
-
-        framework/test/unit_test_compression.h
-        framework/test/unit_test_compression.cpp
 
         framework/net/connection.h
         framework/net/connection.cpp
@@ -113,6 +110,11 @@ add_library(
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)
+
+# for the threading capability
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+target_link_libraries (Dappf ${CMAKE_THREAD_LIBS_INIT})
 
 # link framework to project
 target_link_libraries(Dappf lib)
