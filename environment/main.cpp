@@ -2,9 +2,9 @@
 #include <cmath>
 #include <signal.h>
 #include "../framework/dappf.h"
-#include "../framework/data/Compression.h"
-#include "../framework/security/packet_cipher.h"
-#include "../framework/meta/event_listeners.h"
+#include "../framework/data/packet/packet_writer.h"
+#include "../framework/data/packet/packet_reader.h"
+#include "../framework/meta/event_listeners/on_packet_received.h"
 
 void interrupt_handler(int s) {
     std::cout << "terminating" << std::endl;
@@ -20,26 +20,27 @@ uint16_t strtouint16(char number[]) {
     return num;
 }
 
-void receive(dappf::meta::packet_reader *reader) {
+void receive(dappf::data::packet::packet_reader *reader) {
     std::cout << reader->decode_string(reader->remaining()) << std::endl;
 }
 
 [[noreturn]] int main(int argc, char **argv) {
-    dappf::meta::packet_writer *packet = new dappf::meta::packet_writer; // this works when it's here, but not just before the while loop TODO: figure it out
-    dappf::Dappf *dappf_handle;
+    dappf::data::packet::packet_writer *packet = new dappf::data::packet::packet_writer; // this works when it's here, but not just before the while loop TODO: figure it out
 
-    dappf::meta::event_listeners::set_on_packet_received_event_listener(receive);
+
+    dappf::data::event_listeners::on_packet_received::set(
+            reinterpret_cast<std::function<void(dappf::data::packet::packet_reader *)> *>(receive));
 
     if (argc == 2) {
         uint16_t listen_port = strtouint16(argv[1]);
 
-        dappf_handle = new dappf::Dappf(listen_port);
+        dappf::init(listen_port);
     } else {
         std::string address(argv[1]);
         uint16_t connect_port = strtouint16(argv[2]);
         uint16_t listen_port = strtouint16(argv[3]);
 
-        dappf_handle = new dappf::Dappf(address, connect_port, listen_port);
+        dappf::init(address, connect_port, listen_port);
     }
 
     // setup the signal handler so that we can quit gracefully
@@ -58,7 +59,7 @@ void receive(dappf::meta::packet_reader *reader) {
 
         try {
             packet->encode_string(message);
-            dappf_handle->broadcast(packet);
+            dappf::broadcast(packet);
             packet->clear();
         } catch (std::runtime_error e) {
             std::cout << e.what() << std::endl;
