@@ -11,7 +11,7 @@
 #include "../../constants.h"
 #include "../event_listeners/on_internal_error.h"
 
-namespace dappf::meta::handlers {
+namespace dappf::data::handlers {
 
     class handler {
     private:

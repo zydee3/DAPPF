@@ -1,21 +1,18 @@
 //
-// Created by Vincent Tan on 11/20/21.
+// Created by Vincent Tan on 11/29/21.
 //
 
 #ifndef DAPPF_UNIT_TEST_H
 #define DAPPF_UNIT_TEST_H
 
+#include <string>
+#include "../constants.h"
+#include "../utility/log.h"
+
 namespace dappf::test {
-
     class unit_test {
-    public:
-        enum test_result {
-            no_test, failed, success
-        };
-
-        virtual test_result test_1();
-        virtual test_result test_2();
-        virtual test_result test_3();
+    protected:
+        static void display_test_result(std::string, bool);
     };
 }
 

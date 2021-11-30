@@ -4,14 +4,8 @@
 
 #include "unit_test.h"
 
-dappf::test::unit_test::test_result dappf::test::unit_test::test_1() {
-    return dappf::test::unit_test::no_test;
-}
-
-dappf::test::unit_test::test_result dappf::test::unit_test::test_2() {
-    return dappf::test::unit_test::no_test;
-}
-
-dappf::test::unit_test::test_result dappf::test::unit_test::test_3() {
-    return dappf::test::unit_test::no_test;
+void dappf::test::unit_test::display_test_result(std::string test_name, bool success) {
+    std::string test_result = (success ? "SUCCESS" : "FAILED");
+    std::string message = "TEST " + test_name + "       " + test_result;
+    dappf::utility::log::info(message);
 }

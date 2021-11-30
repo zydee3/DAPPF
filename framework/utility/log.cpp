@@ -28,3 +28,10 @@ void dappf::utility::log::cout_hex_array(int8_t* a, int32_t length) {
     }
     std::cout << std::endl;
 }
+
+void dappf::utility::log::info(std::string message) {
+    char s[100];
+    time_t t = time(0);
+    strftime(s, 100, "%a %m.%d.%Y %I:%M:%S", localtime(&t));
+    std::cout << "[INFO - " << s << "] " << message << std::endl;
+}

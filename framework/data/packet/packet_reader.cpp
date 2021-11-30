@@ -11,7 +11,7 @@
  * @param a The bytes to be read.
  * @param length The number of bytes that are present inside of parameter a.
  */
-dappf::meta::packet::packet_reader::packet_reader(int8_t* a, int32_t length) {
+dappf::data::packet::packet_reader::packet_reader(int8_t* a, int32_t length) {
     position = 0;
     packet = a;
     this->length = length;
@@ -20,7 +20,7 @@ dappf::meta::packet::packet_reader::packet_reader(int8_t* a, int32_t length) {
 /**
  * Destructor to release the buffer holding the array of bytes.
  */
-dappf::meta::packet::packet_reader::~packet_reader() {
+dappf::data::packet::packet_reader::~packet_reader() {
     delete packet;
 }
 
@@ -29,7 +29,7 @@ dappf::meta::packet::packet_reader::~packet_reader() {
  * Otherwise, the position is moved forward by the number of bytes to be consumed.
  * @param num_bytes The number of bytes to be consumed.
  */
-void dappf::meta::packet::packet_reader::check_and_shift(int32_t num_bytes) {
+void dappf::data::packet::packet_reader::check_and_shift(int32_t num_bytes) {
     std::string error = invalid_read_size_error + "attempt: " + std::to_string(num_bytes) + ", actual: " + std::to_string(remaining());
     if(position + num_bytes > length)
         throw std::logic_error(error);
@@ -41,7 +41,7 @@ void dappf::meta::packet::packet_reader::check_and_shift(int32_t num_bytes) {
  * Reads and consumes a single byte from the packet.
  * @return Byte consumed as an int8_t.
  */
-int8_t dappf::meta::packet::packet_reader::decode_1() {
+int8_t dappf::data::packet::packet_reader::decode_1() {
     check_and_shift(1);
     return (0xff & packet[position - 1]);
 }
@@ -50,7 +50,7 @@ int8_t dappf::meta::packet::packet_reader::decode_1() {
  * Reads and consumes two bytes from the packet.
  * @return Two bytes consumed as an int16_t.
  */
-int16_t dappf::meta::packet::packet_reader::decode_2() {
+int16_t dappf::data::packet::packet_reader::decode_2() {
     int32_t num_bytes = 2;
     check_and_shift(num_bytes);
     int32_t value = 0;
@@ -63,7 +63,7 @@ int16_t dappf::meta::packet::packet_reader::decode_2() {
  * Reads and consumes 4 bytes from the packet.
  * @return Four bytes consumed as an int32_t.
  */
-int32_t dappf::meta::packet::packet_reader::decode_4() {
+int32_t dappf::data::packet::packet_reader::decode_4() {
     int32_t num_bytes = 4;
     check_and_shift(num_bytes);
     int32_t value = 0;
@@ -76,7 +76,7 @@ int32_t dappf::meta::packet::packet_reader::decode_4() {
  * Reads and consumes 8 bytes from the packet.
  * @return Eight bytes consumed as an int64_t.
  */
-int64_t dappf::meta::packet::packet_reader::decode_8() {
+int64_t dappf::data::packet::packet_reader::decode_8() {
     int32_t num_bytes = 8;
     check_and_shift(num_bytes);
     int64_t value = 0;
@@ -91,11 +91,11 @@ int64_t dappf::meta::packet::packet_reader::decode_8() {
  * @param num_chars
  * @return
  */
-std::string dappf::meta::packet::packet_reader::decode_string(int32_t num_chars) {
+std::string dappf::data::packet::packet_reader::decode_string(int32_t num_chars) {
     check_and_shift(num_chars);
 
     std::string value = "";
-    for(int32_t i = position; i < position+num_chars; i++){
+    for(int32_t i = position-num_chars; i < position; i++){
         value.push_back(packet[i]);
     }
 
@@ -106,7 +106,7 @@ std::string dappf::meta::packet::packet_reader::decode_string(int32_t num_chars)
  * The number of bytes remaining that can be read and consumed.
  * @return Number of bytes remaining that can be read and consumed.
  */
-int32_t dappf::meta::packet::packet_reader::remaining() {
+int32_t dappf::data::packet::packet_reader::remaining() {
     return length - position;
 }
 
@@ -114,6 +114,6 @@ int32_t dappf::meta::packet::packet_reader::remaining() {
  * Returns the original packet being interfaced.
  * @return packet
  */
-int8_t* dappf::meta::packet::packet_reader::get_packet(){
+int8_t* dappf::data::packet::packet_reader::get_packet(){
     return packet;
 }

@@ -28,9 +28,6 @@ add_library(
         framework/data/packet/packet_compression.h
         framework/data/packet/packet_compression.cpp
 
-        framework/test/unit_test_compression.h
-        framework/test/unit_test_compression.cpp
-
         framework/net/connection.h
         framework/net/connection.cpp
 
@@ -92,15 +89,15 @@ add_library(
         framework/data/packet/packet_validation.cpp
         framework/data/packet/packet_validation.h
 
-        framework/test/unit_test.cpp
-        framework/test/unit_test.h
-
         framework/meta/spooler/predictor.cpp
         framework/meta/spooler/predictor.h
 
         framework/meta/spooler/spooler.cpp
         framework/meta/spooler/spooler.h
-)
+
+        framework/test/unit_test_packet.cpp
+        framework/test/unit_test_packet.h
+        framework/test/unit_test.cpp framework/test/unit_test.h)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)

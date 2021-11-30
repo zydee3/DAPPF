@@ -4,14 +4,14 @@
 
 #include "predictor.h"
 
-std::function<std::vector<int>(int)>* dappf::meta::spooler::predictor::handle;
+std::function<std::vector<int>(int)>* dappf::data::spooler::predictor::handle;
 
 /**
  * Returns a new pair with a value being parameter value and an occurrence being 1
  * @param value Value of pair.left
  * @return pair (value, 1)
  */
-std::pair<int, int> dappf::meta::spooler::predictor::get_new_pair_entry(int value) {
+std::pair<int, int> dappf::data::spooler::predictor::get_new_pair_entry(int value) {
     std::pair<int, int> new_pair_entry;
     new_pair_entry.first = value;
     new_pair_entry.second = 1;
@@ -24,7 +24,7 @@ std::pair<int, int> dappf::meta::spooler::predictor::get_new_pair_entry(int valu
  * @param initial_value Value of vector[0].left
  * @return vector {pair (initial_value, 1) }
  */
-std::vector<std::pair<int, int>> dappf::meta::spooler::predictor::get_new_vector_entry(int initial_value) {
+std::vector<std::pair<int, int>> dappf::data::spooler::predictor::get_new_vector_entry(int initial_value) {
     std::vector<std::pair<int, int>> new_vector_entry;
     new_vector_entry.push_back(get_new_pair_entry(initial_value));
     return new_vector_entry;
@@ -39,7 +39,7 @@ std::vector<std::pair<int, int>> dappf::meta::spooler::predictor::get_new_vector
  * @param key
  * @param value
  */
-void dappf::meta::spooler::predictor::increment(int key, int value) {
+void dappf::data::spooler::predictor::increment(int key, int value) {
     std::map<int, std::vector<std::pair<int, int>>>::iterator map_entry = references.find(key);
 
     if (map_entry == references.end()) {
@@ -75,7 +75,7 @@ void dappf::meta::spooler::predictor::increment(int key, int value) {
  * @param key The value which the parameter value is being associated to
  * @param value The value which key is being associated with.
  */
-void dappf::meta::spooler::predictor::decrement(int key, int value) {
+void dappf::data::spooler::predictor::decrement(int key, int value) {
     std::map<int, std::vector<std::pair<int, int>>>::iterator map_entry = references.find(key);
     std::vector<std::pair<int, int>> value_vector = (*map_entry).second;
 
@@ -99,7 +99,7 @@ void dappf::meta::spooler::predictor::decrement(int key, int value) {
  * value in the last k elements.
  * @param value Newly inserted value into previously seen values vector
  */
-void dappf::meta::spooler::predictor::associate(int value) {
+void dappf::data::spooler::predictor::associate(int value) {
     int upper_bound = previous_values.size();
     int lower_bound = std::max(0, upper_bound - max_lookback);
 
@@ -113,7 +113,7 @@ void dappf::meta::spooler::predictor::associate(int value) {
  * by decrementing the occurrence in the vector of lookback values
  * @param value
  */
-void dappf::meta::spooler::predictor::unassociate(int value) {
+void dappf::data::spooler::predictor::unassociate(int value) {
     for (int i = 0; i < lookback_values.size(); i++) {
         decrement(lookback_values[i], value);
     }
@@ -124,7 +124,7 @@ void dappf::meta::spooler::predictor::unassociate(int value) {
  * to the vector of lookback values. This is so we can unassociate
  * E from the k-range of numbers prior.
  */
-void dappf::meta::spooler::predictor::move() {
+void dappf::data::spooler::predictor::move() {
     lookback_values.push_back(previous_values[0]);
     previous_values.erase(previous_values.begin());
     if (lookback_values.size() >= max_lookback) {
@@ -170,13 +170,13 @@ void dappf::meta::spooler::predictor::move() {
  **/
 
 /**
- * Required for dappf::meta::spooler::predictor::predict(int) to work. Inserts a
+ * Required for dappf::data::spooler::predictor::predict(int) to work. Inserts a
  * value into a list of previously seen values. See pseudo code above current function
- * or the documentation for dappf::meta::spooler::predictor::predict(int) for an in
+ * or the documentation for dappf::data::spooler::predictor::predict(int) for an in
  * depth look at how the process works for inserting and predicting
  * @param value
  */
-void dappf::meta::spooler::predictor::insert(int value) {
+void dappf::data::spooler::predictor::insert(int value) {
     if(!dappf::constants::use_spooler){
         return;
     }
@@ -192,7 +192,7 @@ void dappf::meta::spooler::predictor::insert(int value) {
 
 /**
  * This predict only works given a set of data accumulated by values inserted
- * through dappf::meta::spooler::predictor::insert(int). Using a k-range (lookback),
+ * through dappf::data::spooler::predictor::insert(int). Using a k-range (lookback),
  * the predictor determines a value which represents how likely a future number is to
  * appear given the history. Everytime a value is inserted, the k values before the current
  * value are associated to the current value. This association is used to determine the
@@ -203,7 +203,7 @@ void dappf::meta::spooler::predictor::insert(int value) {
  * @param key
  * @return
  */
-std::vector<int> dappf::meta::spooler::predictor::predict(int key) {
+std::vector<int> dappf::data::spooler::predictor::predict(int key) {
     std::vector<int> predictions;
 
     if(dappf::constants::use_spooler) {
@@ -229,17 +229,17 @@ std::vector<int> dappf::meta::spooler::predictor::predict(int key) {
 
 /**
  * Sets function pointer to handle for predicting potential future values
- * @return dappf::meta::spooler::predictor::handle
+ * @return dappf::data::spooler::predictor::handle
  */
-void dappf::meta::spooler::predictor::set(std::function<std::vector<int>(int)>* _handle) {
+void dappf::data::spooler::predictor::set(std::function<std::vector<int>(int)>* _handle) {
     handle = _handle;
 }
 
 /**
  * Returns function pointer to handle for predicting potential future values
- * @return dappf::meta::spooler::predictor::handle
+ * @return dappf::data::spooler::predictor::handle
  */
-std::function<std::vector<int>(int)>* dappf::meta::spooler::predictor::get() {
+std::function<std::vector<int>(int)>* dappf::data::spooler::predictor::get() {
     return handle;
 }
 

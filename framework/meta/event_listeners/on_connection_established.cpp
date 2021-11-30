@@ -4,12 +4,12 @@
 
 #include "on_connection_established.h"
 
-std::function<void(std::string, int)>* dappf::meta::event_listeners::on_connection_established::handle;
+std::function<void(std::string, int)>* dappf::data::event_listeners::on_connection_established::handle;
 
-void dappf::meta::event_listeners::on_connection_established::set(std::function<void(std::string, int)>* _handle) {
+void dappf::data::event_listeners::on_connection_established::set(std::function<void(std::string, int)>* _handle) {
     handle = _handle;
 }
 
-std::function<void(std::string, int)> *dappf::meta::event_listeners::on_connection_established::get() {
+std::function<void(std::string, int)> *dappf::data::event_listeners::on_connection_established::get() {
     return handle;
 }

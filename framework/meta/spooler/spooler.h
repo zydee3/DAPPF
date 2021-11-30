@@ -15,10 +15,10 @@
 #include "../../constants.h"
 #include "../../data/storage/cache.h"
 
-namespace dappf::meta::spooler {
+namespace dappf::data::spooler {
     class spooler {
     private:
-        dappf::meta::handlers::handler* fetch_handler(int);
+        dappf::data::handlers::handler* fetch_handler(int);
     public:
         void spool(std::string, int);
     };

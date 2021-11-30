@@ -87,7 +87,7 @@ rotr32d (argtype v,
 // * Encrypts the contents of a packet using Caesar's cipher
 // * @param packet is the packet to be encrypted
 // */
-//void dappf::meta::packet_cipher::encrypt(std::vector<int8_t> *packet) {
+//void dappf::data::packet_cipher::encrypt(std::vector<int8_t> *packet) {
 //    std::for_each(packet->begin(), packet->end(), _encrypt);
 //}
 //
@@ -95,7 +95,7 @@ rotr32d (argtype v,
 // * Helper function for packet_cipher::encrypt()
 // * @param current_byte is the byte to be encrypted
 // */
-//void dappf::meta::packet_cipher::_encrypt(int8_t *current_byte) {
+//void dappf::data::packet_cipher::_encrypt(int8_t *current_byte) {
 //    *current_byte = *current_byte << BIT_SHIFT;
 //}
 
