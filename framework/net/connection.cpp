@@ -29,7 +29,9 @@ int create_client_socket(std::string address, uint16_t port) {
     int clientfd = socket(AF_INET, SOCK_STREAM, 0);
     if (clientfd < 0) {
         std::string error_str = "couldn't open socket";
-        (*dappf::meta::event_listeners::on_internal_error::get())(error_str);
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -40,7 +42,9 @@ int create_client_socket(std::string address, uint16_t port) {
     addr.sin_port = htons(port);
     if (connect(clientfd, (struct sockaddr*) &addr, sizeof addr)) {
         std::string error_str = "couldn't connect to target";
-        (*dappf::meta::event_listeners::on_internal_error::get())(error_str);
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
         throw std::runtime_error(error_str);
     }
     return clientfd;
@@ -57,14 +61,18 @@ int create_listen_socket(uint16_t port) {
     int listenfd = socket(AF_INET, SOCK_STREAM, 0);
     if (listenfd < 0) {
         std::string error_str = "couldn't open socket";
-        (*dappf::meta::event_listeners::on_internal_error::get())(error_str);
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
         throw std::runtime_error(error_str);
     }
 
     int dummy = 1;
     if (setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &dummy, sizeof(int)) < 0) {
         std::string error_str = "couldn't set socket options";
-        (*dappf::meta::event_listeners::on_internal_error::get())(error_str);
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -74,13 +82,17 @@ int create_listen_socket(uint16_t port) {
     addr.sin_port = htons(port);
     if (bind(listenfd, (struct sockaddr*)&addr, sizeof addr) < 0) {
         std::string error_str = "couldn't bind port";
-        (*dappf::meta::event_listeners::on_internal_error::get())(error_str);
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
         throw std::runtime_error(error_str);
     }
 
     if (listen(listenfd, 500) < 0) {
         std::string error_str = "couldn't listen to socket";
-        (*dappf::meta::event_listeners::on_internal_error::get())(error_str);
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -99,10 +111,11 @@ void listen_connection(int connfd, std::string address) {
         int32_t length_read_in = read(connfd, buffer, dappf::connection::BUFFER_SIZE);
         if (length_read_in == 0) break;
 
-        (*dappf::meta::event_listeners::on_packet_received::get())(dappf::meta::packet::processing::unwrap(buffer, length_read_in));
+        dappf::data::packet::processing::receive(buffer, length_read_in);
     }
 
-    (*dappf::meta::event_listeners::on_connection_dropped::get())(address);
+    auto on_connection_dropped = dappf::data::event_listeners::on_connection_dropped::get();
+    if (on_connection_dropped) (*on_connection_dropped)(address);
 }
 
 /**
@@ -136,15 +149,20 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
         int connfd = accept(listenfd, &incoming_address, &address_length);
         if (connfd < 0) {
             // not fatal, so just report, no error throwing
-            (*dappf::meta::event_listeners::on_internal_error::get())("tried to accept connection, but failed");
+            auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+            if (on_internal_error) (*on_internal_error)("tried to accept connection, but failed");
         } else {
             // extracting address
             sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
             std::string address(inet_ntoa(addr_in->sin_addr));
 
-            (*dappf::meta::event_listeners::on_connection_request::get())(address);
+            auto on_connection_request = dappf::data::event_listeners::on_connection_request::get();
+            if (on_connection_request) (*on_connection_request)(address);
+
             add_connection(connections, address, connfd);
-            (*dappf::meta::event_listeners::on_connection_established::get())(address);
+
+            auto on_connection_established = dappf::data::event_listeners::on_connection_established::get();
+            if (on_connection_established) (*on_connection_established)(address);
         }
     }
 }
@@ -187,7 +205,8 @@ void dappf::connection::broadcast_message(std::vector<conn> *connections, int8_t
         write(connection.connfd, message, length);
     }
 
-    (*dappf::meta::event_listeners::on_packet_sent::get())(message, length);
+    auto on_packet_sent = dappf::data::event_listeners::on_packet_sent::get();
+    if (on_packet_sent) (*on_packet_sent)(message, length);
 }
 
 /**
