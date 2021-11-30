@@ -10,6 +10,12 @@ add_library(
         framework/dappf.h
         framework/dappf.cpp
 
+        framework/meta/async_wrappers/message_counter.h
+        framework/meta/async_wrappers/message_counter.cpp
+
+        framework/meta/async_wrappers/message_id_tracker.h
+        framework/meta/async_wrappers/message_id_tracker.cpp
+
         framework/data/packet/packet_writer.h
         framework/data/packet/packet_writer.cpp
 
@@ -27,6 +33,9 @@ add_library(
 
         framework/data/packet/packet_compression.h
         framework/data/packet/packet_compression.cpp
+
+        framework/data/packet/packet_processing.h
+        framework/data/packet/packet_processing.cpp
 
         framework/test/unit_test_compression.h
         framework/test/unit_test_compression.cpp
