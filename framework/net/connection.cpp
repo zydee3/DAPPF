@@ -3,13 +3,20 @@
 //
 
 #include "connection.h"
-#include <iostream>
 #include <string>
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <cstring>
 #include <unistd.h>
+
+#include "../data/packet/packet_processing.h"
+#include "../meta/event_listeners/on_packet_received.h"
+#include "../meta/event_listeners/on_packet_sent.h"
+#include "../meta/event_listeners/on_internal_error.h"
+#include "../meta/event_listeners/on_connection_request.h"
+#include "../meta/event_listeners/on_connection_established.h"
+#include "../meta/event_listeners/on_connection_dropped.h"
 
 /**
  * Creates a socket for connecting to a server, listening on the specified port number.
@@ -21,7 +28,11 @@
 int create_client_socket(std::string address, uint16_t port) {
     int clientfd = socket(AF_INET, SOCK_STREAM, 0);
     if (clientfd < 0) {
-        throw std::runtime_error("couldn't open socket");
+        std::string error_str = "couldn't open socket";
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
+        throw std::runtime_error(error_str);
     }
 
     struct sockaddr_in addr;
@@ -30,7 +41,11 @@ int create_client_socket(std::string address, uint16_t port) {
     addr.sin_addr.s_addr = inet_addr(address.c_str());
     addr.sin_port = htons(port);
     if (connect(clientfd, (struct sockaddr*) &addr, sizeof addr)) {
-        throw std::runtime_error("couldn't connect to target");
+        std::string error_str = "couldn't connect to target";
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
+        throw std::runtime_error(error_str);
     }
     return clientfd;
 }
@@ -45,12 +60,20 @@ int create_listen_socket(uint16_t port) {
     struct sockaddr_in addr;
     int listenfd = socket(AF_INET, SOCK_STREAM, 0);
     if (listenfd < 0) {
-        throw std::runtime_error("couldn't open socket");
+        std::string error_str = "couldn't open socket";
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
+        throw std::runtime_error(error_str);
     }
 
     int dummy = 1;
     if (setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &dummy, sizeof(int)) < 0) {
-        throw std::runtime_error("couldn't set socket options");
+        std::string error_str = "couldn't set socket options";
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
+        throw std::runtime_error(error_str);
     }
 
     std::memset(&addr, 0, sizeof addr);
@@ -58,11 +81,19 @@ int create_listen_socket(uint16_t port) {
     addr.sin_addr.s_addr = htons(INADDR_ANY);
     addr.sin_port = htons(port);
     if (bind(listenfd, (struct sockaddr*)&addr, sizeof addr) < 0) {
-        throw std::runtime_error("couldn't bind port");
+        std::string error_str = "couldn't bind port";
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
+        throw std::runtime_error(error_str);
     }
 
     if (listen(listenfd, 500) < 0) {
-        throw std::runtime_error("couldn't listen to socket");
+        std::string error_str = "couldn't listen to socket";
+
+        auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+        if (on_internal_error) (*on_internal_error)(error_str);
+        throw std::runtime_error(error_str);
     }
 
     return listenfd;
@@ -73,13 +104,18 @@ int create_listen_socket(uint16_t port) {
  * @param connection the connection to listen to
  * @param handler the function that should be called when data is received
  */
-[[noreturn]] void listen_connection(int connfd, void (*handler)(int8_t *, int32_t)) {
+void listen_connection(int connfd, std::string address) {
     int8_t *buffer = (int8_t *) malloc(dappf::connection::BUFFER_SIZE);
 
     while (true) {
         int32_t length_read_in = read(connfd, buffer, dappf::connection::BUFFER_SIZE);
-        handler(buffer, length_read_in);
+        if (length_read_in == 0) break;
+
+        dappf::data::packet::processing::receive(buffer, length_read_in);
     }
+
+    auto on_connection_dropped = dappf::data::event_listeners::on_connection_dropped::get();
+    if (on_connection_dropped) (*on_connection_dropped)(address);
 }
 
 /**
@@ -89,8 +125,8 @@ int create_listen_socket(uint16_t port) {
  * @param connfd the file descriptor of the new connection
  * @param handler the function that should be called when data is received
  */
-void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd, void (*handler)(int8_t *, int32_t)) {
-    std::thread *thread = new std::thread(listen_connection, connfd, handler);
+void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd) {
+    std::thread *thread = new std::thread(listen_connection, connfd, address);
     connections->push_back(dappf::connection::conn { address, connfd, thread });
 }
 
@@ -101,7 +137,7 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
  * @param port the port on which to listen for incoming connections
  * @param handler the function that should be called when data is received
  */
-[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port, void (*handler)(int8_t *, int32_t)) {
+[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port) {
     int listenfd = create_listen_socket(port);
 
     while (true) {
@@ -112,16 +148,30 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
 
         int connfd = accept(listenfd, &incoming_address, &address_length);
         if (connfd < 0) {
-            // not fatal, so just print, no error throwing
-            std::cerr << "tried to accept connection, but failed" << std::endl;
+            // not fatal, so just report, no error throwing
+            auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
+            if (on_internal_error) (*on_internal_error)("tried to accept connection, but failed");
         } else {
             // extracting address
             sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
             std::string address(inet_ntoa(addr_in->sin_addr));
 
-            add_connection(connections, address, connfd, handler);
+            auto on_connection_request = dappf::data::event_listeners::on_connection_request::get();
+            if (on_connection_request) (*on_connection_request)(address);
+
+            add_connection(connections, address, connfd);
+
+            auto on_connection_established = dappf::data::event_listeners::on_connection_established::get();
+            if (on_connection_established) (*on_connection_established)(address);
         }
     }
+}
+
+dappf::connection::network dappf::connection::start_network(uint16_t listen_port) {
+    std::vector<conn> *connections = new std::vector<conn>;
+    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port);
+
+    return network { listen_port, connections, thread_listening_for_incoming_connections };
 }
 
 /**
@@ -132,18 +182,16 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
  * @param handler the function that should be called when data is received
  * @return the list of active connections, initialized with a single element
  */
-dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t)) {
+dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port) {
     // in order for a node to connect, it must already have the address/connect_port of a node in the network
     // how it obtains that will be outside the framework's responsibilities
 
-    std::vector<conn> *connections = new std::vector<conn>;
-
-    std::thread *thread_listening_for_incoming_connections = new std::thread(listen_for_connections, connections, listen_port, handler);
+    network net = start_network(listen_port);
 
     int clientfd = create_client_socket(address, connect_port);
-    add_connection(connections, address, clientfd, handler);
+    add_connection(net.connections, address, clientfd);
 
-    return network { connections, thread_listening_for_incoming_connections };
+    return net;
 }
 
 /**
@@ -156,6 +204,9 @@ void dappf::connection::broadcast_message(std::vector<conn> *connections, int8_t
     for (conn connection : *connections) {
         write(connection.connfd, message, length);
     }
+
+    auto on_packet_sent = dappf::data::event_listeners::on_packet_sent::get();
+    if (on_packet_sent) (*on_packet_sent)(message, length);
 }
 
 /**
@@ -165,7 +216,7 @@ void dappf::connection::broadcast_message(std::vector<conn> *connections, int8_t
 void dappf::connection::leave_network(std::vector<conn> *connections) {
     for (conn connection : *connections) {
         close(connection.connfd);
-        delete(connection.connection_thread);
+        delete connection.connection_thread;
     }
 
     free(connections);

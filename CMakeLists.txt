@@ -1,4 +1,4 @@
-project(Dappf)
+project(Dappf C CXX)
 set(CMAKE_CXX_STANDARD 20)
 cmake_minimum_required(VERSION 3.19)
 
@@ -9,6 +9,12 @@ add_library(
         # files to be compiled
         framework/dappf.h
         framework/dappf.cpp
+
+        framework/meta/async_wrappers/message_counter.h
+        framework/meta/async_wrappers/message_counter.cpp
+
+        framework/meta/async_wrappers/message_id_tracker.h
+        framework/meta/async_wrappers/message_id_tracker.cpp
 
         framework/data/packet/packet_writer.h
         framework/data/packet/packet_writer.cpp
@@ -27,6 +33,9 @@ add_library(
 
         framework/data/packet/packet_compression.h
         framework/data/packet/packet_compression.cpp
+
+        framework/data/packet/packet_processing.h
+        framework/data/packet/packet_processing.cpp
 
         framework/net/connection.h
         framework/net/connection.cpp
@@ -89,18 +98,23 @@ add_library(
         framework/data/packet/packet_validation.cpp
         framework/data/packet/packet_validation.h
 
+        framework/test/unit_test.cpp
+        framework/test/unit_test.h
+
         framework/meta/spooler/predictor.cpp
         framework/meta/spooler/predictor.h
 
         framework/meta/spooler/spooler.cpp
         framework/meta/spooler/spooler.h
-
-        framework/test/unit_test_packet.cpp
-        framework/test/unit_test_packet.h
-        framework/test/unit_test.cpp framework/test/unit_test.h)
+)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)
+
+# for the threading capability
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+target_link_libraries (Dappf ${CMAKE_THREAD_LIBS_INIT})
 
 # link framework to project
 target_link_libraries(Dappf lib)
