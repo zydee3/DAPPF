@@ -31,7 +31,7 @@ Encryption is a feature that allows users to encrypt packets as they are being s
 it prevents outside forces or malicious code from being able to access information that they are not privy to. By default, the framework has a simple encrpytion algorithm,
 but if you would prefer to use your own method of packet encryption, you can override the encryption functions `set_encryptor()` and `set_decryptor()`. Changing only one
 of these could lead to serious errors due to conflicts in the encryption and decryption algorithms. If these are not paired properly, data will not be recoverable once
-encrypted. The ability to modify the encrpytion algorithms increases the flexibility and security of our framework.
+encrypted. The ability to modify the encryption algorithms increases the flexibility and security of our framework.
 
 #### 4. Packet Compression
 
