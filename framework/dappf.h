@@ -7,11 +7,8 @@
 
 
 #include <cstdint>
-#include <unordered_set>
 #include "data/packet/packet_writer.h"
 #include "net/connection.h"
-#include "meta/async_wrappers/message_id_tracker.h"
-#include "meta/async_wrappers/message_counter.h"
 
 namespace dappf {
     enum state {
@@ -23,17 +20,14 @@ namespace dappf {
     static state internal_state = state::stopped;
     static uint16_t local_port;
 
-    class Dappf {
-    private:
-        connection::network net;
+    static connection::network net;
 
-    public:
-        Dappf(uint16_t listen_port);
-        Dappf(std::string address, uint16_t connect_port, uint16_t listen_port);
+    void init(uint16_t listen_port);
+    void init(std::string address, uint16_t connect_port, uint16_t listen_port);
 
-        void broadcast(meta::packet::packet_writer *packet);
-        void send(meta::packet::packet_writer *packet, std::string address, uint16_t target_port);
-    };
+    void broadcast(data::packet::packet_writer *packet);
+    void broadcast(int8_t *data, int32_t length);
+    void send(data::packet::packet_writer *packet, std::string address, uint16_t target_port);
 }
 
 
