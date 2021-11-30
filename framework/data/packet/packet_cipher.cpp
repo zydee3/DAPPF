@@ -10,6 +10,9 @@
 #define BIT_SHIFT 3
 
 
+std::function<void(int8_t*, int32_t)>* dappf::data::packet::packet_cipher::encryptor;
+std::function<void(int8_t*, int32_t)>* dappf::data::packet::packet_cipher::decryptor;
+
 /*
  * BEGIN FOREIGN CODE
  *
@@ -136,17 +139,32 @@ void dappf::data::packet::packet_cipher::decrypt(int8_t *array, int32_t length) 
 }
 
 /**
- * Returns the the function used to encrypt a packet.
- * @return dappf::data::packet::packet_cipher::encrypt(int8_t *, int32_t);
+ * Sets the function pointer used to encrypt a packet.
  */
-auto dappf::data::packet::packet_cipher::get_encryptor() -> std::function<void(int8_t*, int32_t)>{
-    return &dappf::data::packet::packet_cipher::encrypt;
+void dappf::data::packet::packet_cipher::set_encryptor(std::function<void(int8_t *, int32_t)>* handle) {
+    encryptor = handle;
 }
 
 /**
- * Returns the the function used to decrypt a packet.
+ * Returns the function pointer used to encrypt a packet.
+ * @return dappf::data::packet::packet_cipher::encrypt(int8_t *, int32_t);
+ */
+std::function<void(int8_t*, int32_t)>* dappf::data::packet::packet_cipher::get_encryptor(){
+    return encryptor;
+}
+
+/**
+ * Sets the function pointer used to decrypt a packet.
+ */
+void dappf::data::packet::packet_cipher::set_decryptor(std::function<void(int8_t *, int32_t)>* handle) {
+    decryptor = handle;
+}
+
+/**
+ * Returns the function pointer used to decrypt a packet.
  * @return dappf::data::packet::packet_cipher::decrypt(int8_t *, int32_t);
  */
-auto dappf::data::packet::packet_cipher::get_decryptor() -> std::function<void(int8_t*, int32_t)>{
-    return &dappf::data::packet::packet_cipher::decrypt;
+std::function<void(int8_t*, int32_t)>* dappf::data::packet::packet_cipher::get_decryptor(){
+    return decryptor;
 }
+

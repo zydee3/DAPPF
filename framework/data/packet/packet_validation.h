@@ -17,7 +17,6 @@ namespace dappf::data::packet {
 
     public:
         static bool validate_packet(int8_t*, int);
-
     };
 }
 

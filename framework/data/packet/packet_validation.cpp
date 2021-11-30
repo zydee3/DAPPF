@@ -1,4 +1,5 @@
 #include "packet_validation.h"
+#include <iostream>
 
 /**
  * Checks if the char is a valid char present inside the packet header
@@ -9,7 +10,8 @@ bool dappf::data::packet::packet_validation::is_valid_character(char c) {
 
     int lower_bound = (int) '0';
     int upper_bound = (int) '9';
-    return c >= lower_bound && c <= upper_bound;
+
+    return lower_bound <= c && c <= upper_bound;
 
 //    switch(c){
 //        case ':':
@@ -28,19 +30,35 @@ bool dappf::data::packet::packet_validation::is_valid_character(char c) {
  * @param length Number of elements in packet
  * @return True if the entire packet header contains only valid characters, otherwise false
  */
-bool dappf::data::packet::packet_validation::validate_packet(int8_t* packet, int length){
+bool dappf::data::packet::packet_validation::validate_packet(int8_t* packet, int length) {
 
     const int num_bytes_header = dappf::constants::num_bytes_header;
-    if(length < num_bytes_header){
+    if (length < num_bytes_header) {
         return false;
     }
 
-    for(int i = 0; i < num_bytes_header; i++){
-        if(!dappf::data::packet::packet_validation::is_valid_character((char) (*(packet + i)))){
+    // check ipv4 fields
+    for (int i = 0; i < dappf::constants::num_bytes_address; i++) {
+        int current_field = (*(packet + i));
+        if (current_field < 0 || current_field > 9) {
             return false;
         }
     }
 
-  return true;
-}
+    // check the port is within 0 and 32767
+    int pos_port = dappf::constants::pos_port;
+    short port = packet[pos_port] | packet[pos_port + 1] << 8;
+    if (port < 0) {
+        return false;
+    }
 
+    for (int i = dappf::constants::pos_message_id;
+         i < dappf::constants::pos_compression_flag + dappf::constants::num_bytes_compression_flag; i++) {
+        int current_field = (*(packet + i));
+        if (current_field < 0 || current_field > 9) {
+            return false;
+        }
+
+        return true;
+    }
+}

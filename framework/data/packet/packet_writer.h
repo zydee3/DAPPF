@@ -13,7 +13,7 @@
 #include "../../utility/string.h"
 
 
-namespace dappf::data::packet {
+namespace dappf::data   ::packet {
     class packet_writer {
     private:
         std::vector<int8_t>* packet;

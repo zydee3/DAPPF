@@ -8,9 +8,13 @@
 #include <iostream>
 #include <iomanip>
 #include "unit_test.h"
+#include "../constants.h"
 #include "../utility/log.h"
 #include "../data/packet/packet_reader.h"
 #include "../data/packet/packet_writer.h"
+#include "../data/packet/packet_validation.h"
+#include "../data/packet/packet_compression.h"
+#include "../data/packet/packet_cipher.h"
 #include "../utility/log.h"
 
 
@@ -24,8 +28,10 @@ namespace dappf::test {
         static bool test_validation_2();
         static bool test_compression_1();
         static bool test_compression_2();
-        static bool test_cipher_1();
-        static bool test_cipher_2();
+        static bool test_compression_3();
+        static bool test_decompression();
+        static bool test_cipher();
+        static bool test_decipher();
     public:
         static void test();
     };

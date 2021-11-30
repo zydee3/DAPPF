@@ -6,6 +6,9 @@
 #include "../../utility/log.h"
 #include "../../constants.h"
 
+std::function<int(int8_t**, int)>* dappf::data::packet::packet_compression::handle_compress;
+std::function<int(int8_t**, int)>* dappf::data::packet::packet_compression::handle_decompress;
+
 /**
  * Helper function for the public compress function. This function specifically
  * performs only the reduction of bytes using a lossless method. This function
@@ -17,6 +20,10 @@
  */
 std::vector<int8_t>* dappf::data::packet::packet_compression::compress(int8_t* packet, int start, int end){
     std::vector<int8_t>* compressed_bytes = new std::vector<int8_t>();
+
+    for(int i = 0; i < start; i++){
+        compressed_bytes->push_back(packet[i]);
+    }
 
     for(int i = start; i < end; i++){
         int counter = 1;
@@ -64,7 +71,7 @@ int dappf::data::packet::packet_compression::compress(int8_t** packet, int lengt
         // and convert the vector into an array. also, the new packet is no longer
         // needed so we can delete it to prevent any memory leaks. everything we
         // need is inside the vector.
-        delete packet;
+        //delete packet;
 
         // we're using the compressed bytes, so set the flag so the receiver knows
         // the bytes were compressed
@@ -92,15 +99,17 @@ int dappf::data::packet::packet_compression::decompress(int8_t** packet, int len
     // if the only things present are the address and op code or the flag
     // is 0 (false) then theres nothing to decompress.
     if(length <= dappf::constants::num_bytes_header || *(*packet + dappf::constants::pos_compression_flag) == 0) return length;
-    dappf::utility::log::cout_hex_array(*packet, length);
+    //dappf::utility::log::cout_hex_array(*packet, length);
 
     // will hold our uncompressed bytes.
     std::vector<int8_t>* uncompressed_bytes = new std::vector<int8_t>();
 
+    int8_t* p = *packet;
+
     // undo lossless packet_compression
-    for(int i = dappf::constants::num_bytes_header; i < length; i += 2){
-        int num_bytes = *packet[i];
-        int8_t byte = *packet[i+1];
+    for(int i = 0; i < length; i += 2){
+        int num_bytes = p[i];
+        int8_t byte = p[i+1];
 
         for(int j = 0; j < num_bytes; j++){
             uncompressed_bytes->push_back(byte);
@@ -108,9 +117,8 @@ int dappf::data::packet::packet_compression::decompress(int8_t** packet, int len
     }
 
     // we no longer need packet. delete and update it.
-    delete packet;
+    //delete packet;
     *packet = dappf::utility::array::to_array(uncompressed_bytes);
-
     // get the new length
     length = uncompressed_bytes->size();
 
@@ -119,4 +127,20 @@ int dappf::data::packet::packet_compression::decompress(int8_t** packet, int len
     delete uncompressed_bytes;
 
     return length;
+}
+
+void dappf::data::packet::packet_compression::set_compressor(std::function<int(int8_t **, int)>* handle) {
+    handle_compress = handle;
+}
+
+std::function<int(int8_t **, int)> *dappf::data::packet::packet_compression::get_compressor() {
+    return handle_compress;
+}
+
+void dappf::data::packet::packet_compression::set_decompressor(std::function<int(int8_t **, int)>* handle) {
+    handle_decompress = handle;
+}
+
+std::function<int(int8_t **, int)> *dappf::data::packet::packet_compression::get_decompressor() {
+    return handle_decompress;
 }

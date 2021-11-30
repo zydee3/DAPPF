@@ -12,8 +12,10 @@ void dappf::test::unit_test_packet::test() {
     test_validation_2();
     test_compression_1();
     test_compression_2();
-    test_cipher_1();
-    test_cipher_2();
+    test_compression_3();
+    test_decompression();
+    test_cipher();
+    test_decipher();
 }
 
 /**
@@ -112,56 +114,220 @@ bool dappf::test::unit_test_packet::test_decode_exception() {
     }
 
     bool result = was_exception_thrown && result_1 == num_1 && result_2 == num_2;
-    display_test_result("dappf::test::unit_test_packet::test_3()", result);
+    display_test_result("dappf::test::unit_test_packet::test_decode_exception()", result);
+
+    return result;
+}
+
+/**
+ * Tests to see if packet validates a valid packet header.
+ * @return True if result is correct, otherwise false
+ */
+bool dappf::test::unit_test_packet::test_validation_1() {
+    bool expected_result = true;
+
+    // create packet writer
+    dappf::data::packet::packet_writer* writer = new dappf::data::packet::packet_writer();
+
+    // get array of bytes from packet writer
+    int8_t* packet = writer->to_array();
+
+    bool result = dappf::data::packet::packet_validation::validate_packet(packet, writer->length());
+    display_test_result("dappf::test::unit_test_packet::test_validation_1()", result);
+
+    return result;
+}
+
+/**
+ * Tests to see if packet validator correctly determines if
+ * the packet is invalid.
+ * @return True if result is correct, otherwise false
+ */
+bool dappf::test::unit_test_packet::test_validation_2() {
+    int num_bytes_in_header = dappf::constants::num_bytes_header;
+    int8_t* packet = new int8_t[num_bytes_in_header];
+    for(int i = 0; i < num_bytes_in_header; i++){
+        packet[i] = i % 9; // arbitrary values we know are valid
+    }
+
+    // insert an invalid value
+    packet[2] = (int8_t)('}');
+    bool result = dappf::data::packet::packet_validation::validate_packet(packet, num_bytes_in_header);
+    display_test_result("dappf::test::unit_test_packet::test_validation_2()", !result);
+
+    return !result;
+}
+
+/**
+ * Tests if the default compression implementation compresses when applicable.
+ * @return True if result is correct, otherwise false
+ */
+bool dappf::test::unit_test_packet::test_compression_1() {
+    // create packet writer
+    dappf::data::packet::packet_writer* writer = new dappf::data::packet::packet_writer();
+
+    writer->encode_4(0);
+    writer->encode_2(0);
+    writer->encode_8(0);
+    writer->encode_2(0);
+    writer->encode_1(0);
+    writer->encode_8(1);
+    writer->encode_8(1);
+    writer->encode_8(1);
+    writer->encode_8(1);
+
+    // get array of bytes from packet writer
+    int8_t* packet = writer->to_array();
+    int initial_length = writer->length();
+    int compressed_length = dappf::data::packet::packet_compression::compress(&packet, initial_length);
+
+    bool result = compressed_length <= initial_length;
+    display_test_result("dappf::test::unit_test_packet::test_compression_1()", result);
+
+    return result;
+}
+
+/**
+ * Tests if the default compression implementation does not compress
+ * the packet when the packet is unable to be compressed. For example,
+ * when there is no body present in the packet.
+ * @return True if result is correct, otherwise false
+ */
+bool dappf::test::unit_test_packet::test_compression_2() {
+    std::string test_string = "sdlsdjflkjsdlfkjdlsfjldkjfldkjflksjdlf.nvnmvksdvn.,nvkn.n.dfn";
+    // create packet writer
+    dappf::data::packet::packet_writer* writer = new dappf::data::packet::packet_writer();
+    writer->encode_string(test_string);
+
+    // get array of bytes from packet writer
+    int8_t* packet = writer->to_array();
+
+    int compressed_length = dappf::data::packet::packet_compression::compress(&packet, writer->length());
+
+    bool result = compressed_length == writer->length();
+    display_test_result("dappf::test::unit_test_packet::test_compression_2()", result);
+
+    return result;
+}
+
+/**
+ * Tests if the compression properly sets the flag.
+ * @return True if result is correct, otherwise false
+ */
+bool dappf::test::unit_test_packet::test_compression_3() {
+    // using test_compression_2, we know this packet cannot be compressed, thus we see
+    // can check if the flag = 0
+
+    std::string test_string = "sdlsdjflkjsdlfkjdlsfjldkjfldkjflksjdlf.nvnmvksdvn.,nvkn.n.dfn";
+    // create packet writer
+    dappf::data::packet::packet_writer* writer = new dappf::data::packet::packet_writer();
+    writer->encode_string(test_string);
+
+    // get array of bytes from packet writer
+    int8_t* packet = writer->to_array();
+
+    int compressed_length = dappf::data::packet::packet_compression::compress(&packet, writer->length());
+    bool result = packet[dappf::constants::pos_compression_flag] == 0;
+    display_test_result("dappf::test::unit_test_packet::test_compression_3()", result);
+
+    return result;
+}
+
+
+/**
+ * Tests if the array can be properly decompressed
+ * @return True if result is correct, otherwise false
+ */
+bool dappf::test::unit_test_packet::test_decompression() {
+    // using test_compression_1, we know that packet was successfully
+    // compressed. now we check if it can be decompressed.
+
+    // create packet writer
+    dappf::data::packet::packet_writer* writer = new dappf::data::packet::packet_writer();
+
+    writer->encode_4(0);
+    writer->encode_2(0);
+    writer->encode_8(0);
+    writer->encode_2(0);
+    writer->encode_1(0);
+    writer->encode_8(1);
+    writer->encode_8(1);
+    writer->encode_8(1);
+    writer->encode_8(1);
+
+    // get array of bytes from packet writer
+    int8_t* packet = writer->to_array();
+    int initial_length = writer->length();
+    int compressed_length = dappf::data::packet::packet_compression::compress(&packet, initial_length);
+    int final_length = dappf::data::packet::packet_compression::decompress(&packet, compressed_length);
+    bool result = compressed_length <= initial_length && initial_length == final_length + dappf::constants::num_bytes_header;
+    display_test_result("dappf::test::unit_test_packet::test_decompression()", result);
+
     return result;
 }
 
 /**
  *
- * @return
+ * @return True if result is correct, otherwise false
  */
-bool dappf::test::unit_test_packet::test_validation_1() {
-    return false;
+bool dappf::test::unit_test_packet::test_cipher() {
+    // create packet writer
+    dappf::data::packet::packet_writer* writer = new dappf::data::packet::packet_writer();
+    for(int i = 0; i < 9; i++){
+        writer->encode_1(i); // arbitrary value
+    }
+
+    // get array of bytes from packet writer
+    int8_t* packet = writer->to_array();
+    int8_t* copy = writer->to_array();
+    dappf::data::packet::packet_cipher::encrypt(packet, writer->length());
+
+    bool all_elements_same = true;
+
+    for(int i = 0; i < writer->length(); i++){
+        if(copy[i] != packet[i]){
+            all_elements_same = false;
+            break;
+        }
+    }
+
+    display_test_result("dappf::test::unit_test_packet::test_cipher()", !all_elements_same);
+
+    return !all_elements_same;
 }
 
 /**
  *
- * @return
+ * @return True if result is correct, otherwise false
  */
-bool dappf::test::unit_test_packet::test_validation_2() {
-    return false;
+bool dappf::test::unit_test_packet::test_decipher() {
+    // using test_cipher, we know the packet was encrypted
+    // so we can just decrypt it and compare to the original packet
+
+    // create packet writer
+    dappf::data::packet::packet_writer* writer = new dappf::data::packet::packet_writer();
+    for(int i = 0; i < 9; i++){
+        writer->encode_1(i); // arbitrary value
+    }
+
+    // get array of bytes from packet writer
+    int8_t* packet = writer->to_array();
+    int8_t* copy = writer->to_array();
+    dappf::data::packet::packet_cipher::encrypt(packet, writer->length());
+    dappf::data::packet::packet_cipher::decrypt(packet, writer->length());
+
+    bool all_elements_same = true;
+    for(int i = 0; i < writer->length(); i++){
+        if(copy[i] != packet[i]){
+            all_elements_same = false;
+            break;
+        }
+    }
+
+    display_test_result("dappf::test::unit_test_packet::test_decipher()", all_elements_same);
+
+    return all_elements_same;
 }
 
-/**
- *
- * @return
- */
-bool dappf::test::unit_test_packet::test_compression_1() {
-    return false;
-}
-
-/**
- *
- * @return
- */
-bool dappf::test::unit_test_packet::test_compression_2() {
-    return false;
-}
-
-/**
- *
- * @return
- */
-bool dappf::test::unit_test_packet::test_cipher_1() {
-    return false;
-}
-
-/**
- *
- * @return
- */
-bool dappf::test::unit_test_packet::test_cipher_2() {
-    return false;
-}
 
 
