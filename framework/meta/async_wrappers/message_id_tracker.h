@@ -20,7 +20,7 @@ namespace dappf::async_wrappers {
         bool contains(uint64_t);
     };
 
-    MessageIdTracker message_id_tracker;
+    static MessageIdTracker message_id_tracker;
 }
 
 #endif //DAPPF_MESSAGE_ID_TRACKER_H

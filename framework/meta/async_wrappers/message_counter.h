@@ -19,7 +19,7 @@ namespace dappf::async_wrappers {
         uint16_t get_and_increment();
     };
 
-    async_wrappers::MessageCounter message_counter;
+    static async_wrappers::MessageCounter message_counter;
 }
 
 #endif //DAPPF_MESSAGE_COUNTER_H
