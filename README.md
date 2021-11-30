@@ -1,14 +1,14 @@
 # Starting Off
-The project is built in JetBrain's CLion IDE. You should be able to simply open the file and compile straight away. Connect your github so you can make pull requests to the main branch.
+The project is built in JetBrain's CLion IDE. You should be able to simply open the file and compile straight away. Connect your GitHub so you can make pull requests to the main branch.
 
 # Framework
-Within the framework are four main directories which pertains to each layer (1-3) of the framework. The fourth layer is written by the user however the framework provides an interface for interaction between handlers and the framework.
- - Layer 1: Net (Communication Layer)
- - Layer 2: Security
- - Layer 3: Data
- - Layer 4: Handlers (Processing)
+Within the framework are four main directories which pertains to each layer (1-4) of the framework. The fourth layer is written by the user. However, the framework provides an interface for interaction between handlers and the framework.
+ - Layer 1: [Net (Communication Layer)][/net/]
+ - Layer 2: [Security][/security/]
+ - Layer 3: [Data][/data/]
+ - Layer 4: [Meta (Processing)][/meta/]
 
-Within each directory the respective directories are data files. The data file will hold data data to the main files within the module. A data file is like that of an inner class to a parent class. Using a game as an example, an example of data data to Player class is PlayerStats which holds the stats of the player. Meta data allows us to break apart classes into smaller more organized classes in order to premote clean code and precent god classes.
+Within each directory, the respective directories are data files. The data file will hold data data to the main files within the module. A data file is like that of an inner class to a parent class. Using a game as an example, an example of data data to Player class is PlayerStats which holds the stats of the player. Meta data allows us to break apart classes into smaller more organized classes in order to premote clean code and precent god classes.
 
 # Modules Task Sheet
 
@@ -102,5 +102,9 @@ Event listeners provides a series of methods provided to the developer to execut
 [on_connection_dropped.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_connection_dropped.h
 [on_packet_received.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_packet_received.h
 [on_packet_sent.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_packet_sent.h
-[example_usage_packet_reader.cpp]: https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_reader.cpp
-[example_usage_packet_writer.cpp]: https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_writer.cpp
+[example_usage_packet_reader.cpp]: https://github.com/zydee3/DAPPF/blob/master/examples/example_usage_packet_reader.cpp
+[example_usage_packet_writer.cpp]: https://github.com/zydee3/DAPPF/blob/master/examples/example_usage_packet_writer.cpp
+[/data/]: https://github.com/zydee3/DAPPF/blob/master/framework/data
+[/meta/]: https://github.com/zydee3/DAPPF/blob/master/framework/meta
+[/net/]: https://github.com/zydee3/DAPPF/blob/master/framework/net
+[/security/]: https://github.com/zydee3/DAPPF/blob/master/framework/security
