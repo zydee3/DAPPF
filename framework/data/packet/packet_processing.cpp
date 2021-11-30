@@ -17,7 +17,7 @@ dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_
 
     // encrypt
     data::packet::packet_cipher cipher;
-    cipher.get_encryptor()(data, length);
+    (*cipher.get_encryptor())(data, length);
 
     // add metadata
     // [4 bytes for ipv4] [2 bytes for port] [8 bytes for message id] [2 bytes for op code] [1 byte flag for compressed] [body]
@@ -52,7 +52,7 @@ dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_
 
     // encrypt
     packet_cipher cipher;
-    cipher.get_encryptor()(data, length);
+    (*cipher.get_encryptor())(data, length);
 
     // add metadata
     // [4 bytes for ipv4] [2 bytes for port] [8 bytes for message id] [2 bytes for op code] [1 byte flag for compressed] [body]
