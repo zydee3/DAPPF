@@ -36,7 +36,7 @@ encrypted. The ability to modify the encryption algorithms increases the flexibi
 #### 4. Packet Compression
 
 Users will also have the option to implement their own compression algorithms into the framework. By default there is a compression system within DAPPF, but like encryption,
-this can be overridden by the user. In order to do this, both `compress()` and `decompress()` need to be overriden. Changing only one of these could lead to serious
+this can be changed by the user. In order to do this, both `set_compressor()` and `set_decompressor()` need to be called with your own function pointers as arguments. Changing only one of these could lead to serious
 errors due to conflicts in the compression and decompression algorithms. Allowing the user to modify the compression algorithm will allow flexibility between the amount of file
 compression and the speed of the process.
 
