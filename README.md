@@ -1,5 +1,5 @@
 # Starting Off
-The project is built in jetbrain's clion IDE. You should be able to just open the file and compile straight away as the project was set up already for you. Connect your github so you can make pull requests to the main branch.
+The project is built in JetBrain's CLion IDE. You should be able to simply open the file and compile straight away. Connect your github so you can make pull requests to the main branch.
 
 # Framework
 Within the framework are four main directories which pertains to each layer (1-3) of the framework. The fourth layer is written by the user however the framework provides an interface for interaction between handlers and the framework.
@@ -12,34 +12,34 @@ Within each directory the respective directories are data files. The data file w
 
 # Modules Task Sheet
 
-| No.  | Module                                      | Status        | Who     | Completed On    |
-| ---- | ------------------------------------------- | ------------- | ------- | ------- |
-| 1.   | Network Node Connect and Disconnect         | Completed     | Kirill | 11/1 |
-| 2.   | Documentation Site                          | Completed     | Garrett | 11/1 |
-| 3.   | Documentation Github (Readme)               | In Progress   | Vincent | 
-| 4.   | Packet Reader and Writer                    | Completed     | Vincent | 10/23 |
-| 5.   | Packet Compress and Decompress              | Completed     | Vincent | 11/6 |
-| 6.   | Packet Encrypt and Decrypt                  | Completed     | Anthony | 11/2 |
-| 7.   | Data Validator                              | Completed     | Garrett, Vincent | 11/10 |
-| 8.   | Data Cache                                  | In Progress   | ~~Vincent~~ Shishir | |
-| 9.   | Data Spooler                                | Completed     | ~~Shishir~~ Vincent | 11/29 |
-| 10.  | Predictor                                   | Completed     | Vincent | 11/27 |
-| 11.  | Task Pool                                   | Completed     | Anthony, Vincent | 11/29 |
-| 12.  | Delegates                                   | In Progress   | Shishir | |
-| 13.  | Listeners                                   | Completed     | Vincent | 11/6 |
-| 14.  | Handlers                                    | Completed     | Vincent | 11/29 | 
-| 15.  | Example Project                             | In Progress   | Kirill | |
-| 16.  | Combining Modules                           | In Progress   | Vincent | |
+| No.  | Module                                      |    Status     |               Who                | Completed On |
+| :--: | :------------------------------------------ | :-----------: | :------------------------------: | :----------: |
+| 1.   | Network Node Connect and Disconnect         |![][completed] |             Kirill               |    11/1      |
+| 2.   | Documentation Site                          |![][completed] |             Garrett              |    11/1      |
+| 3.   | Documentation Github (Readme)               |   ![][wip]    |             Vincent              |              |
+| 4.   | Packet Reader and Writer                    |![][completed] |             Vincent              |    10/23     |
+| 5.   | Packet Compress and Decompress              |![][completed] |             Vincent              |    11/6      |
+| 6.   | Packet Encrypt and Decrypt                  |![][completed] |             Anthony              |    11/2      |
+| 7.   | Data Validator                              |![][completed] |         Garrett, Vincent         |    11/10     |
+| 8.   | Data Cache                                  |   ![][wip]    | <strike>Vincent</strike> Shishir |              |
+| 9.   | Data Spooler                                |![][completed] | <strike>Shishir</strike> Vincent |    11/29     |
+| 10.  | Predictor                                   |![][completed] |             Vincent              |    11/27     |
+| 11.  | Task Pool                                   |![][completed] |         Anthony, Vincent         |    11/29     |
+| 12.  | Delegates                                   |   ![][wip]    |             Shishir              |              |
+| 13.  | Listeners                                   |![][completed] |             Vincent              |    11/6      |
+| 14.  | Handlers                                    |![][completed] |             Vincent              |    11/29     | 
+| 15.  | Example Project                             |   ![][wip]    |             Kirill               |              |
+| 16.  | Combining Modules                           |   ![][wip]    |             Vincent              |              |
 
 # Backlog
-| No.  | Date | Task                                       | 
-| ---- | --------|-------------------------------------- |
+| No.  | Date  |                 Task                  | 
+| :--: | :----:|:------------------------------------: |
 | 1.   | 11/29 | Need to implement semaphore or conditional lock into task_pool since the thread is currently busy waiting | 
 
 # Module Functionality
 
 | No.  | Module                                                           |
-| ---- | ---------------------------------------------------------------- |
+| :--: | :--------------------------------------------------------------- |
 | 1.   |  Network Node Connect and Disconnect <br /><br />This feature handles the connection between any two or more nodes in a network. The questions we ask here are, in the absence of a direct target, how would a new node enter the network? When a node would like to leave the network, it remembers some nodes and is able to use those records to re-enter the network without needing to find a way in like it did when it was a new node. Here we note that it is entirely possible for all records to disconnect prior to the current node re-entering the network, thus it is possible for a non-new node to be subject to new-node entry proceedures of finding an entry point.|
 | 2.   |  Documentation Site <br /><br /> We can create a website which has complete live documentation for future developers to use. The idea is since the github is hosted publically, the website can webscrape the repository for comments above functions and generate documentation. This is completely optional and should only be done towards the end.|
 | 3.   |  Packet Reader and Writer <br /><br />A packet is a sequence of bytes normally in the form of an array of bytes. Packets contain data represented in bytes and is the general way to send data between a connection. The packet reader accepts bytes and allows you to read 2^n bytes depending on the data type you're trying to read while the packet writer does the opposite and allows you to feed bytes into the writer and then construct the array of bytes when the packet is completed and ready to be sent. |
@@ -56,16 +56,16 @@ Within each directory the respective directories are data files. The data file w
 # Available Utility
 
 | No.  | Utility                                                         |
-| ---- | --------------------------------------------------------------- |
-| 1.   | **Packet Reader** <br /><br />The packet reader provides an interface for reading bytes sequentially in a safe and efficient way. The reader must be given an array to read from as well as the length of the array. See [dappf::data::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/data/packet_reader.h) for documentation and [dappf::examples::example_usage_packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_reader.cpp) for example usage(s).
-| 2.   | **Packet Writer** <br /><br />The packet writer provides an interface for writing bytes sequentially in a safe and efficient way. The writer encodes most primitive data types and maintains the length of the total number of bytes encoded. See [dappf::data::packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/data/packet_writer.h) for documentation and [dappf::examples::example_usage_packet_writer](https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_writer.cpp) for example usage(s). | 
+| :--: | :------------------------------------------------------------- |
+| 1.   | ![][reader] <br /><br />The packet reader provides an interface for reading bytes sequentially in a safe and efficient way. The reader must be given an array to read from as well as the length of the array. See [dappf::framework::data::packet::packet_reader][packet_reader.h] for documentation and [dappf::examples::example_usage_packet_reader][example_usage_packet_reader.cpp] for example usage(s).
+| 2.   | ![][writer] <br /><br />The packet writer provides an interface for writing bytes sequentially in a safe and efficient way. The writer encodes most primitive data types and maintains the length of the total number of bytes encoded. See [dappf::framework::data::packet::packet_writer][packet_writer.h] for documentation and [dappf::examples::example_usage_packet_writer][example_usage_packet_writer.cpp] for example usage(s). | 
 
 # Available Internal Overrides
 | No.  | Utility                                                         |
-| ---- | --------------------------------------------------------------- |
-| 1.   | **Packet Encryptor**  | 
-| 2.   | **Packet Validator**  | 
-| 3.   | **Packet Compressor** |
+| :--: | :------------------------------------------------------------- |
+| 1.   | ![][encryption]  | 
+| 2.   | ![][validation] | 
+| 3.   | ![][compression] |
 
 
 
@@ -73,9 +73,34 @@ Within each directory the respective directories are data files. The data file w
 Event listeners provides a series of methods provided to the developer to execute certain tasks in addition to some background tasks performed by the framework. A simple example is if the developer implements a logging system which logs every incoming packet. The developer can implement the "on_packet_received" event listener which provides the developer access to an immutable instance of the packet reader which is used to handler the recieved bytes internally. From there, the developer can log the bytes received or a deserialized form of those bytes. All event listeners are of type void.
 
 | No.  | Event Listener                                                  |
-| ---- | --------------------------------------------------------------- |
-| 1.   | void dappf::data::event_listeners::[**on_connection_request**](https://github.com/zydee3/DAPPF/blob/master/framework/data/event_listeners.cpp)(std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the ipv4 address of the requesting node. |
-| 2.   | void dappf::data::event_listeners::[**on_connection_established**](https://github.com/zydee3/DAPPF/blob/master/framework/data/event_listeners.cpp)(std::string);<br /><br />Called when a previous request to connect has been fulfilled and connection between the two nodes has been established. The given string parameter holds the ipv4 address of the requesting node. |
-| 3.   | void dappf::data::event_listeners::[**on_connection_dropped**](https://github.com/zydee3/DAPPF/blob/master/framework/data/event_listeners.cpp)(std::string);<br /><br />Called when an existing connection is dropped. The given string parameter holds the ipv4 address of the requesting node. |
-| 4.   | void dappf::data::event_listeners::[**on_packet_received**](https://github.com/zydee3/DAPPF/blob/master/framework/data/event_listeners.cpp)([dappf::data::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/data/packet_reader.h));<br /><br />Called when a packet is received from a current established connection.  |
-| 5.   | void dappf::data::event_listeners::[**on_packet_sent**](https://github.com/zydee3/DAPPF/blob/master/framework/data/event_listeners.cpp)([dappf::data::packet_reader](https://github.com/zydee3/DAPPF/blob/master/framework/data/packet_writer.h));<br /><br />Called when a packet is sent to current established neighbors. The packet writer in this state is immutable. | 
+| :--: | :-------------------------------------------------------------- |
+| 1.   | void dappf::framework::meta::event_listeners::[**on_connection_request**][on_connection_request.h](std::string);<br /><br />Called when a request to connect is made to the user. The given string parameter holds the ipv4 address of the requesting node. |
+| 2.   | void dappf::framework::meta::event_listeners::[**on_connection_established**][on_connection_established.h](std::string);<br /><br />Called when a previous request to connect has been fulfilled and connection between the two nodes has been established. The given string parameter holds the ipv4 address of the requesting node. |
+| 3.   | void dappf::framework::meta::event_listeners::[**on_connection_dropped**][on_connection_dropped.h](std::string);<br /><br />Called when an existing connection is dropped. The given string parameter holds the ipv4 address of the requesting node. |
+| 4.   | void dappf::framework::meta::event_listeners::[**on_packet_received**][on_packet_received.h]([dappf::data::packet::packet_reader][packet_reader.h]);<br /><br />Called when a packet is received from a current established connection.  |
+| 5.   | void dappf::framework::meta::event_listeners::[**on_packet_sent**][on_packet_sent.h]([dappf::data::packet::packet_writer][packet_writer.h]);<br /><br />Called when a packet is sent to current established neighbors. The packet writer in this state is immutable. | 
+
+
+<!-- Status -->
+[completed]: https://img.shields.io/badge/Completed-informational?style=flat&logoColor=white&color=sucess
+[wip]: https://img.shields.io/badge/In%20Progress-informational?style=flat&logoColor=white&color=yellow
+[incomplete]: https://img.shields.io/badge/Incomplete-informational?style=flat&logoColor=white&color=critical
+[deprecated]: https://img.shields.io/badge/Deprecated-informational?style=flat&logoColor=white&color=inactive
+
+<!-- Packet Stuff -->
+[writer]: https://img.shields.io/badge/Packet-Writer-informational?style=flat&logoColor=white&color=ff4d4d
+[reader]: https://img.shields.io/badge/Packet-Reader-informational?style=flat&logoColor=white&color=00cc66
+[encryption]: https://img.shields.io/badge/Packet-Encryption-informational?style=flat&logoColor=white&color=blue
+[validation]: https://img.shields.io/badge/Packet-Validation-informational?style=flat&logoColor=white&color=success
+[compression]: https://img.shields.io/badge/Packet-Compression-informational?style=flat&logoColor=white&color=yellow
+
+<!-- Links -->
+[packet_writer.h]: https://github.com/zydee3/DAPPF/blob/master/framework/data/packet/packet_writer.h
+[packet_reader.h]: https://github.com/zydee3/DAPPF/blob/master/framework/data/packet/packet_reader.h
+[on_connection_request.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_connection_request.h
+[on_connection_established.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_connection_established.h
+[on_connection_dropped.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_connection_dropped.h
+[on_packet_received.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_packet_received.h
+[on_packet_sent.h]: https://github.com/zydee3/DAPPF/blob/master/framework/meta/event_listeners/on_packet_sent.h
+[example_usage_packet_reader.cpp]: https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_reader.cpp
+[example_usage_packet_writer.cpp]: https://github.com/zydee3/DAPPF/blob/master/framework/examples/example_usage_packet_writer.cpp
