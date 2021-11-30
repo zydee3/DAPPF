@@ -11,12 +11,12 @@
 #include "../../constants.h"
 
 namespace dappf::data::packet {
-    class validation {
+    class packet_validation {
     private:
-        bool is_valid_character(char);
+        static bool is_valid_character(char);
 
     public:
-        bool validate_packet(int8_t*, int);
+        static bool validate_packet(int8_t*, int);
 
     };
 }

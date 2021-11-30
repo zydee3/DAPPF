@@ -5,7 +5,7 @@
  * @param c Char to be tested
  * @return True if char c is valid, otherwise false
  */
-bool dappf::data::packet::validation::is_valid_character(char c) {
+bool dappf::data::packet::packet_validation::is_valid_character(char c) {
 
     int lower_bound = (int) '0';
     int upper_bound = (int) '9';
@@ -28,7 +28,7 @@ bool dappf::data::packet::validation::is_valid_character(char c) {
  * @param length Number of elements in packet
  * @return True if the entire packet header contains only valid characters, otherwise false
  */
-bool dappf::data::packet::validation::validate_packet(int8_t* packet, int length){
+bool dappf::data::packet::packet_validation::validate_packet(int8_t* packet, int length){
 
     const int num_bytes_header = dappf::constants::num_bytes_header;
     if(length < num_bytes_header){
@@ -36,7 +36,7 @@ bool dappf::data::packet::validation::validate_packet(int8_t* packet, int length
     }
 
     for(int i = 0; i < num_bytes_header; i++){
-        if(!dappf::data::packet::validation::is_valid_character((char) (*(packet + i)))){
+        if(!dappf::data::packet::packet_validation::is_valid_character((char) (*(packet + i)))){
             return false;
         }
     }
