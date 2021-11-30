@@ -8,7 +8,7 @@
 #include "packet_writer.h"
 #include "packet_reader.h"
 
-namespace dappf::meta::packet::processing {
+namespace dappf::data::packet::processing {
     typedef struct {
         int8_t *data;
         int32_t length;
