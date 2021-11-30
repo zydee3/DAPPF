@@ -3,7 +3,7 @@
 
 #include <ctime>
 #include <chrono>
-#include "../framework/utility/log.h";
+#include "../framework/utility/log.h"
 
 int main() {
     dappf::test::unit_test_packet::test();
