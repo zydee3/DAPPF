@@ -23,7 +23,7 @@ dappf::data::handlers::handler* dappf::data::spooler::spooler::fetch_handler(int
 
         auto listener = dappf::data::event_listeners::on_internal_error::get();
         if(listener != nullptr){
-            (*listener)(error);
+            listener(error);
         }
     }
 
@@ -62,7 +62,7 @@ void dappf::data::spooler::spooler::spool(std::string source, int value) {
         if(!handler->process()){
             auto listener = dappf::data::event_listeners::on_internal_error::get();
             if(listener != nullptr){
-                (*listener)("unable to process handler");
+                listener("unable to process handler");
             }
             continue;
         }

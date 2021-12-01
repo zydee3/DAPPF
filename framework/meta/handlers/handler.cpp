@@ -35,8 +35,8 @@ void dappf::data::handlers::handler::throw_unhandled_exception(std::string error
     }
 
     auto listener = dappf::data::event_listeners::on_internal_error::get();
-    if(listener != nullptr){
-        (*listener)(error);
+    if(listener){
+        listener(error);
     }
 }
 

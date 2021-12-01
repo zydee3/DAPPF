@@ -31,7 +31,7 @@ int create_client_socket(std::string address, uint16_t port) {
         std::string error_str = "couldn't open socket";
 
         auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
-        if (on_internal_error) (*on_internal_error)(error_str);
+        if (on_internal_error) on_internal_error(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -44,7 +44,7 @@ int create_client_socket(std::string address, uint16_t port) {
         std::string error_str = "couldn't connect to target";
 
         auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
-        if (on_internal_error) (*on_internal_error)(error_str);
+        if (on_internal_error) on_internal_error(error_str);
         throw std::runtime_error(error_str);
     }
     return clientfd;
@@ -63,7 +63,7 @@ int create_listen_socket(uint16_t port) {
         std::string error_str = "couldn't open socket";
 
         auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
-        if (on_internal_error) (*on_internal_error)(error_str);
+        if (on_internal_error) on_internal_error(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -72,7 +72,7 @@ int create_listen_socket(uint16_t port) {
         std::string error_str = "couldn't set socket options";
 
         auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
-        if (on_internal_error) (*on_internal_error)(error_str);
+        if (on_internal_error) on_internal_error(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -84,7 +84,7 @@ int create_listen_socket(uint16_t port) {
         std::string error_str = "couldn't bind port";
 
         auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
-        if (on_internal_error) (*on_internal_error)(error_str);
+        if (on_internal_error) on_internal_error(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -92,7 +92,7 @@ int create_listen_socket(uint16_t port) {
         std::string error_str = "couldn't listen to socket";
 
         auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
-        if (on_internal_error) (*on_internal_error)(error_str);
+        if (on_internal_error) on_internal_error(error_str);
         throw std::runtime_error(error_str);
     }
 
@@ -115,7 +115,7 @@ void listen_connection(int connfd, std::string address) {
     }
 
     auto on_connection_dropped = dappf::data::event_listeners::on_connection_dropped::get();
-    if (on_connection_dropped) (*on_connection_dropped)(address);
+    if (on_connection_dropped) on_connection_dropped(address);
 }
 
 /**
@@ -150,19 +150,19 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
         if (connfd < 0) {
             // not fatal, so just report, no error throwing
             auto on_internal_error = dappf::data::event_listeners::on_internal_error::get();
-            if (on_internal_error) (*on_internal_error)("tried to accept connection, but failed");
+            if (on_internal_error) on_internal_error("tried to accept connection, but failed");
         } else {
             // extracting address
             sockaddr_in *addr_in = (sockaddr_in *) &incoming_address;
             std::string address(inet_ntoa(addr_in->sin_addr));
 
             auto on_connection_request = dappf::data::event_listeners::on_connection_request::get();
-            if (on_connection_request) (*on_connection_request)(address);
+            if (on_connection_request) on_connection_request(address);
 
             add_connection(connections, address, connfd);
 
             auto on_connection_established = dappf::data::event_listeners::on_connection_established::get();
-            if (on_connection_established) (*on_connection_established)(address);
+            if (on_connection_established) on_connection_established(address);
         }
     }
 }
@@ -206,7 +206,7 @@ void dappf::connection::broadcast_message(std::vector<conn> *connections, int8_t
     }
 
     auto on_packet_sent = dappf::data::event_listeners::on_packet_sent::get();
-    if (on_packet_sent) (*on_packet_sent)(message, length);
+    if (on_packet_sent) on_packet_sent(message, length);
 }
 
 /**

@@ -16,7 +16,7 @@ bool dappf::data::handlers::handler_director::check_state(std::string source) {
     if (dappf::internal_state != dappf::state::stopped) {
         auto handler = dappf::data::event_listeners::on_internal_error::get();
         if(handler != nullptr){
-            (*handler)("Attempting to modify (" + source + ") handler on non-stopped internal state.");
+            handler("Attempting to modify (" + source + ") handler on non-stopped internal state.");
         }
 
         return false;
