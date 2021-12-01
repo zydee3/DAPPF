@@ -1,7 +1,7 @@
 # DAPPF User Guide
 
 ## Compatibility
-DAPPF is built on Linux subsystems and as such it *must* be run on a Linux machine.
+DAPPF is built on Linux libraries and as such it *must* be run on a Linux machine.
 
 ## Installation
 Installing the DAPPF framework into your project is a fairly staightforward process. This guide will show you how to add it to your project in only 3 simple steps.
