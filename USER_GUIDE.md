@@ -5,7 +5,7 @@ Installing the DAPPF framework into your project is a fairly staightforward proc
 
 #### 1. Download the source code
 The first step is to clone the DAPPF repository into a folder within your project. This can be either the root folder or its own directory
-(which is preffered for better organization).
+(which is preferred for better organization).
 
 #### 2. Include the Framework Header
 The second step is to add include the header file `dappf.h` into your main project file or wherever you need to access/use the framework. This will enable you to use the
@@ -29,14 +29,14 @@ This framework contains event listeners that allow users to (fff).
 
 Encryption is a feature that allows users to encrypt packets as they are being sent throughout the framework. This adds an extra layer of security because
 it prevents outside forces or malicious code from being able to access information that they are not privy to. By default, the framework has a simple encrpytion algorithm,
-but if you would prefer to use your own method of packet encryption, you can override the encryption functions `get_encryptor()` and `get_decryptor()`. Changing only one
+but if you would prefer to use your own method of packet encryption, you can call the encryption functions `set_encryptor()` and `set_decryptor()` and input your own function pointers as arguments. Changing only one
 of these could lead to serious errors due to conflicts in the encryption and decryption algorithms. If these are not paired properly, data will not be recoverable once
-encrpyted. The ability to modify the encrpytion algorithms increases the flexibility and security of our framework.
+encrypted. The ability to modify the encryption algorithms increases the flexibility and security of our framework.
 
 #### 4. Packet Compression
 
 Users will also have the option to implement their own compression algorithms into the framework. By default there is a compression system within DAPPF, but like encryption,
-this can be overridden by the user. In order to do this, both `compress()` and `decompress()` need to be overriden. Changing only one of these could lead to serious
+this can be changed by the user. In order to do this, both `set_compressor()` and `set_decompressor()` need to be called with your own function pointers as arguments. Changing only one of these could lead to serious
 errors due to conflicts in the compression and decompression algorithms. Allowing the user to modify the compression algorithm will allow flexibility between the amount of file
 compression and the speed of the process.
 

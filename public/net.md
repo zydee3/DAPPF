@@ -27,7 +27,7 @@ int create_listen_socket(uint16_t port)
 #### listen_connection()
 
 ```cpp
-[[noreturn]] void listen_connection(int connfd, void (*handler)(int8_t *, int32_t))
+void listen_connection(int connfd, std::string address)
 ```
 
 > Listens for data coming from a connection, and calls the provided function when data is received  
@@ -37,7 +37,7 @@ int create_listen_socket(uint16_t port)
 #### add_connection()
 
 ```cpp
-void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd, void (*handler)(int8_t *, int32_t))
+void add_connection(std::vector<dappf::connection::conn> *connections, std::string address, int connfd)
 ```
 
 > Adds the new connection to the list, and creates a new thread which will listen to the connection for data  
@@ -49,7 +49,7 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
 #### listen_for_connections()
 
 ```cpp
-[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port, void (*handler)(int8_t *, int32_t))
+[[noreturn]] void listen_for_connections(std::vector<dappf::connection::conn> *connections, uint16_t port)
 ```
 
 > Enters a non-busy infinite loop of accepting connections and adding them to a list  
@@ -61,7 +61,7 @@ void add_connection(std::vector<dappf::connection::conn> *connections, std::stri
 #### join_network()
 
 ```cpp
-dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port, void (*handler)(int8_t *, int32_t))
+dappf::connection::network dappf::connection::join_network(std::string address, uint16_t connect_port, uint16_t listen_port)
 ```
 
 > Attempts to join the network given the address and connect_port of some node in that network  
