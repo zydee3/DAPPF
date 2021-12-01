@@ -186,6 +186,8 @@ void dappf::data::packet::processing::receive(int8_t *data, int32_t length) {
         auto on_packet_received = dappf::data::event_listeners::on_packet_received::get();
         if (on_packet_received) on_packet_received(unwrap(data, length));
 
-        dappf::data::spooler::spooler::spool(std::to_string(id), extract_op_code(data));
+        //dappf::data::spooler::spooler::spool(std::to_string(id), extract_op_code(data));
+        // here i'd use the the cache too, but that's not done...
+        // correspondingly, no point using the spooler, since it simply places things into the cache
     }
 }
