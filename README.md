@@ -79,8 +79,6 @@ Within each directory, the respective directories are data files. The data file 
 | 2.   | [![][validation]][packet_validation.h] | 
 | 3.   | [![][compression]][packet_compression.h] |
 
-
-
 # Available Event Listeners
 Event listeners provides a series of methods provided to the developer to execute certain tasks in addition to some background tasks performed by the framework. A simple example is if the developer implements a logging system which logs every incoming packet. The developer can implement the `on_packet_received` event listener which provides the developer access to an immutable instance of the packet reader which is used to handler the recieved bytes internally. From there, the developer can log the bytes received or a deserialized form of those bytes. All event listeners are of type void.
 
@@ -92,6 +90,9 @@ Event listeners provides a series of methods provided to the developer to execut
 | 4.   | void dappf::framework::meta::event_listeners::[**on_packet_received**][on_packet_received.h]([dappf::data::packet::packet_reader][packet_reader.h]);<br /><br />Called when a packet is received from a current established connection.  |
 | 5.   | void dappf::framework::meta::event_listeners::[**on_packet_sent**][on_packet_sent.h]([dappf::data::packet::packet_writer][packet_writer.h]);<br /><br />Called when a packet is sent to current established neighbors. The packet writer in this state is immutable. | 
 
+# Documentation Site
+
+[Click here](https://garrettleising.github.io/DAPPF.github.io/#/) to see our documentation website.
 
 #### Built using
 [![](https://img.shields.io/badge/C++-92.2%25-informational?style=flat&logo=C%2B%2B&logoColor=white&color=blue)](https://www.cplusplus.com/)
