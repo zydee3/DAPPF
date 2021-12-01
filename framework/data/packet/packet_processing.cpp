@@ -7,6 +7,7 @@
 #include "packet_compression.h"
 #include "packet_processing.h"
 #include "packet_cipher.h"
+#include "../../meta/spooler/spooler.h"
 
 #include "../../meta/event_listeners/on_packet_received.h"
 #include "../../dappf.h"
@@ -184,5 +185,7 @@ void dappf::data::packet::processing::receive(int8_t *data, int32_t length) {
 
         auto on_packet_received = dappf::data::event_listeners::on_packet_received::get();
         if (on_packet_received) on_packet_received(unwrap(data, length));
+
+        dappf::data::spooler::spooler::spool(std::to_string(id), extract_op_code(data));
     }
 }
