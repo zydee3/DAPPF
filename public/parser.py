@@ -1,7 +1,7 @@
 import re
 import os
 
-root = "../framework"
+roots = ["../framework", "../framework/data", "../framework/meta"]
 
 def parseFile(file, path, markdown):
 
@@ -43,30 +43,36 @@ def parseFile(file, path, markdown):
       markdown.write(f"```cpp\n{fullFunctionName}```\n\n")
       markdown.write(f"{functionDescription}\n")
 
-
-dirs = os.listdir(root)
-websitefiles = os.listdir()
-
 sidebar = open("_sidebar.md", "w")
 
 sidebar.write("- DAPPF\n  - [About](/)\n  - [Getting Started](confinguration.md)\n\n- Documentation\n")
 
-for d in dirs: 
-  d_path = f"{root}/{d}"
-  if os.path.isfile(d_path):
-    continue
-  
-  markdown_name = d + ".md"
-  markdown = open(markdown_name, "w")
-  markdown.write(f"# {d.capitalize()} API Reference  \n")
-  sidebar.write(f"  - [{d.capitalize()}]({markdown_name})\n")
-  files = os.listdir(d_path)
+for root in roots:
+  dirs = os.listdir(root)
+  websitefiles = os.listdir()
 
-  for file in files:
-    if ".cpp" not in file:
+  for d in dirs: 
+    if d == "test" or d == "utility":
       continue
-    parseFile(file, d_path, markdown)
 
-    markdown.write(f"<hr>\n\n")
+    d_path = f"{root}/{d}"
+    if os.path.isfile(d_path):
+      continue
+    
+    files = os.listdir(d_path)
+    if len(files) == 0:
+      continue
 
-  markdown.close()
+    markdown_name = d + ".md"
+    markdown = open(markdown_name, "w")
+    markdown.write(f"# {d.capitalize()} API Reference  \n")
+    sidebar.write(f"  - [{d.capitalize()}]({markdown_name})\n")
+
+    for file in files:
+      if ".cpp" not in file:
+        continue
+      parseFile(file, d_path, markdown)
+
+      markdown.write(f"<hr>\n\n")
+
+    markdown.close()
