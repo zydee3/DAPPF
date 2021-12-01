@@ -12,7 +12,7 @@
 namespace dappf::test {
     class run_test_global {
     public:
-        static const bool do_tests = false;
+        static const bool do_tests = true;
         static const void run();
     };
 }

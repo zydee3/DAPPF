@@ -31,7 +31,7 @@ void unit_test_master(){
 
 [[noreturn]] int main(int argc, char **argv) {
     if(dappf::test::run_test_global::do_tests){
-        dappf::test::run_test_global();
+        dappf::test::run_test_global::run();
         return 0;
     }
 
