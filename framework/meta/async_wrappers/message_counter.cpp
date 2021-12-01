@@ -5,8 +5,13 @@
 #include <cstdlib>
 #include "message_counter.h"
 
+dappf::async_wrappers::MessageCounter &dappf::async_wrappers::MessageCounter::get() {
+    static MessageCounter counter;
+    return counter;
+}
+
 dappf::async_wrappers::MessageCounter::MessageCounter() {
-    lock = (sem_t *) malloc(sizeof(sem_t));
+    lock = new sem_t;
 
     // 0 for shared between threads, not processes
     // 1 for semaphore value, so it's binary

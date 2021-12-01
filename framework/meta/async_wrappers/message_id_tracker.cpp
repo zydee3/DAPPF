@@ -5,8 +5,13 @@
 #include <cstdint>
 #include "message_id_tracker.h"
 
+dappf::async_wrappers::MessageIdTracker &dappf::async_wrappers::MessageIdTracker::get() {
+    static MessageIdTracker tracker;
+    return tracker;
+}
+
 dappf::async_wrappers::MessageIdTracker::MessageIdTracker() {
-    lock = (sem_t *) malloc(sizeof(sem_t));
+    lock = new sem_t;
 
     // 0 for shared between threads, not processes
     // 1 for semaphore value, so it's binary

@@ -14,12 +14,12 @@ namespace dappf::async_wrappers {
         sem_t* lock;
         uint16_t counter;
 
-    public:
         MessageCounter();
+
+    public:
+        static MessageCounter &get();
         uint16_t get_and_increment();
     };
-
-    static async_wrappers::MessageCounter message_counter;
 }
 
 #endif //DAPPF_MESSAGE_COUNTER_H

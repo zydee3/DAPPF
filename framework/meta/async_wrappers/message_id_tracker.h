@@ -14,13 +14,14 @@ namespace dappf::async_wrappers {
         sem_t* lock;
         std::unordered_set<uint64_t> seen_set;
 
-    public:
         MessageIdTracker();
+
+    public:
+        static MessageIdTracker &get();
+
         void insert(uint64_t id);
         bool contains(uint64_t);
     };
-
-    static MessageIdTracker message_id_tracker;
 }
 
 #endif //DAPPF_MESSAGE_ID_TRACKER_H
