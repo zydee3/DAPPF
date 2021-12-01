@@ -1,15 +1,9 @@
-# TODO
-- add documentation for LISTENERS (all)
-  - packet sent
-  - packet received
-  - internal error
-  - connection request
-  - connection established
-  - connection dropped
-  - UPDATE "Framework" section of readme
-
 # Starting Off
 The project is built in JetBrain's CLion IDE. You should be able to simply open the file and compile straight away. Connect your GitHub so you can make pull requests to the main branch.
+
+# Documentation Site
+
+[Click here](https://garrettleising.github.io/DAPPF.github.io/#/) to see our documentation website.
 
 # Modules Task Sheet
 
@@ -66,10 +60,6 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 [INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_delete()       FAILED<br />
 [INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_policy()       FAILED<br />
 [INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_spool::                    test()       FAILED<br />
-
-# Documentation Site
-
-[Click here](https://garrettleising.github.io/DAPPF.github.io/#/) to see our documentation website.
 
 #### Built using
 [![](https://img.shields.io/badge/C++-92.2%25-informational?style=flat&logo=C%2B%2B&logoColor=white&color=blue)](https://www.cplusplus.com/)
