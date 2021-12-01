@@ -36,6 +36,8 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 | No.  | Date  |                 Task                  | 
 | :--: | :----:|:------------------------------------: |
 | 1.   | 11/29 | Need to implement semaphore or conditional lock into `task_pool` since the thread is currently busy waiting | 
+| 2.   | 11/29 | Predictor association isn't being updated and needs to be fixed | 
+| 3.   | 11/29 | Cache is not complete and cannot be included in the compilable |
 
 # Known bugs
 - When broadcasting to the whole network, packets will be resent by nodes that didn't originate the packet, so the `on_packet_sent` listener will trigger, which may be unexpected behavior.
