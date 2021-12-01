@@ -51,6 +51,7 @@ First open up a terminal window and navigate to the directory where the executab
 Open up a new terminal window and navigate to the same directory. Since you want to connect to the same system as the first node, run the command `./prototype 127.0.0.1 6001 6002` where `127.0.0.1` is the ip address of the node you are trying to connect to (in this case it is local), `6001` is the port the node you are trying to connect to is on, and `6002` is the port that you would like to run this new instance on. You should now have two instances connected to the network. 
 
 Repeat step 3 as many times as desired to add additional nodes to the system.
+Repeat step 3 as many times as desired. The address and first port value, describing the target node to connect to, does not *necessarily* need to be the first node's port - this can be any node in the network.
 
 #### 4. Using the Example
 You can type any string into the terminal window, and once you hit `enter`, it will be sent to all other nodes in the network and printed. You may have also noticed that all event listeners will be printed when activated. While this is a simple example, it is a good demonstration of our framework in action.
