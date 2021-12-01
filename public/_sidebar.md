@@ -3,7 +3,6 @@
 
 - Documentation
   - [Net](net.md)
-  - [Storage](storage.md)
   - [Packet](packet.md)
   - [Spooler](spooler.md)
   - [Handlers](handlers.md)

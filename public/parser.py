@@ -2,7 +2,7 @@ import re
 import os
 
 roots = ["../framework", "../framework/data", "../framework/meta"]
-forbidden = ["test", "utility", "data", "meta", "async_wrappers", "event_listeners", "security"]
+forbidden = ["test", "utility", "data", "meta", "async_wrappers", "event_listeners", "security", "storage"]
 
 def parseFile(file, path, markdown):
 
@@ -52,7 +52,7 @@ def parseFile(file, path, markdown):
 
 sidebar = open("_sidebar.md", "w")
 
-sidebar.write("- DAPPF\n  - [About](/)\n  - [Getting Started](confinguration.md)\n\n- Documentation\n")
+sidebar.write("- DAPPF\n  - [User Guide](/)\n\n- Documentation\n")
 
 for root in roots:
   dirs = os.listdir(root)
