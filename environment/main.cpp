@@ -10,7 +10,7 @@
 #include "../framework/meta/event_listeners/on_connection_established.h"
 #include "../framework/meta/event_listeners/on_connection_dropped.h"
 #include "../framework/utility/log.h"
-#include "../test/run_test_global.h"
+#include "../Testing/run_test_global.h"
 
 void interrupt_handler(int s) {
     std::cout << "interrupted" << std::endl;

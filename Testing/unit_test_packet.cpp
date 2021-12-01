@@ -19,7 +19,7 @@ void dappf::test::unit_test_packet::test() {
 }
 
 /**
- * This test will encode numbers
+ * This Testing will encode numbers
  * @return True if result is correct, otherwise false.
  */
 bool dappf::test::unit_test_packet::test_encode_numbers() {
@@ -49,13 +49,13 @@ bool dappf::test::unit_test_packet::test_encode_numbers() {
                 && reader->decode_4() == i
                 && reader->decode_8() == l;
 
-    display_test_result("dappf::test::unit_test_packet::test_encode_numbers()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::    test_encode_numbers()", result);
 
     return result;
 }
 
 /**
- * This test will encode a string
+ * This Testing will encode a string
  * @return True if result is correct, otherwise false
  */
 bool dappf::test::unit_test_packet::test_encode_string() {
@@ -78,13 +78,13 @@ bool dappf::test::unit_test_packet::test_encode_string() {
 
     bool result = test_string == decoded_string;
 
-    display_test_result("dappf::test::unit_test_packet::test_encode_string()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::     test_encode_string()", result);
 
     return result;
 }
 
 /**
- * This test attempts to read more bytes from the buffer than available.
+ * This Testing attempts to read more bytes from the buffer than available.
  * @return True if result is correct, otherwise false
  */
 bool dappf::test::unit_test_packet::test_decode_exception() {
@@ -114,7 +114,7 @@ bool dappf::test::unit_test_packet::test_decode_exception() {
     }
 
     bool result = was_exception_thrown && result_1 == num_1 && result_2 == num_2;
-    display_test_result("dappf::test::unit_test_packet::test_decode_exception()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::  test_decode_exception()", result);
 
     return result;
 }
@@ -133,7 +133,7 @@ bool dappf::test::unit_test_packet::test_validation_1() {
     int8_t* packet = writer->to_array();
 
     bool result = dappf::data::packet::packet_validation::validate_packet(packet, writer->length());
-    display_test_result("dappf::test::unit_test_packet::test_validation_1()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::      test_validation_1()", result);
 
     return result;
 }
@@ -153,7 +153,7 @@ bool dappf::test::unit_test_packet::test_validation_2() {
     // insert an invalid value
     packet[2] = (int8_t)('}');
     bool result = dappf::data::packet::packet_validation::validate_packet(packet, num_bytes_in_header);
-    display_test_result("dappf::test::unit_test_packet::test_validation_2()", !result);
+    display_test_result("dappf::Testing::  unit_test_packet::      test_validation_2()", !result);
 
     return !result;
 }
@@ -182,7 +182,7 @@ bool dappf::test::unit_test_packet::test_compression_1() {
     int compressed_length = dappf::data::packet::packet_compression::compress(&packet, initial_length);
 
     bool result = compressed_length <= initial_length;
-    display_test_result("dappf::test::unit_test_packet::test_compression_1()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::     test_compression_1()", result);
 
     return result;
 }
@@ -205,7 +205,7 @@ bool dappf::test::unit_test_packet::test_compression_2() {
     int compressed_length = dappf::data::packet::packet_compression::compress(&packet, writer->length());
 
     bool result = compressed_length == writer->length();
-    display_test_result("dappf::test::unit_test_packet::test_compression_2()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::     test_compression_2()", result);
 
     return result;
 }
@@ -228,7 +228,7 @@ bool dappf::test::unit_test_packet::test_compression_3() {
 
     int compressed_length = dappf::data::packet::packet_compression::compress(&packet, writer->length());
     bool result = packet[dappf::constants::pos_compression_flag] == 0;
-    display_test_result("dappf::test::unit_test_packet::test_compression_3()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::     test_compression_3()", result);
 
     return result;
 }
@@ -261,7 +261,7 @@ bool dappf::test::unit_test_packet::test_decompression() {
     int compressed_length = dappf::data::packet::packet_compression::compress(&packet, initial_length);
     int final_length = dappf::data::packet::packet_compression::decompress(&packet, compressed_length);
     bool result = compressed_length <= initial_length && initial_length == final_length + dappf::constants::num_bytes_header;
-    display_test_result("dappf::test::unit_test_packet::test_decompression()", result);
+    display_test_result("dappf::Testing::  unit_test_packet::     test_decompression()", result);
 
     return result;
 }
@@ -291,7 +291,7 @@ bool dappf::test::unit_test_packet::test_cipher() {
         }
     }
 
-    display_test_result("dappf::test::unit_test_packet::test_cipher()", !all_elements_same);
+    display_test_result("dappf::Testing::  unit_test_packet::            test_cipher()", !all_elements_same);
 
     return !all_elements_same;
 }
@@ -324,7 +324,7 @@ bool dappf::test::unit_test_packet::test_decipher() {
         }
     }
 
-    display_test_result("dappf::test::unit_test_packet::test_decipher()", all_elements_same);
+    display_test_result("dappf::Testing::  unit_test_packet::          test_decipher()", all_elements_same);
 
     return all_elements_same;
 }

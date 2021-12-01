@@ -25,8 +25,8 @@ add_library(
         framework/utility/log.h
         framework/utility/log.cpp
 
-        test/unit_test_packet.h
-        test/unit_test_packet.cpp
+        Testing/unit_test_packet.h
+        Testing/unit_test_packet.cpp
 
         framework/data/storage/cache.h
         framework/data/storage/cache.cpp
@@ -104,15 +104,15 @@ add_library(
         framework/meta/spooler/spooler.cpp
         framework/meta/spooler/spooler.h
 
-        test/unit_test.cpp
-        test/unit_test.h
+        Testing/unit_test.cpp
+        Testing/unit_test.h
 
-        test/unit_test_handler.cpp
-        test/unit_test_handler.h
+        Testing/unit_test_handler.cpp
+        Testing/unit_test_handler.h
 
-        test/unit_test_task.cpp
-        test/unit_test_task.h
-        test/run_test_global.cpp test/run_test_global.h)
+        Testing/unit_test_task.cpp
+        Testing/unit_test_task.h
+        Testing/run_test_global.cpp Testing/run_test_global.h Testing/input_output.cpp Testing/input_output.h)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)

@@ -23,7 +23,7 @@ bool dappf::test::unit_test_task::test_can_run() {
     dappf::data::task_pool::task task_2 = dappf::data::task_pool::task(future, nullptr);
     bool result = task_1.can_run() && !task_2.can_run();
 
-    display_test_result("dappf::test::unit_test_task::test_can_run()", result);
+    display_test_result("dappf::Testing::  unit_test_task::             test_can_run()", result);
 
     return result;
 
@@ -36,13 +36,14 @@ bool dappf::test::unit_test_task::test_can_run() {
  */
 bool dappf::test::unit_test_task::test_execute() {
     long now = dappf::utility::time::now();
+    int default_value = 50;
+    int test_value = default_value;
 
-//    dappf::data::task_pool::task()
-//    dappf::data::task_pool::task(now, *[](){
-//
-//    });
+    dappf::data::task_pool::task(now, *[](){
+        //dappf::test::input_output::unit_test_task_test_execute_value = 0;
+    });
 
     bool result;
-    display_test_result("dappf::test::unit_test_task::test_execute()", result);
+    display_test_result("dappf::Testing::  unit_test_task::             test_execute()", result);
     return false;
 }
