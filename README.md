@@ -36,6 +36,9 @@ Within each directory, the respective directories are data files. The data file 
 | :--: | :----:|:------------------------------------: |
 | 1.   | 11/29 | Need to implement semaphore or conditional lock into `task_pool` since the thread is currently busy waiting | 
 
+# Known bugs
+- When broadcasting to the whole network, packets will be resent by nodes that didn't originate the packet, so the `on_packet_sent` listener will trigger, which may be unexpected behavior.
+
 # Module Functionality
 
 | No.  | Module                                                           |
