@@ -43,30 +43,6 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 | 2.   | 11/30 | Prediction isn't properly updating the associated value. I have unit tested the remainder of the prediction module and the tests have been working. |
 
 # Current Unit Test Results 
-| No.  | Test                    |    Result    |
-| :--: | :---------------------- | :----------: |
-| 1.   | test_encode_numbers()   | ![][success] |
-| 2.   | test_encode_string()    | ![][success] |
-| 3.   | test_decode_exception() | ![][success] |
-| 4.   | test_validation_1()     | ![][success] |
-| 5.   | test_validation_2()     | ![][failure] |
-| 6.   | test_compression_1()    | ![][success] |
-| 7.   | test_compression_2()    | ![][success] |
-| 8.   | test_compression_3()    | ![][success] |
-| 9.   | test_decompression()    | ![][success] |
-| 10.  | test_cipher()           | ![][success] |
-| 11.  | test_decipher()         | ![][success] |
-| 12.  | test_can_run()          | ![][success] |
-| 13.  | test_execute()          | ![][success] |
-| 14.  | test_if_settable()      | ![][success] |
-| 15.  | test_if_callable()      | ![][success] |
-| 16.  | test_insert()           | ![][failure] |
-| 17.  | test_get()              | ![][failure] |
-| 18.  | test_delete()           | ![][failure] |
-| 19.  | test_policy()           | ![][failure] |
-| 20.  | test()                  | ![][failure] |
-
-#### Raw Data:
 ```
 [INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::    test_encode_numbers()       SUCCESS
 [INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_encode_string()       SUCCESS
