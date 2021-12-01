@@ -5,5 +5,6 @@
 #include "run_test_global.h"
 
 const void dappf::test::run_test_global::run() {
-
+    dappf::test::unit_test_packet::test();
+    dappf::test::unit_test_task::test();
 }

@@ -18,7 +18,7 @@ namespace dappf::data::task_pool {
         static std::vector<dappf::data::task_pool::task*> pool;
 
     public:
-        static void insert(long, std::function<void()>*);
+        static void insert(long, std::function<void()>);
         static void execute();
         [[noreturn]]static void run();
         static void start();

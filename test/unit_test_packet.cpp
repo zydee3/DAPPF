@@ -267,7 +267,7 @@ bool dappf::test::unit_test_packet::test_decompression() {
 }
 
 /**
- *
+ * Tests to see if the encrypted packet data is different than the original packet data.
  * @return True if result is correct, otherwise false
  */
 bool dappf::test::unit_test_packet::test_cipher() {
@@ -297,7 +297,7 @@ bool dappf::test::unit_test_packet::test_cipher() {
 }
 
 /**
- *
+ * Tests to see if a packet data persist once it has been both encrypted and decrypted.
  * @return True if result is correct, otherwise false
  */
 bool dappf::test::unit_test_packet::test_decipher() {
