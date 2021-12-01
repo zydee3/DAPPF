@@ -7,7 +7,7 @@
 #include "../framework/meta/event_listeners/on_packet_received.h"
 
 void interrupt_handler(int s) {
-    std::cout << "terminating" << std::endl;
+    std::cout << "interrupted" << std::endl;
     exit(1);
 }
 
@@ -27,9 +27,7 @@ void receive(dappf::data::packet::packet_reader *reader) {
 [[noreturn]] int main(int argc, char **argv) {
     dappf::data::packet::packet_writer *packet = new dappf::data::packet::packet_writer; // this works when it's here, but not just before the while loop TODO: figure it out
 
-
-    dappf::data::event_listeners::on_packet_received::set(
-            reinterpret_cast<std::function<void(dappf::data::packet::packet_reader *)> *>(receive));
+    dappf::data::event_listeners::on_packet_received::set(receive);
 
     if (argc == 2) {
         uint16_t listen_port = strtouint16(argv[1]);
