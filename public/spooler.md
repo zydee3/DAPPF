@@ -78,46 +78,6 @@ void dappf::data::spooler::predictor::move()
 > to the vector of lookback values. This is so we can unassociate  
 > E from the k-range of numbers prior.  
 
-#### )
-
-```cpp
-```
-
-> [lookback_values] [ previous_values ] (value)  
-> [ a b c         ] [ y x x x x i j k ] (z)  
->   
->   
-> INSERT z INTO previous_values  
-> FOR EACH element IN [i, j, k]: (ASSOCIATE)  
-> IF references CONTAINS element THEN:  
-> LET v BE value AT element IN references  
-> LET p BE std::pair WHERE pair.first == value IN v  
-> IF p EXISTS THEN:  
-> INCREMENT p.second  
-> ELSE:  
-> p = std::pair(value, 1)  
-> INSERT p INTO v  
-> LET l BE length OF v  
-> IF l >= max_lookback THEN:  
-> REMOVE first element OF V  
-> ELSE:  
-> LET v BE std::vector OF integers  
-> LET p = std::pair(value, 1)  
-> INSERT p INTO v  
-> INSERT v INTO references AS std::pair(element, v)  
->   
-> REMOVE y FROM previous_values  
-> FOR EACH element IN [a, b, c]: (UNASSOCIATE)  
-> LET v BE value AT element IN lookback_values  
-> LET p BE std::pair WHERE pair.first == y IN v  
-> DECREMENT p.second  
-> IF p.second == 0 THEN:  
-> REMOVE p FROM v  
-> INSERT y INTO lookback_values  
-> Let l BE length OF lookback_values  
-> IF l >= max_lookback THEN:  
-> REMOVE a  
-
 #### insert()
 
 ```cpp
