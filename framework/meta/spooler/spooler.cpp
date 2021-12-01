@@ -51,7 +51,7 @@ void dappf::data::spooler::spooler::spool(std::string source, int value) {
         return;
     }
 
-    std::vector<int> to_spool = (*predictor)(value);
+    std::vector<int> to_spool = predictor(value);
     for(int i = 0; i < to_spool.size(); i++){
         int key = to_spool[i];
         dappf::data::handlers::handler* handler = fetch_handler(key);
