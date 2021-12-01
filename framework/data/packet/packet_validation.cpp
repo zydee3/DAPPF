@@ -23,14 +23,13 @@ bool dappf::data::packet::packet_validation::is_valid_character(char c) {
 }
 
 /**
- * Checks to see if the packet header is valid by iterating through the
- * packet header element by element and checking if the byte is a valid
- * byte to be contained in the packet header
+ * Checks whether a received packet is valid - the only distinguishing mark we can rely on, however, is the length
  * @param packet Array of bytes
  * @param length Number of elements in packet
- * @return True if the entire packet header contains only valid characters, otherwise false
+ * @return True if the entire packet header contains enough characters to include at least the header
  */
 bool dappf::data::packet::packet_validation::validate_packet(int8_t* packet, int length) {
+    return length >= dappf::constants::num_bytes_header;
 
     const int num_bytes_header = dappf::constants::num_bytes_header;
     if (length < num_bytes_header) {

@@ -12,6 +12,13 @@
 #include "../../dappf.h"
 #include "../../meta/async_wrappers/message_id_tracker.h"
 
+/**
+ * Prepares a packet for broadcasting over the network by filling in header information, encrypting, and compressing
+ * @param packet the packet to prepare
+ * @param listen_port port of the source
+ * @param counter message counter
+ * @return the prepared data (array and length)
+ */
 dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_broadcast(data::packet::packet_writer *packet, int16_t listen_port, int64_t counter) {
     int8_t *data = packet->to_array();
     int32_t length = packet->length();
@@ -45,6 +52,13 @@ dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_
     return new Message {data, length};
 }
 
+/**
+ * Prepares a packet for sending to a particular target over the network by filling in header information, encrypting, and compressing
+ * @param packet the packet to prepare
+ * @param listen_port port of the source
+ * @param counter message counter
+ * @return the prepared data (array and length)
+ */
 dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_targeted(data::packet::packet_writer *packet, int16_t listen_port, int64_t counter) {
     // TODO: see if the duplicated code can be made not duplicate
 
@@ -80,6 +94,12 @@ dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_
     return new Message {data, length};
 }
 
+/**
+ * Takes apart a received packet by decompressing and decrypting
+ * @param data the received data
+ * @param length the length of the array that holds the data
+ * @return the prepared data (array and length)
+ */
 dappf::data::packet::packet_reader *dappf::data::packet::processing::unwrap(int8_t *data, int32_t length) {
     // decompress
     int8_t **data_loc = &data;
@@ -99,6 +119,11 @@ dappf::data::packet::packet_reader *dappf::data::packet::processing::unwrap(int8
     return new packet_reader(body, body_length);
 }
 
+/**
+ * Helper method that interprets a packet and determines whether it needs to be rebroadcast
+ * @param data the received packet
+ * @return whether the packet needs to be rebroadcast
+ */
 bool need_rebroadcast(int8_t *data) {
     int marker_length = dappf::constants::num_bytes_address + dappf::constants::num_bytes_port;
 
@@ -107,6 +132,11 @@ bool need_rebroadcast(int8_t *data) {
     return std::memcmp(data, zero, marker_length) == 0;
 }
 
+/**
+ * Extracts the message id part of the header of the packet
+ * @param data the received packet
+ * @return the message id
+ */
 uint64_t dappf::data::packet::processing::extract_message_id(int8_t *data) {
     int8_t *loc = data+dappf::constants::pos_message_id;
     uint64_t *loc_casted = (uint64_t *) loc;
@@ -120,6 +150,11 @@ uint64_t dappf::data::packet::processing::extract_message_id(int8_t *data) {
     return id;*/
 }
 
+/**
+ * Extracts the op code part of the header of the packet
+ * @param data the received packet
+ * @return the op code
+ */
 uint16_t dappf::data::packet::processing::extract_op_code(int8_t *data) {
     int8_t *loc = data+dappf::constants::pos_op_code;
     uint16_t *loc_casted = (uint16_t *) loc;
@@ -131,8 +166,13 @@ uint16_t dappf::data::packet::processing::extract_op_code(int8_t *data) {
     return id;*/
 }
 
+/**
+ * The method to be called when the net layer receives a packet - performs checks as needed, and
+ * @param data
+ * @param length
+ */
 void dappf::data::packet::processing::receive(int8_t *data, int32_t length) {
-    if (true) { // packet_validation::validate_packet(data, length)
+    if (packet_validation::validate_packet(data, length)) {
         uint64_t id = extract_message_id(data);
         if (dappf::async_wrappers::MessageIdTracker::get().contains(id)) return;
 
