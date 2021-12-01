@@ -10,7 +10,6 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 [Click here](https://github.com/zydee3/DAPPF/blob/master/USER_GUIDE.md) to see our user guide.
 
 # Modules Task Sheet
-
 | No.  | Module                                      |    Status     |               Who                | Completed On |
 | :--: | :------------------------------------------ | :-----------: | :------------------------------: | :----------: |
 | 1.   | Network Node Connect and Disconnect         |![][completed] |             Kirill               |    11/1      |
@@ -44,37 +43,65 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 | 2.   | 11/30 | Prediction isn't properly updating the associated value. I have unit tested the remainder of the prediction module and the tests have been working. |
 
 # Current Unit Test Results 
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::    test_encode_numbers()       SUCCESS <br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_encode_string()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::  test_decode_exception()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_1()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_2()       FAILED<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_1()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_2()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_3()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_decompression()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::            test_cipher()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::          test_decipher()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_can_run()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_execute()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_settable()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_callable()       SUCCESS<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_insert()       FAILED<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::                test_get()       FAILED<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_delete()       FAILED<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_policy()       FAILED<br />
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_spool::                    test()       FAILED<br />
+| No.  | Test                    |    Result    |
+| :--: | :---------------------- | :----------: |
+| 1.   | test_encode_numbers()   | ![][success] |
+| 2.   | test_encode_string()    | ![][success] |
+| 3.   | test_decode_exception() | ![][success] |
+| 4.   | test_validation_1()     | ![][success] |
+| 5.   | test_validation_2()     | ![][failure] |
+| 6.   | test_compression_1()    | ![][success] |
+| 7.   | test_compression_2()    | ![][success] |
+| 8.   | test_compression_3()    | ![][success] |
+| 9.   | test_decompression()    | ![][success] |
+| 10.  | test_cipher()           | ![][success] |
+| 11.  | test_decipher()         | ![][success] |
+| 12.  | test_can_run()          | ![][success] |
+| 13.  | test_execute()          | ![][success] |
+| 14.  | test_if_settable()      | ![][success] |
+| 15.  | test_if_callable()      | ![][success] |
+| 16.  | test_insert()           | ![][failure] |
+| 17.  | test_get()              | ![][failure] |
+| 18.  | test_delete()           | ![][failure] |
+| 19.  | test_policy()           | ![][failure] |
+| 20.  | test()                  | ![][failure] |
+
+#### Raw Data:
+```
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::    test_encode_numbers()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_encode_string()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::  test_decode_exception()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_1()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_2()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_1()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_2()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_3()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_decompression()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::            test_cipher()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::          test_decipher()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_can_run()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_execute()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_settable()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_callable()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_insert()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::                test_get()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_delete()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_policy()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_spool::                    test()       FAILED
+```
 
 #### Built using
-[![](https://img.shields.io/badge/C++-92.2%25-informational?style=flat&logo=C%2B%2B&logoColor=white&color=blue)](https://www.cplusplus.com/)
-[![](https://img.shields.io/badge/Python-1.8%25-informational?style=flat&logo=Python&logoColor=white&color=yellow)](https://www.python.org/)
-[![](https://img.shields.io/badge/HTML-0.8%25-informational?style=flat&logo=HTML5&logoColor=white&color=orange)](https://www.w3schools.com/html/)
+[![](https://img.shields.io/badge/C++-92.5%25-informational?style=flat&logo=C%2B%2B&logoColor=white&color=blue)](https://www.cplusplus.com/)
+[![](https://img.shields.io/badge/Python-1.9%25-informational?style=flat&logo=Python&logoColor=white&color=yellow)](https://www.python.org/)
+[![](https://img.shields.io/badge/HTML-0.7%25-informational?style=flat&logo=HTML5&logoColor=white&color=orange)](https://www.w3schools.com/html/)
 
 <!-- Status -->
 [completed]: https://img.shields.io/badge/Completed-informational?style=flat&logoColor=white&color=sucess
 [wip]: https://img.shields.io/badge/In%20Progress-informational?style=flat&logoColor=white&color=yellow
 [incomplete]: https://img.shields.io/badge/Incomplete-informational?style=flat&logoColor=white&color=critical
 [deprecated]: https://img.shields.io/badge/Deprecated-informational?style=flat&logoColor=white&color=inactive
+[success]: https://img.shields.io/badge/Success-informational?style=flat&logoColor=white&color=sucess
+[failure]: https://img.shields.io/badge/Failure-informational?style=flat&logoColor=white&color=critical
 
 <!-- Packet Stuff -->
 [reader]: https://img.shields.io/badge/Packet-Reader-informational?style=flat&logoColor=white&color=00cc66
