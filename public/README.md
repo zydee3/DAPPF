@@ -1,36 +1,58 @@
-# Starting Off
-Hello
+# DAPPF User Guide
 
-# DAPPF
+## Installation
+Installing the DAPPF framework into your project is a fairly staightforward process. This guide will show you how to add it to your project in only 3 simple steps.
 
+#### 1. Download the source code
+The first step is to clone the DAPPF repository into a folder within your project. This can be either the root folder or its own directory
+(which is preferred for better organization).
 
-# Framework
-Within the framework are four main directories which pertains to each layer of the framework:
- - Layer 1: Net (Communication Layer)
- - Layer 2: Security
- - Layer 3: Data
- - Layer 4: Handlers (Processing)
+#### 2. Include the Framework Header
+The second step is to add include the header file `dappf.h` into your main project file or wherever you need to access/use the framework. This will enable you to use the
+functions provided and interact with the framework.
 
-Within each directory the respective directories are meta files. The meta file will hold meta data to the main files within the module. A meta file is like that of an inner class to a parent class. Using a game as an example, an example of meta data to Player class is PlayerStats which holds the stats of the player. Meta data allows us to break apart classes into smaller more organized classes in order to premote clean code and precent god classes.
+#### 3. Done
+This is all that needs to be done in order to "install" the framework into your project. For instructions on how to actually use/implement it, see the **Usage** section below.
 
-# Modules Task Sheet
+## Usage
 
-```
-No.  | Module                                      | Status        | Who
------|---------------------------------------------|---------------| :-------------
-1.   | Network Node Connect and Disconnect         | In Progress   | Kirill
-2.   | Network Node Analyzer                       | Incomplete    | 
-3.   | Network API                                 | In Progress   | Garrett
-4.   | Packet Reader and Writer                    | Completed     | Vincent
-5.   | Packet Compress and Decompress              | Incomplete    | 
-6.   | Packet Encrypt and Decrypt                  | Incomplete    | 
-7.   | Data Serializer and Deserializer            | Incomplete    | 
-8.   | Data Validator                              | Incomplete    | 
-9.   | Data Cache                                  | In Progress   | Vincent
-10.  | Data Spooler                                | Incomplete    |
-11.  | Task Pool                                   | Incomplete    |
-12.  | Delegates                                   | Incomplete    |
-13.  | Handlers                                    | Incomplete    | 
-14.  | Listeners                                   | Incomplete    |
-15.  | Example Project                             | In Progress   | *
-```
+#### 1. Basic Packet Functionality
+
+The DAPPF framework relies on communication between multiple nodes. In order to do this, we have to be able to send data in an efficient manner through the network.
+We do this by writing to and reading from packets.
+
+#### 2. Event Listeners
+
+This framework contains event listeners that allow users to (fff).
+
+#### 3. Packet Encryption
+
+Encryption is a feature that allows users to encrypt packets as they are being sent throughout the framework. This adds an extra layer of security because
+it prevents outside forces or malicious code from being able to access information that they are not privy to. By default, the framework has a simple encrpytion algorithm,
+but if you would prefer to use your own method of packet encryption, you can call the encryption functions `set_encryptor()` and `set_decryptor()` and input your own function pointers as arguments. Changing only one
+of these could lead to serious errors due to conflicts in the encryption and decryption algorithms. If these are not paired properly, data will not be recoverable once
+encrypted. The ability to modify the encryption algorithms increases the flexibility and security of our framework.
+
+#### 4. Packet Compression
+
+Users will also have the option to implement their own compression algorithms into the framework. By default there is a compression system within DAPPF, but like encryption,
+this can be changed by the user. In order to do this, both `set_compressor()` and `set_decompressor()` need to be called with your own function pointers as arguments. Changing only one of these could lead to serious
+errors due to conflicts in the compression and decompression algorithms. Allowing the user to modify the compression algorithm will allow flexibility between the amount of file
+compression and the speed of the process.
+
+## Example Installation/Usage
+
+#### 1. Download the Source Code
+f
+
+#### 2. Run the Code
+f
+
+#### 3. Add More Instances
+Repeat step 2 as many times as desired to add additional nodes to the system.
+
+#### 4. Send Data?
+f
+
+#### 5. Read Data?
+f

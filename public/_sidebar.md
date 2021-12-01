@@ -1,6 +1,5 @@
 - DAPPF
-  - [About](/)
-  - [Getting Started](confinguration.md)
+  - [User Guide](/)
 
 - Documentation
   - [Net](net.md)

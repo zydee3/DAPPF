@@ -221,7 +221,7 @@ void dappf::data::packet::packet_cipher::decrypt(int8_t *array, int32_t length)
 #### set_encryptor()
 
 ```cpp
-void dappf::data::packet::packet_cipher::set_encryptor(std::function<void(int8_t *, int32_t)>* handle)
+void dappf::data::packet::packet_cipher::set_encryptor(std::function<void(int8_t *, int32_t)> handle)
 ```
 
 > Sets the function pointer used to encrypt a packet.  
@@ -229,7 +229,7 @@ void dappf::data::packet::packet_cipher::set_encryptor(std::function<void(int8_t
 #### void()
 
 ```cpp
-std::function<void(int8_t*, int32_t)>* dappf::data::packet::packet_cipher::get_encryptor()
+std::function<void(int8_t*, int32_t)> dappf::data::packet::packet_cipher::get_encryptor()
 ```
 
 > Returns the function pointer used to encrypt a packet.  
@@ -238,7 +238,7 @@ std::function<void(int8_t*, int32_t)>* dappf::data::packet::packet_cipher::get_e
 #### set_decryptor()
 
 ```cpp
-void dappf::data::packet::packet_cipher::set_decryptor(std::function<void(int8_t *, int32_t)>* handle)
+void dappf::data::packet::packet_cipher::set_decryptor(std::function<void(int8_t *, int32_t)> handle)
 ```
 
 > Sets the function pointer used to decrypt a packet.  
@@ -246,7 +246,7 @@ void dappf::data::packet::packet_cipher::set_decryptor(std::function<void(int8_t
 #### void()
 
 ```cpp
-std::function<void(int8_t*, int32_t)>* dappf::data::packet::packet_cipher::get_decryptor()
+std::function<void(int8_t*, int32_t)> dappf::data::packet::packet_cipher::get_decryptor()
 ```
 
 > Returns the function pointer used to decrypt a packet.  
