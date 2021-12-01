@@ -40,8 +40,10 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 | 3.   | 11/29 | Cache is not complete and cannot be included in the compilable |
 
 # Known bugs
-- When broadcasting to the whole network, packets will be resent by nodes that didn't originate the packet, so the `on_packet_sent` listener will trigger, which may be unexpected behavior.
-- Prediction isn't properly updating the associated value. I have unit tested the remainder of the prediction module and the tests have been working.
+| No.  | Date  |                 Task                  | 
+| :--: | :----:|:------------------------------------: |
+| 1.   | 11/30 | When broadcasting to the whole network, packets will be resent by nodes that didn't originate the packet, so the `on_packet_sent` listener will trigger, which may be unexpected behavior. |
+| 2.   | 11/30 | Prediction isn't properly updating the associated value. I have unit tested the remainder of the prediction module and the tests have been working. |
 
 # Current Unit Test Results 
 [INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::    test_encode_numbers()       SUCCESS <br />
