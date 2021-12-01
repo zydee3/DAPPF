@@ -6,6 +6,7 @@
   - connection request
   - connection established
   - connection dropped
+  - UPDATE "Framework" section of readme
 
 # Starting Off
 The project is built in JetBrain's CLion IDE. You should be able to simply open the file and compile straight away. Connect your GitHub so you can make pull requests to the main branch.
