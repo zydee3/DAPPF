@@ -1,3 +1,12 @@
+# TODO
+- add documentation for LISTENERS (all)
+  - packet sent
+  - packet received
+  - internal error
+  - connection request
+  - connection established
+  - connection dropped
+
 # Starting Off
 The project is built in JetBrain's CLion IDE. You should be able to simply open the file and compile straight away. Connect your GitHub so you can make pull requests to the main branch.
 
