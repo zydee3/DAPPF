@@ -12,10 +12,10 @@ namespace dappf::data::task_pool {
     class task {
     private:
         long timestamp;
-        std::function<void()>* handle;
+        std::function<void()> handle;
 
     public:
-        task(long, std::function<void()>*);
+        task(long, std::function<void()>);
         bool can_run();
         void run();
     };

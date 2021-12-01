@@ -13,7 +13,7 @@ std::vector<dappf::data::task_pool::task*> dappf::data::task_pool::task_pool::po
  * @param timestamp
  * @param task
  */
-void dappf::data::task_pool::task_pool::insert(long timestamp, std::function<void()>* task) {
+void dappf::data::task_pool::task_pool::insert(long timestamp, std::function<void()> task) {
     lock.lock();
     pool.push_back(new dappf::data::task_pool::task(timestamp, task));
     lock.unlock();

@@ -4,7 +4,7 @@
 
 #include "task.h"
 
-dappf::data::task_pool::task::task(long _timestamp, std::function<void()>* _handle) {
+dappf::data::task_pool::task::task(long _timestamp, std::function<void()> _handle) {
     timestamp = _timestamp;
     handle = _handle;
 }
@@ -15,6 +15,6 @@ bool dappf::data::task_pool::task::can_run() {
 
 void dappf::data::task_pool::task::run() {
     if(handle != nullptr){
-        (*handle)();
+        handle();
     }
 }
