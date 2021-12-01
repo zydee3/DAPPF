@@ -51,32 +51,33 @@ Within each directory, the respective directories are data files. The data file 
 - Prediction isn't properly updating the associated value. I have unit tested the remainder of the prediction module and the tests have been working.
 
 # Current Unit Test Results 
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::    test_encode_numbers()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_encode_string()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::  test_decode_exception()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_1()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_2()       FAILED
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_1()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_2()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_3()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_decompression()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::            test_cipher()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::          test_decipher()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_can_run()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_execute()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_settable()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_callable()       SUCCESS
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_insert()       FAILED
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::                test_get()       FAILED
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_delete()       FAILED
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_policy()       FAILED
-[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_spool::                    test()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::    test_encode_numbers()       SUCCESS <br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_encode_string()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::  test_decode_exception()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_1()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_2()       FAILED<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_1()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_2()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_3()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_decompression()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::            test_cipher()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::          test_decipher()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_can_run()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_execute()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_settable()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_callable()       SUCCESS<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_insert()       FAILED<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::                test_get()       FAILED<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_delete()       FAILED<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_policy()       FAILED<br />
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_spool::                    test()       FAILED<br />
 
 # Module Functionality
 
 | No.  | Module                                                           |
 | :--: | :--------------------------------------------------------------- |
-| 1.   |  *Network Node Connect and Disconnect* <br /><br />This feature handles the connection between any two or more nodes in a network. The questions we ask here are, in the absence of a direct target, how would a new node enter the network? When a node would like to leave the network, it remembers some nodes and is able to use those records to re-enter the network without needing to find a way in like it did when it was a new node. Here we note that it is entirely possible for all records to disconnect prior to the current node re-entering the network, thus it is possible for a non-new node to be subject to new-node entry proceedures of finding an entry point.|
+| 1.   |  *Network Node Connect and Disconnect* <
+/><br />This feature handles the connection between any two or more nodes in a network. The questions we ask here are, in the absence of a direct target, how would a new node enter the network? When a node would like to leave the network, it remembers some nodes and is able to use those records to re-enter the network without needing to find a way in like it did when it was a new node. Here we note that it is entirely possible for all records to disconnect prior to the current node re-entering the network, thus it is possible for a non-new node to be subject to new-node entry proceedures of finding an entry point.|
 | 2.   |  *Documentation Site* <br /><br /> We can create a website which has complete live documentation for future developers to use. The idea is since the GitHub is hosted publically, the website can webscrape the repository for comments above functions and generate documentation. This is completely optional and should only be done towards the end.|
 | 3.   |  *Packet Reader and Writer* <br /><br />A packet is a sequence of bytes normally in the form of an array of bytes. Packets contain data represented in bytes and is the general way to send data between a connection. The packet reader accepts bytes and allows you to read 2<sup>n</sup> bytes depending on the data type you're trying to read while the packet writer does the opposite and allows you to feed bytes into the writer and then construct the array of bytes when the packet is completed and ready to be sent. |
 | 4.   |  *Packet Compress and Decompress*  <br /><br />Packet Compression is when you take an array of bytes and reduce the total number of bytes in the array. Effectively, you're representing the same data, but in a way that uses less memory. This is good since you reduce the number of bytes on the local machine and being sent to peers. A simple approach to this is to use something called lossless compression. An example usage is as follows: lets say we have an array [a,a,b,c,d,d,d,d,d,d,f,f,f,f]. A simple way to compress this is to replace all the repeating values with a numerical representation. That is,  [a,a,b,c,d,d,d,d,d,d,f,f,f,f] ⇒ [2,a,1,b,1,c,6,d,4,f]. Though, it is entirely possible, using this method, for the array to get bigger but that is an edge case. For example, [a,b,c,d,e,f,g] ⇒ [1,a,1,b,1,c,1,d,1,e,1,f,1,g]|
