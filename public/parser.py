@@ -2,6 +2,7 @@ import re
 import os
 
 roots = ["../framework", "../framework/data", "../framework/meta"]
+forbidden = ["test", "utility", "data", "meta", "async_wrappers", "event_listeners", "security"]
 
 def parseFile(file, path, markdown):
 
@@ -19,11 +20,16 @@ def parseFile(file, path, markdown):
       functionDescription += f"> {line[:-1]}  \n"
       index += 1
     index += 1
-    if index < len(lines):
-      fullFunctionName = lines[index]
-      while fullFunctionName[-1] == "{" or fullFunctionName[-1] == " " or fullFunctionName[-1] == "\n":
-        fullFunctionName = fullFunctionName[0:len(fullFunctionName)-1]
-      fullFunctionName += "\n"
+    try:
+      if index < len(lines):
+        fullFunctionName = lines[index]
+        while fullFunctionName[-1] == "{" or fullFunctionName[-1] == " " or fullFunctionName[-1] == "\n":
+          fullFunctionName = fullFunctionName[0:len(fullFunctionName)-1]
+        fullFunctionName += "\n"
+    except:
+      print(path)
+      print(file)
+      functionName = ""
 
     functionName = re.findall(r'[a-zA-Z0-9_]+\(|$',fullFunctionName)[0]
     functionName += ")\n"
@@ -39,9 +45,10 @@ def parseFile(file, path, markdown):
   for i in range(len(lines)):
     if "/**" in lines[i]:
       parseFunction(lines, i+1)
-      markdown.write(f"#### {functionName}\n")
-      markdown.write(f"```cpp\n{fullFunctionName}```\n\n")
-      markdown.write(f"{functionDescription}\n")
+      if functionName != "":
+        markdown.write(f"#### {functionName}\n")
+        markdown.write(f"```cpp\n{fullFunctionName}```\n\n")
+        markdown.write(f"{functionDescription}\n")
 
 sidebar = open("_sidebar.md", "w")
 
@@ -52,7 +59,7 @@ for root in roots:
   websitefiles = os.listdir()
 
   for d in dirs: 
-    if d == "test" or d == "utility":
+    if d in forbidden:
       continue
 
     d_path = f"{root}/{d}"
