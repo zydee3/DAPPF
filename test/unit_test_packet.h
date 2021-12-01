@@ -8,14 +8,14 @@
 #include <iostream>
 #include <iomanip>
 #include "unit_test.h"
-#include "../constants.h"
-#include "../utility/log.h"
-#include "../data/packet/packet_reader.h"
-#include "../data/packet/packet_writer.h"
-#include "../data/packet/packet_validation.h"
-#include "../data/packet/packet_compression.h"
-#include "../data/packet/packet_cipher.h"
-#include "../utility/log.h"
+#include "../framework/constants.h"
+#include "../framework/utility/log.h"
+#include "../framework/data/packet/packet_reader.h"
+#include "../framework/data/packet/packet_writer.h"
+#include "../framework/data/packet/packet_validation.h"
+#include "../framework/data/packet/packet_compression.h"
+#include "../framework/data/packet/packet_cipher.h"
+#include "../framework/utility/log.h"
 
 
 namespace dappf::test {

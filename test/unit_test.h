@@ -6,8 +6,8 @@
 #define DAPPF_UNIT_TEST_H
 
 #include <string>
-#include "../constants.h"
-#include "../utility/log.h"
+#include "../framework/constants.h"
+#include "../framework/utility/log.h"
 
 namespace dappf::test {
     class unit_test {

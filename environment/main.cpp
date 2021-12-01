@@ -5,6 +5,7 @@
 #include "../framework/data/packet/packet_writer.h"
 #include "../framework/data/packet/packet_reader.h"
 #include "../framework/meta/event_listeners/on_packet_received.h"
+#include "../test/run_test_global.h"
 
 void interrupt_handler(int s) {
     std::cout << "interrupted" << std::endl;
@@ -24,7 +25,16 @@ void receive(dappf::data::packet::packet_reader *reader) {
     std::cout << reader->decode_string(reader->remaining()) << std::endl;
 }
 
+void unit_test_master(){
+
+}
+
 [[noreturn]] int main(int argc, char **argv) {
+    if(dappf::test::run_test_global::do_tests){
+        dappf::test::run_test_global();
+        return 0;
+    }
+
     dappf::data::packet::packet_writer *packet = new dappf::data::packet::packet_writer; // this works when it's here, but not just before the while loop TODO: figure it out
 
     dappf::data::event_listeners::on_packet_received::set(receive);
