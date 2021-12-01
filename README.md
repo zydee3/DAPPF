@@ -5,6 +5,10 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 
 [Click here](https://garrettleising.github.io/DAPPF.github.io/#/) to see our documentation website.
 
+# User Guide
+
+[Click here](https://github.com/zydee3/DAPPF/blob/master/USER_GUIDE.md) to see our user guide.
+
 # Modules Task Sheet
 
 | No.  | Module                                      |    Status     |               Who                | Completed On |
@@ -16,7 +20,7 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 | 5.   | Packet Compress and Decompress              |![][completed] |             Vincent              |    11/6      |
 | 6.   | Packet Encrypt and Decrypt                  |![][completed] |             Anthony              |    11/2      |
 | 7.   | Data Validator                              |![][completed] |         Garrett, Vincent         |    11/10     |
-| 8.   | Data Cache                                  |![][incomplete]| <strike>Vincent</strike> Shishir |       -      |
+| 8.   | Data Cache                                  |![][incomplete]| <strike>Vincent</strike> Shishir |      -       |
 | 9.   | Data Spooler                                |![][completed] | <strike>Shishir</strike> Vincent |    11/29     |
 | 10.  | Predictor                                   |![][completed] |             Vincent              |    11/27     |
 | 11.  | Task Pool                                   |![][completed] |         Anthony, Vincent         |    11/29     |
