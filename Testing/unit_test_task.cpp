@@ -29,6 +29,8 @@ bool dappf::test::unit_test_task::test_can_run() {
 
 }
 
+static int testing = 0;
+
 /**
  * Tests to see if the callback is executed properly when invoked
  * through the provided function
@@ -37,13 +39,17 @@ bool dappf::test::unit_test_task::test_can_run() {
 bool dappf::test::unit_test_task::test_execute() {
     long now = dappf::utility::time::now();
     int default_value = 50;
-    int test_value = default_value;
+    dappf::test::input_output::unit_test_task_test_execute_value = default_value;
 
-    dappf::data::task_pool::task(now, *[](){
-        //dappf::test::input_output::unit_test_task_test_execute_value = 0;
+    dappf::data::task_pool::task* task = new dappf::data::task_pool::task(now, *[](){
+        dappf::test::input_output::unit_test_task_test_execute_value++;
     });
 
-    bool result;
+    if(task->can_run()){
+        task->run();
+    }
+
+    bool result = dappf::test::input_output::unit_test_task_test_execute_value != default_value;
     display_test_result("dappf::Testing::  unit_test_task::             test_execute()", result);
-    return false;
+    return result;
 }

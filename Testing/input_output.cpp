@@ -4,4 +4,5 @@
 
 #include "input_output.h"
 
-int unit_test_task_test_execute_value;
+int dappf::test::input_output::unit_test_task_test_execute_value;
+std::string dappf::test::input_output::unit_test_delegates_test_if_callable_value;

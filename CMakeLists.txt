@@ -112,7 +112,7 @@ add_library(
 
         Testing/unit_test_task.cpp
         Testing/unit_test_task.h
-        Testing/run_test_global.cpp Testing/run_test_global.h Testing/input_output.cpp Testing/input_output.h)
+        Testing/run_test_global.cpp Testing/run_test_global.h Testing/input_output.cpp Testing/input_output.h Testing/unit_test_delegates.cpp Testing/unit_test_delegates.h Testing/unit_test_cache.cpp Testing/unit_test_cache.h Testing/unit_test_spool.cpp Testing/unit_test_spool.h)
 
 # link entry point to project
 add_executable(Dappf environment/main.cpp)

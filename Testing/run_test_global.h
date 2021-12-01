@@ -8,6 +8,9 @@
 #include "unit_test_handler.h"
 #include "unit_test_packet.h"
 #include "unit_test_task.h"
+#include "unit_test_delegates.h"
+#include "unit_test_cache.h"
+#include "unit_test_spool.h"
 
 namespace dappf::test {
     class run_test_global {
