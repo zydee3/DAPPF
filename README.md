@@ -17,7 +17,7 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 | :--: | :------------------------------------------ | :-----------: | :------------------------------: | :----------: |
 | 1.   | Network Node Connect and Disconnect         |![][completed] |             Kirill               |    11/1      |
 | 2.   | Documentation Site                          |![][completed] |             Garrett              |    11/1      |
-| 3.   | Documentation Github (Readme)               |   ![][wip]    |             Vincent              |              |
+| 3.   | Documentation Github (Readme)               |![][completed] |             Vincent              |    11/3      |
 | 4.   | Packet Reader and Writer                    |![][completed] |             Vincent              |    10/23     |
 | 5.   | Packet Compress and Decompress              |![][completed] |             Vincent              |    11/6      |
 | 6.   | Packet Encrypt and Decrypt                  |![][completed] |             Anthony              |    11/2      |
@@ -26,11 +26,11 @@ The project is built in JetBrain's CLion IDE. You should be able to simply open 
 | 9.   | Data Spooler                                |![][completed] | <strike>Shishir</strike> Vincent |    11/29     |
 | 10.  | Predictor                                   |![][completed] |             Vincent              |    11/27     |
 | 11.  | Task Pool                                   |![][completed] |         Anthony, Vincent         |    11/29     |
-| 12.  | Delegates                                   |   ![][wip]    |             Shishir              |              |
+| 12.  | Delegates                                   |![][completed] | <strike>Shishir</strike> Vincent |    11/29     |
 | 13.  | Listeners                                   |![][completed] |             Vincent              |    11/6      |
 | 14.  | Handlers                                    |![][completed] |             Vincent              |    11/29     | 
-| 15.  | Example Project                             |   ![][wip]    |             Kirill               |              |
-| 16.  | Combining Modules                           |   ![][wip]    |             Vincent              |              |
+| 15.  | Example Project                             |![][completed] |             Kirill               |    11/30     |
+| 16.  | Combining Modules                           |![][completed] |             Vincent              |    11/30     |
 
 # Backlog
 | No.  | Date  |                 Task                  | 
