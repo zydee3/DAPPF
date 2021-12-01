@@ -29,8 +29,10 @@ dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_
 
     // message id (encodes address (kinda) and port)
     std::memset(data+dappf::constants::pos_message_id, 0, 4);
-    std::memcpy(data+dappf::constants::pos_message_id+4, &listen_port, 2);
-    std::memcpy(data+dappf::constants::pos_message_id+6, &counter, 2);
+    *((uint16_t *) (data+dappf::constants::pos_message_id+4)) = listen_port;
+    //std::memcpy(data+dappf::constants::pos_message_id+4, &listen_port, 2);
+    *((uint16_t *) (data+dappf::constants::pos_message_id+6)) = counter;
+    //std::memcpy(data+dappf::constants::pos_message_id+6, &counter, 2);
 
     // compress
     int8_t **data_loc = &data;
@@ -62,8 +64,10 @@ dappf::data::packet::processing::Message *dappf::data::packet::processing::wrap_
 
     // message id (encodes address (kinda) and port)
     std::memset(data+dappf::constants::pos_message_id, 0, 4);
-    std::memcpy(data+dappf::constants::pos_message_id+4, &listen_port, 2);
-    std::memcpy(data+dappf::constants::pos_message_id+6, &counter, 2);
+    *((uint16_t *) (data+dappf::constants::pos_message_id+4)) = listen_port;
+    //std::memcpy(data+dappf::constants::pos_message_id+4, &listen_port, 2);
+    *((uint16_t *) (data+dappf::constants::pos_message_id+6)) = counter;
+    //std::memcpy(data+dappf::constants::pos_message_id+6, &counter, 2);
 
     // compress
     int8_t **data_loc = &data;
@@ -104,9 +108,27 @@ bool need_rebroadcast(int8_t *data) {
 }
 
 uint64_t dappf::data::packet::processing::extract_message_id(int8_t *data) {
+    int8_t *loc = data+dappf::constants::pos_message_id;
+    uint64_t *loc_casted = (uint64_t *) loc;
+    uint64_t ans = *loc_casted;
+
+    return ans;
+    return *((uint64_t *) data+dappf::constants::pos_message_id);/*
+
     uint64_t id = 0;
     std::memcpy(&id, data+dappf::constants::pos_message_id, dappf::constants::num_bytes_message_id);
-    return id;
+    return id;*/
+}
+
+uint16_t dappf::data::packet::processing::extract_op_code(int8_t *data) {
+    int8_t *loc = data+dappf::constants::pos_op_code;
+    uint16_t *loc_casted = (uint16_t *) loc;
+
+    return *loc_casted;/*
+
+    uint64_t id = 0;
+    std::memcpy(&id, data+dappf::constants::pos_message_id, dappf::constants::num_bytes_message_id);
+    return id;*/
 }
 
 void dappf::data::packet::processing::receive(int8_t *data, int32_t length) {

@@ -16,8 +16,10 @@ namespace dappf::data::packet::processing {
 
     Message *wrap_broadcast(packet_writer *packet, int16_t listen_port, int64_t counter);
     Message *wrap_targeted(packet_writer *packet, int16_t listen_port, int64_t counter);
-    uint64_t extract_message_id(int8_t *data);
     packet_reader *unwrap(int8_t *data, int32_t length);
+
+    uint64_t extract_message_id(int8_t *data);
+    uint16_t extract_op_code(int8_t *data);
 
     void receive(int8_t *data, int32_t length);
 }
