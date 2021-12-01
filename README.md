@@ -50,6 +50,28 @@ Within each directory, the respective directories are data files. The data file 
 - When broadcasting to the whole network, packets will be resent by nodes that didn't originate the packet, so the `on_packet_sent` listener will trigger, which may be unexpected behavior.
 - Prediction isn't properly updating the associated value. I have unit tested the remainder of the prediction module and the tests have been working.
 
+# Current Unit Test Results 
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::    test_encode_numbers()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_encode_string()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::  test_decode_exception()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_1()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::      test_validation_2()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_1()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_2()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_compression_3()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::     test_decompression()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::            test_cipher()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_packet::          test_decipher()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_can_run()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_task::             test_execute()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_settable()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_delegates::    test_if_callable()       SUCCESS
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_insert()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::                test_get()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_delete()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_cache::             test_policy()       FAILED
+[INFO - Tue 11.30.2021 11:57:10] TEST dappf::Testing::  unit_test_spool::                    test()       FAILED
+
 # Module Functionality
 
 | No.  | Module                                                           |
