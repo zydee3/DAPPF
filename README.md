@@ -6,6 +6,7 @@
   - connection request
   - connection established
   - connection dropped
+  - UPDATE "Framework" section of readme
 
 # Starting Off
 The project is built in JetBrain's CLion IDE. You should be able to simply open the file and compile straight away. Connect your GitHub so you can make pull requests to the main branch.
@@ -47,6 +48,7 @@ Within each directory, the respective directories are data files. The data file 
 
 # Known bugs
 - When broadcasting to the whole network, packets will be resent by nodes that didn't originate the packet, so the `on_packet_sent` listener will trigger, which may be unexpected behavior.
+- Prediction isn't properly updating the associated value. I have unit tested the remainder of the prediction module and the tests have been working.
 
 # Module Functionality
 
