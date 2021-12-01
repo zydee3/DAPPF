@@ -6,8 +6,8 @@
 #include "../../utility/log.h"
 #include "../../constants.h"
 
-std::function<int(int8_t**, int)>* dappf::data::packet::packet_compression::handle_compress;
-std::function<int(int8_t**, int)>* dappf::data::packet::packet_compression::handle_decompress;
+std::function<int(int8_t**, int)> dappf::data::packet::packet_compression::handle_compress;
+std::function<int(int8_t**, int)> dappf::data::packet::packet_compression::handle_decompress;
 
 /**
  * Helper function for the public compress function. This function specifically
@@ -129,18 +129,18 @@ int dappf::data::packet::packet_compression::decompress(int8_t** packet, int len
     return length;
 }
 
-void dappf::data::packet::packet_compression::set_compressor(std::function<int(int8_t **, int)>* handle) {
+void dappf::data::packet::packet_compression::set_compressor(std::function<int(int8_t **, int)> handle) {
     handle_compress = handle;
 }
 
-std::function<int(int8_t **, int)> *dappf::data::packet::packet_compression::get_compressor() {
+std::function<int(int8_t **, int)> dappf::data::packet::packet_compression::get_compressor() {
     return handle_compress;
 }
 
-void dappf::data::packet::packet_compression::set_decompressor(std::function<int(int8_t **, int)>* handle) {
+void dappf::data::packet::packet_compression::set_decompressor(std::function<int(int8_t **, int)> handle) {
     handle_decompress = handle;
 }
 
-std::function<int(int8_t **, int)> *dappf::data::packet::packet_compression::get_decompressor() {
+std::function<int(int8_t **, int)> dappf::data::packet::packet_compression::get_decompressor() {
     return handle_decompress;
 }
