@@ -5,9 +5,12 @@
 #include "../framework/data/packet/packet_writer.h"
 #include "../framework/data/packet/packet_reader.h"
 #include "../framework/meta/event_listeners/on_packet_received.h"
-#include "../test/run_test_global.h"
 #include "../framework/meta/event_listeners/on_packet_sent.h"
+#include "../framework/meta/event_listeners/on_connection_request.h"
+#include "../framework/meta/event_listeners/on_connection_established.h"
+#include "../framework/meta/event_listeners/on_connection_dropped.h"
 #include "../framework/utility/log.h"
+#include "../test/run_test_global.h"
 
 void interrupt_handler(int s) {
     std::cout << "interrupted" << std::endl;
@@ -43,6 +46,22 @@ int main(int argc, char **argv) {
     dappf::data::event_listeners::on_packet_sent::set([](int8_t *data, int32_t length) {
         std::cout << "packet sent! here it is: " << std::flush;
         dappf::utility::log::cout_hex_array(data, length);
+    });
+
+    dappf::data::event_listeners::on_internal_error::set([](std::string error) {
+        std::cout << "An internal ERROR occurred, and the listener caught wind of it! here it is: " << error << std::endl;
+    });
+
+    dappf::data::event_listeners::on_connection_request::set([](std::string ip) {
+        std::cout << "A node is REQUESTING TO CONNECT, from this ip: " << ip << std::endl;
+    });
+
+    dappf::data::event_listeners::on_connection_established::set([](std::string ip) {
+        std::cout << "A node is has CONNECTED, from this ip: " << ip << std::endl;
+    });
+
+    dappf::data::event_listeners::on_connection_dropped::set([](std::string ip) {
+        std::cout << "A connection with a node DROPPED, from this ip: " << ip << std::endl;
     });
 
     if (argc == 2) {
