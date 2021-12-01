@@ -18,9 +18,9 @@
 namespace dappf::data::spooler {
     class spooler {
     private:
-        dappf::data::handlers::handler* fetch_handler(int);
+        static dappf::data::handlers::handler* fetch_handler(int);
     public:
-        void spool(std::string, int);
+        static void spool(std::string, int);
     };
 }
 
