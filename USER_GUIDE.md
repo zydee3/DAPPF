@@ -26,7 +26,7 @@ We do this by writing to and reading from packets.
 
 #### 2. Event Listeners
 
-This framework contains event listeners that allow users to have one of their functions called when a certain event happens. To assign a function to an event, call the `set()` function of the desired event listener with a pointer to the desired function as the argument. The availible event listeners are as follows: `on_connection_dropped`, `on_connection_established`, `on_connection_request`, `on_internal_error`, `on_packet_received`, `on_packet_sent`.
+This framework contains event listeners that allow users to have one of their functions called when a certain event happens. To assign a function to an event, call the `set()` function of the desired event listener with the desired function as the argument. The available event listeners are as follows: `on_connection_dropped`, `on_connection_established`, `on_connection_request`, `on_internal_error`, `on_packet_received`, `on_packet_sent`.
 
 #### 3. Packet Encryption
 
