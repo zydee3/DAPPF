@@ -6,6 +6,8 @@
 #include "../framework/data/packet/packet_reader.h"
 #include "../framework/meta/event_listeners/on_packet_received.h"
 #include "../test/run_test_global.h"
+#include "../framework/meta/event_listeners/on_packet_sent.h"
+#include "../framework/utility/log.h"
 
 void interrupt_handler(int s) {
     std::cout << "interrupted" << std::endl;
@@ -35,9 +37,13 @@ void unit_test_master(){
         return 0;
     }
 
-    dappf::data::packet::packet_writer *packet = new dappf::data::packet::packet_writer; // this works when it's here, but not just before the while loop TODO: figure it out
-
+    // set all the listeners/delegates
     dappf::data::event_listeners::on_packet_received::set(receive);
+
+    dappf::data::event_listeners::on_packet_sent::set([](int8_t *data, int32_t length) {
+        std::cout << "packet sent! here it is: " << std::flush;
+        dappf::utility::log::cout_hex_array(data, length);
+    });
 
     if (argc == 2) {
         uint16_t listen_port = strtouint16(argv[1]);
@@ -66,9 +72,11 @@ void unit_test_master(){
         std::cin >> message;
 
         try {
+            dappf::data::packet::packet_writer *packet = new dappf::data::packet::packet_writer;
             packet->encode_string(message);
             dappf::broadcast(packet);
             packet->clear();
+            delete packet;
         } catch (std::runtime_error e) {
             std::cout << e.what() << std::endl;
         } catch (...) {
