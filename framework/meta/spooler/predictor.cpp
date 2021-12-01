@@ -4,7 +4,7 @@
 
 #include "predictor.h"
 
-std::function<std::vector<int>(int)>* dappf::data::spooler::predictor::handle;
+std::function<std::vector<int>(int)> dappf::data::spooler::predictor::handle;
 
 /**
  * Returns a new pair with a value being parameter value and an occurrence being 1
@@ -231,7 +231,7 @@ std::vector<int> dappf::data::spooler::predictor::predict(int key) {
  * Sets function pointer to handle for predicting potential future values
  * @return dappf::data::spooler::predictor::handle
  */
-void dappf::data::spooler::predictor::set(std::function<std::vector<int>(int)>* _handle) {
+void dappf::data::spooler::predictor::set(std::function<std::vector<int>(int)> _handle) {
     handle = _handle;
 }
 
@@ -239,7 +239,7 @@ void dappf::data::spooler::predictor::set(std::function<std::vector<int>(int)>* 
  * Returns function pointer to handle for predicting potential future values
  * @return dappf::data::spooler::predictor::handle
  */
-std::function<std::vector<int>(int)>* dappf::data::spooler::predictor::get() {
+std::function<std::vector<int>(int)> dappf::data::spooler::predictor::get() {
     return handle;
 }
 
