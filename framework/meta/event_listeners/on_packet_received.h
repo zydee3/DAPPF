@@ -13,10 +13,10 @@ namespace dappf::data::event_listeners {
     class on_packet_received : event_listener {
 
     private:
-        static std::function<void(dappf::data::packet::packet_reader *)> * handle;
+        static std::function<void(dappf::data::packet::packet_reader *)> handle;
     public:
-        static void set(std::function<void(dappf::data::packet::packet_reader *)> *);
-        static std::function<void(dappf::data::packet::packet_reader *)> *get();
+        static void set(std::function<void(dappf::data::packet::packet_reader *)>);
+        static std::function<void(dappf::data::packet::packet_reader *)> get();
     };
 }
 

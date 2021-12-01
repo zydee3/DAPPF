@@ -13,10 +13,10 @@ namespace dappf::data::event_listeners {
     class on_packet_sent : event_listener {
 
     private:
-        static std::function<void(int8_t*, int)>* handle;
+        static std::function<void(int8_t*, int)> handle;
     public:
-        static void set(std::function<void(int8_t*, int)>*);
-        static std::function<void(int8_t*, int)>* get();
+        static void set(std::function<void(int8_t*, int)>);
+        static std::function<void(int8_t*, int)> get();
     };
 }
 

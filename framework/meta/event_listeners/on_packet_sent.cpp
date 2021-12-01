@@ -4,12 +4,12 @@
 
 #include "on_packet_sent.h"
 
-std::function<void(int8_t*, int)>* dappf::data::event_listeners::on_packet_sent::handle;
+std::function<void(int8_t*, int)> dappf::data::event_listeners::on_packet_sent::handle;
 
-void dappf::data::event_listeners::on_packet_sent::set(std::function<void(int8_t *, int)>* _handle) {
+void dappf::data::event_listeners::on_packet_sent::set(std::function<void(int8_t *, int)> _handle) {
     handle = _handle;
 }
 
-std::function<void(int8_t *, int)> *dappf::data::event_listeners::on_packet_sent::get() {
+std::function<void(int8_t *, int)> dappf::data::event_listeners::on_packet_sent::get() {
     return handle;
 }

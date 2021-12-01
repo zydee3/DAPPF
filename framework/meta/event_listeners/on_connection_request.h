@@ -12,10 +12,10 @@
 namespace dappf::data::event_listeners {
     class on_connection_request : event_listener {
     private:
-        static std::function<void(std::string)>* handle;
+        static std::function<void(std::string)> handle;
     public:
-        static void set(std::function<void(std::string)>*);
-        static std::function<void(std::string)>* get();
+        static void set(std::function<void(std::string)>);
+        static std::function<void(std::string)> get();
     };
 }
 
